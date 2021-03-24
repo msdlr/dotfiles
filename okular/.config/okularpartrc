@@ -1,0 +1,15 @@
+[Dlg Accessibility]
+HighlightLinks=true
+
+[General]
+ShellOpenFileInTabs=true
+ttsEngine=flite
+
+[Main View]
+SplitterSizes=297,1534
+
+[PageView]
+TrimMargins=false
+
+[Reviews]
+AnnotationTools=<tool type="note-inline" id="1"><engine hoverIcon="tool-note-inline" type="PickPoint" block="true" color="#ffff7f"><annotation type="FreeText" font="Ubuntu\\,10\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0\\,Regular" width="0" align="1" color="#ffff7f"/></engine><shortcut>1</shortcut></tool>,<tool type="note-linked" id="2"><engine hoverIcon="tool-note" type="PickPoint" color="#55ff7f"><annotation type="Text" icon="Note" color="#55ff7f"/></engine><shortcut>2</shortcut></tool>,<tool type="highlight" id="3"><engine type="TextSelector" color="#ffff00"><annotation type="Highlight" color="#ffff00"/></engine><shortcut>3</shortcut></tool>,<tool type="highlight" id="4"><engine type="TextSelector" color="#00ff00"><annotation type="Highlight" color="#00ff00"/></engine><shortcut>4</shortcut></tool>,<tool type="underline" id="5"><engine type="TextSelector" color="#ffff5500"><annotation type="Underline" color="#ffff5500"/></engine><shortcut>5</shortcut></tool>,<tool type="rectangle" id="6"><engine type="PickPoint" block="true" color="#ff0000ff"><annotation opacity="0.8" type="GeomSquare" width="5" color="#ff0000ff"/></engine><shortcut>6</shortcut></tool>,<tool type="rectangle" id="7"><engine type="PickPoint" block="true" color="#ffffff00"><annotation opacity="0.4" innerColor="#ffff00" type="GeomSquare" width="5" color="#ffffff00"/></engine><shortcut>7</shortcut></tool>
