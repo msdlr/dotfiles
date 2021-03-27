@@ -10,6 +10,7 @@ set wildmenu
 
 "Indentación
 set autoindent
+set smartindent
 
 "Busca no case sensitive menos 
 set ignorecase
