@@ -149,6 +149,7 @@ then
 fi
 
 setxkbmap es
+xset led
 
 #Aliases 
 
