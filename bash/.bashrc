@@ -148,8 +148,8 @@ then
     fi
 fi
 
-setxkbmap es
-xset led
+setxkbmap es 2>/dev/null
+xset led 2>/dev/null
 
 #Aliases 
 
