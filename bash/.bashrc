@@ -169,6 +169,7 @@ alias reload='source $HOME/.bashrc'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
 
+# Git
 alias gst='git status'
 alias ga='git add'
 alias gcm='git commit -m'
@@ -179,8 +180,20 @@ alias gcout='git checkout'
 alias gclean='git clean -df'
 alias gua='git remote | xargs -L1 git push --all'
 
-alias monitor="airmon-ng start wlp2s0"
-alias nomonitor="airmon-ng stop wlp2s0mon"
+# Docker
+alias dps='docker ps'
+alias di='docker images'
+drmi () {
+	docker rmi $1
+}
+alias drmi-all='docker rmi $(docker images -a -q)'
+alias dr='docker run'
+alias db='docker build'
+alias dstop='docker stop'
+alias dkill='docker kill'
+alias dstop-all='docker stop $(docker ps -a -q)'
+alias dsprune='docker system prune'
+
 ex () {
   if [ -f $1 ] ; then
     case $1 in
