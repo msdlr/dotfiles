@@ -179,18 +179,23 @@ alias greset='git reset --hard'
 alias gcout='git checkout'
 alias gclean='git clean -df'
 alias gua='git remote | xargs -L1 git push --all'
+alias gdiff='git diff'
 
 # Docker
 alias dps='docker ps'
-alias di='docker images'
+alias dimgs='docker images'
 drmi () {
 	docker rmi $1
 }
 alias drmi-all='docker rmi $(docker images -a -q)'
-alias dr='docker run'
-alias db='docker build'
-alias dstop='docker stop'
+drem () {
+	docker rm $1
+}
+alias drem-all='docker rm $(docker ps -a -q)'
+alias drun='docker run'
+alias dbuild='docker build'
 alias dkill='docker kill'
+alias dstop='docker stop'
 alias dstop-all='docker stop $(docker ps -a -q)'
 alias dsprune='docker system prune'
 
