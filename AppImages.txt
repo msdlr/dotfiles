@@ -1,0 +1,7 @@
+https://github.com/VSCodium/vscodium/releases
+https://www.libreoffice.org/download/appimage/
+https://apprepo.de/appimage/vscode
+https://kdenlive.org/en/download
+https://github.com/jgraph/drawio-desktop/releases
+https://github.com/balena-io/etcher/releases
+https://apprepo.de/appimage/gimp
