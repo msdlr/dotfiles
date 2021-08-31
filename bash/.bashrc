@@ -132,9 +132,9 @@ stty -ixon # disable CTRL-S/Q
 if [ "$(id -u)" -ne "0" ]
 then
     # GOLANG
-    if [ -d /usr/local/go/bin ]; then
+    if [ -d /opt/go/bin ]; then
         # Add go binary to PATH
-        [[ ":$PATH:" == *"/usr/local/go/bin"* ]] || PATH=/usr/local/go/bin:$PATH
+        [[ ":$PATH:" == *"/opt/go/bin"* ]] || PATH=/opt/go/bin:$PATH
     fi
 
     if  (command -v go >/dev/null); then
