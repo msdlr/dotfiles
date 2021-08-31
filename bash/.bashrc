@@ -134,7 +134,7 @@ then
     # GOLANG
     if [ -d /usr/local/go/bin ]; then
         # Add go binary to PATH
-        [[ ":$PATH:" == *"/usr/local/go/bin"* ]] || PATH=$PATH:/usr/local/go/bin
+        [[ ":$PATH:" == *"/usr/local/go/bin"* ]] || PATH=/usr/local/go/bin:$PATH
     fi
 
     if  (command -v go >/dev/null); then
