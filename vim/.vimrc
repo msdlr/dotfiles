@@ -1,18 +1,16 @@
-" Número de línea
+" Line num
 set number
 "set relativenumber 
 
-" Color de sintaxis
 syntax on
 
-"Autocompletado de comandos
+" Command completion
 set wildmenu
 
-"Indentación
 set autoindent
 set smartindent
 
-"Busca no case sensitive menos 
+" Case-(in)sensitivity 
 set ignorecase
 set smartcase
 
@@ -20,9 +18,7 @@ set smartcase
 set wrap
 set linebreak
 
-"Autocargar archivo modificado
 set autoread
 
-"Coloscheme (Windows)
-"colorscheme desert
-
+set undofile
+set undodir=~/.cache/undodir
