@@ -1,4 +1,3 @@
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -85,8 +84,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# PATH
-[ -d $HOME/.local/bin ] && [[ ":$PATH:" == *"$HOME/.local/bin"* ]] || PATH=$PATH:~/.local/bin:.
+# PATH + LD for .local/{bin,lib,etc...} for local, non-root user
+[ -d $HOME/.local/bin ] && [[ ":$PATH:" == *"$HOME/.local/bin"* ]] || PATH=$HOME/.local/bin:$PATH
+[ -d $HOME/.local/lib ] && [[ ":$LD_LIBRARY_PATH:" == *"$HOME/.local/lib"* ]] || LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+
+# PATH for scripts directory
+[ -d $HOME/.local/scripts ] && [[ ":$PATH:" == *"$HOME/.local/scripts"* ]] || PATH=$HOME/.local/scripts:$PATH
+
 stty -ixon # disable CTRL-S/Q
 
 if [ "$(id -u)" -ne "0" ]
