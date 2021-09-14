@@ -9,7 +9,6 @@ alias du1='du -h --max-depth=1'
 alias remix-ide='nice -n 20 remix-ide'
 alias df='df -h'
 alias reload='source $HOME/.bashrc'
-# [ -f /usr/bin/nvim ] && alias vim='nvim -p'
 
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
@@ -23,6 +22,7 @@ alias gpull='git pull'
 alias greset='git reset --hard'
 alias gcout='git checkout'
 alias gclean='git clean -df'
+alias gnuke='git clean -dfx' # Git clean of untracker files too
 alias gua='git remote | xargs -L1 git push --all'
 alias gdiff='git diff'
 
