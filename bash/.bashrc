@@ -85,12 +85,12 @@ if ! shopt -oq posix; then
 fi
 
 # PATH + LD for .local/{bin,lib,etc...} for local, non-root user
-[ -d $HOME/.local/bin ] && [[ ":$PATH:" == *"$HOME/.local/bin"* ]] || PATH=$HOME/.local/bin:$PATH
-[ -d $HOME/.local/lib ] && [[ ":$LD_LIBRARY_PATH:" == *"$HOME/.local/lib"* ]] || LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+[ -d $HOME/.local/bin ] && [[ ":$PATH:" == *"$HOME/.local/bin"* ]] || export PATH=$HOME/.local/bin:$PATH
+[ -d $HOME/.local/lib ] && [[ ":$LD_LIBRARY_PATH:" == *"$HOME/.local/lib"* ]] || export LD_LIBRARY-PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 [ -d $HOME/.local/lib ] && ldconfig -n $HOME/.local/lib
 
 # PATH for scripts directory
-[ -d $HOME/.local/scripts ] && [[ ":$PATH:" == *"$HOME/.local/scripts"* ]] || PATH=$HOME/.local/scripts:$PATH
+[ -d $HOME/.local/scripts ] && [[ ":$PATH:" == *"$HOME/.local/scripts"* ]] || export PATH=$HOME/.local/scripts:$PATH
 
 stty -ixon # disable CTRL-S/Q
 
@@ -99,7 +99,7 @@ then
     # GOLANG
     if [ -d /opt/go/bin ]; then
         # Add go binary to PATH
-        [[ ":$PATH:" == *"/opt/go/bin"* ]] || PATH=/opt/go/bin:$PATH
+        [[ ":$PATH:" == *"/opt/go/bin"* ]] || export PATH=/opt/go/bin:$PATH
     fi
 
     if  (command -v go >/dev/null); then
@@ -108,7 +108,7 @@ then
         #export GOROOT=$(which go | sed 's|bin/go$||')
         export GOPATH=$HOME/go
         export GOBIN=$GOPATH/bin
-        [[ ":$PATH:" == *"$HOME/go/bin"* ]] || PATH=$PATH:$HOME/go/bin
+        [[ ":$PATH:" == *"$HOME/go/bin"* ]] || export PATH=$PATH:$HOME/go/bin
         export PATH
     fi
 fi
