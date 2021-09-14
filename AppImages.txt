@@ -5,3 +5,4 @@ https://kdenlive.org/en/download
 https://github.com/jgraph/drawio-desktop/releases
 https://github.com/balena-io/etcher/releases
 https://www.jetbrains.com/toolbox-app/
+https://www.strawberrymusicplayer.org/#download
