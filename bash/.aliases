@@ -8,7 +8,7 @@ alias du='du -h'
 alias du1='du -h --max-depth=1'
 alias df='df -h'
 alias reload='source $HOME/.bashrc'
-alias echopath='echo $PATH | sed s/:/\\n/g | sort | uniq'
+alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias l='less'
 
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
