@@ -104,11 +104,10 @@ then
 
     if  (command -v go >/dev/null); then
         # Create default go workspace
-        [ -d $HOME/go ] || mkdir -p $HOME/go/{bin,src,pkg} 
-        #export GOROOT=$(which go | sed 's|bin/go$||')
-        export GOPATH=$HOME/go
+        export GOPATH=$HOME/.go
+	[ -d $GOPATH ] || mkdir -p $GOPATH/{bin,src,pkg} 
         export GOBIN=$GOPATH/bin
-        [[ ":$PATH:" == *"$HOME/go/bin"* ]] || export PATH=$PATH:$HOME/go/bin
+        [[ ":$PATH:" == *"$GOPATH/bin"* ]] || export PATH=$PATH:$GOPATH/bin
         export PATH
     fi
 fi
