@@ -107,10 +107,13 @@ then
         export GOPATH=$HOME/.go
 	[ -d $GOPATH ] || mkdir -p $GOPATH/{bin,src,pkg} 
         export GOBIN=$GOPATH/bin
-        [[ ":$PATH:" == *"$GOPATH/bin"* ]] || export PATH=$PATH:$GOPATH/bin
+        [[ ":$PATH:" == *"$GOBIN"* ]] || export PATH=$PATH:$GOBIN
         export PATH
     fi
 fi
+
+CARGOBIN=${HOME}/.cargo/bin
+[[ ":$PATH:" == *"${CARGOBIN}"* ]] || export PATH=$PATH:${CARGOBIN}
 
 setxkbmap es 2>/dev/null
 xset led 2>/dev/null
