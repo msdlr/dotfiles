@@ -1,3 +1,5 @@
+#!/usr/bin/env/sh
+alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias lla='ls -lah'
 alias ups='sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y'
