@@ -14,5 +14,13 @@ function git_branch() {
     fi
 }
 
-# Prompt
-PS1="%F{red}%n@%m%f %F{green}%1~%f %F{13}$(git_branch)%f%F{11}%#%f "
+function precmd() { # Execute after every command
+    # Prompt
+    PS1="%F{red}%n@%m%f %F{green}%1~%f %F{13}$(git_branch)%f%F{11}%#%f "
+}
+
+# Setup $PATH
+[ -f $HOME/.config/shell/path.sh ] && source $HOME/.config/shell/path.sh
+# Setup aliases
+[ -f $HOME/.config/shell/aliases.sh ] && source $HOME/.config/shell/aliases.sh
+[ -f $HOME/.config/shell/aliases-w.sh ] && source $HOME/.config/shell/aliases-w.sh
