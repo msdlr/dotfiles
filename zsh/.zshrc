@@ -24,3 +24,7 @@ function precmd() { # Execute after every command
 # Setup aliases
 [ -f $HOME/.config/shell/aliases.sh ] && source $HOME/.config/shell/aliases.sh
 [ -f $HOME/.config/shell/aliases-w.sh ] && source $HOME/.config/shell/aliases-w.sh
+
+# Ctrl + arrows
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
