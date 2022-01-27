@@ -10,13 +10,12 @@ function git_branch() {
 
 PS1='\[\e[0;31m\]\u\[\e[0;31m\]@\[\e[0;31m\]\h \[\e[0;32m\]\W \[\e[0;1;35m\]$(git_branch)\[\e[0;93m\]\$ \[\e[0m\]'
 
-
-# Setup $PATH
-[ -f $HOME/.config/shell/path.sh ] && source $HOME/.config/shell/path.sh
-# Setup aliases
-[ -f $HOME/.config/shell/aliases.sh ] && source $HOME/.config/shell/aliases.sh
-[ -f $HOME/.config/shell/aliases-w.sh ] && source $HOME/.config/shell/aliases-w.sh
-
+# Setup $PATH, other envvars, aliases, etc
+for cfg in ${HOME}/.config/shell/*
+do
+    #echo "loaded ${cfg}"
+    source ${cfg}
+done
 
 setxkbmap es 2>/dev/null
 xset led 2>/dev/null

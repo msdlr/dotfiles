@@ -19,7 +19,13 @@ function precmd() { # Execute after every command
     PS1="%F{red}%n@%m%f %F{green}%1~%f %B%F{13}$(git_branch)%f%b%F{11}%#%f "
 }
 
-# Setup $PATH
+# Setup $PATH, other envvars, aliases, etc
+for cfg in ${HOME}/.config/shell/*
+do
+    #echo "Loaded ${cfg}"
+    source ${cfg}
+done
+
 [ -f $HOME/.config/shell/path.sh ] && source $HOME/.config/shell/path.sh
 # Setup aliases
 [ -f $HOME/.config/shell/aliases.sh ] && source $HOME/.config/shell/aliases.sh
