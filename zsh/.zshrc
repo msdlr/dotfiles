@@ -7,6 +7,11 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 
+# History
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE=${HOME}/.zsh_history
+
 function git_branch() {
     GIT_BRANCH="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
     if [ -n "$GIT_BRANCH" ]; then
