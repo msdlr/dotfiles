@@ -15,6 +15,7 @@ alias l='less'
 
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
+alias python='python3'
 
 # Git
 alias gst='git status'
