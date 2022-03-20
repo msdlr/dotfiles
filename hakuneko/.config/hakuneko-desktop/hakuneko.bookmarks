@@ -1,0 +1,202 @@
+[
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "Berserk"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "801513ba-a712-498c-8f57-cae55b38cc92"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 1 - Phantom Blood"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "5a547d1d-576b-477f-8cb3-70a3b4187f8a"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 1 - Phantom Blood (Official Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "2dfeb1aa-14c4-4acf-96d5-86334584bf94"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 2 - Battle Tendency"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "61079efc-d1c4-4565-bbe6-de58e1d75fdf"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 2 - Battle Tendency (Official Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "3148976a-e0b0-4a9c-a1eb-58783a11ff99"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 3 - Stardust Crusaders"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "0d545e62-d4cd-4e65-a65c-a5c46b794918"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 3 - Stardust Crusaders (Official Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "51f7d9fc-256e-4160-add1-ab9652f32ae1"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 4 - Diamond is Unbreakable"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "5ed1f8fc-a119-4cbc-aeae-26ce2bd3f838"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 4 - Diamond is Unbreakable (Official Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "b7af9467-a5d3-470a-86e9-b5ae4a82e0cd"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 5 - Vento Aureo"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "2725e983-81c3-4a62-8e97-5027c5996c2b"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 5 - Vento Aureo (Official Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "fd917921-5e97-479f-b22c-5d7f00e1c830"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 6: Stone Ocean"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "ea57752d-acb7-469e-aa60-43e694ded9a9"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 6: Stone Ocean (Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "72d1ae71-4391-4bb2-9f39-784af3cc3c71"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 7 - Steel Ball Run"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "b30dfee3-9d1d-4e8d-bfbe-8fcabc3c96f6"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 7 - Steel Ball Run (Official Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "1044287a-73df-48d0-b0b2-5327f32dd651"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 8 - JoJolion"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "c086153a-0162-412a-9914-a7b2633d0cd3"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure Part 8 - JoJolion (Official Colored)"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "7a9d76c3-42b9-4bcf-81d7-ad307d2ea971"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "JoJo's Bizarre Adventure: Crazy Diamond's Demonic Heartbreak"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "0d89de3b-454b-422e-9eed-c17402cf1604"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaLife",
+      "manga": "One Piece"
+    },
+    "key": {
+      "connector": "mangalife",
+      "manga": "One-Piece"
+    }
+  },
+  {
+    "title": {
+      "connector": "MangaDex",
+      "manga": "Oyasumi Punpun"
+    },
+    "key": {
+      "connector": "mangadex",
+      "manga": "4301d363-ee02-43f4-ae24-4cbf29a74830"
+    }
+  }
+]
