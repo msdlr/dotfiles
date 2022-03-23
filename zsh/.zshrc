@@ -39,3 +39,6 @@ done
 # Ctrl + arrows
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
+
+# Del key writing '~'
+bindkey "^[[3~" delete-char
