@@ -70,3 +70,8 @@ ex () {
     echo "'$1' is not a valid file"
   fi
 }
+
+# So that zsh does not print 'aliased to' is overriden
+which () {
+	sh -c "which $1"
+}
