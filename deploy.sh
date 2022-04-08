@@ -3,27 +3,27 @@
 # Method that links the files in the repo and creates the directory structure and then links regular files
 stowlike () {
     TARGET=${HOME}
-    PACKAGE=$1
+    PACKAGE=${1}
     
     cd ${PACKAGE}
     
     # Create directory structure
     for dir in $(find . -type d -mindepth 1 2>/dev/null)
     do
-        TARGETDIR=$(echo $dir | sed "s|^.|$HOME|g")
-        #echo "CREATE DIR $TARGETDIR" #| sed -e "s/$PACKAGE//d"
-        mkdir -pv $TARGETDIR
+        TARGETDIR=$(echo $dir | sed "s|^.|${TARGET}|g")
+        #echo "CREATE DIR ${TARGETDIR}" #| sed -e "s/$PACKAGE//d"
+        mkdir -pv ${TARGETDIR} 2>/dev/null
     done
     
     # Link regular files
     for file in $(find . -type f -mindepth 1 2>/dev/null)
     do
-        SOURCEFILE=$(realpath $file)
-        TARGETFILE=$(echo $file | sed "s|^.|$HOME|g")
+        SOURCEFILE=$(realpath ${file})
+        TARGETFILE=$(echo ${file} | sed "s|^.|${TARGET}|g")
         
-        # echo "Link $SOURCEFILE @ $TARGETFILE"
-        rm $TARGETFILE 2>/dev/null # Remove target file to override it
-        ln -sv $SOURCEFILE $TARGETFILE 2>/dev/null
+        # echo "Link ${SOURCEFILE} @ ${TARGETFILE}"
+        rm ${TARGETFILE} 2>/dev/null # Remove target file to override it
+        ln -sv ${SOURCEFILE} ${TARGETFILE} 2>/dev/null
     done
     
     cd $OLDPWD
@@ -40,8 +40,8 @@ case $# in
         done
         ;;
     "1")
-        #echo "Installing $1"
-        stowlike $1
+        #echo "Installing ${1}"
+        stowlike ${1}
         ;;
     *)
         #echo "Installing $# pkgs"
