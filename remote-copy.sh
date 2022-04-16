@@ -18,6 +18,8 @@ scp_pkg () {
     cd $OLDPWD
 }
 
+ssh-copy-id ${U}@${R} 2>/dev/null
+
 case $# in
     "0")
         #echo "No params, installing all..."
