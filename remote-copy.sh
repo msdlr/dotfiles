@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
-U=${U:=${USER}}
 R=${R:=$(hostname)}
+U=${U:=$(ssh ${R} whoami)}
 
 echo "Deploying at $U@$R"
 
@@ -40,7 +40,6 @@ case $# in
         for p in $@
         do
             scp_pkg ${p}
-            wait
         done
         ;;
 esac
