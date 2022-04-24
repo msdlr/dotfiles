@@ -21,7 +21,7 @@ function git_branch() {
 
 function precmd() { # Execute after every command
     # Prompt
-    PS1="%F{red}%n@%m%f %F{green}%1~%f %B%F{blue}$(git_branch)%f%b%F{yellow}%#%f "
+    PS1="%F{red}%n@%m%f %F{green}%1~%f %B%F{magenta}$(git_branch)%f%b%F{yellow}%#%f "
 }
 
 # Setup $PATH, other envvars, aliases, etc
