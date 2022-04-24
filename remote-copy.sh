@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
-U=${U:=${USER}}
 R=${R:=$(hostname)}
+U=${U:=$(ssh ${R} whoami)}
 
 echo "Deploying at $U@$R"
 
@@ -17,6 +17,8 @@ scp_pkg () {
     scp -r ${FILELIST} ${U}@${R}:${TARGET}
     cd $OLDPWD
 }
+
+ssh-copy-id ${U}@${R} 2>/dev/null
 
 case $# in
     "0")
@@ -38,7 +40,6 @@ case $# in
         for p in $@
         do
             scp_pkg ${p}
-            wait
         done
         ;;
 esac
