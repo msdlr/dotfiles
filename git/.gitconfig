@@ -9,3 +9,6 @@
 	pll = pull
 	pshf = push -f
 	pllf = pull -f
+[user]
+	email = miguelsrosa97@gmail.com
+	name = msdlr
