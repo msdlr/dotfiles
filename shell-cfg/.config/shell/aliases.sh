@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
+# QOL
 alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias lla='ls -lah'
-alias ups='sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y'
-alias rm='rm -r'
 alias vim='vim -p'
 alias du='du -h'
 alias du1='du -h --max-depth=1'
@@ -11,6 +10,7 @@ alias df='df -h'
 alias reload='source $HOME/.bashrc'
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias l='less'
+alias make='make -j'
 
 # Verbose commands
 alias mkdir='mkdir -pv'
@@ -21,6 +21,7 @@ alias cp='cp -v'
 alias chmod='chmod -v'
 alias chown='chown -v'
 
+alias ups='sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
 
@@ -35,7 +36,7 @@ alias grs='git reset --soft'
 alias grm='git reset --mixed'
 alias gcout='git checkout'
 alias gclean='git clean -df'
-alias gnuke='git clean -dfx' # Git clean of untracker files too
+alias gnuke='git clean -dfx' # Git clean of untracked files too
 alias gua='git remote | xargs -L1 git push --all'
 alias gdiff='git diff'
 
@@ -56,6 +57,8 @@ alias dkill='docker kill'
 alias dstop='docker stop'
 alias dstop-all='docker stop $(docker ps -a -q)'
 alias dsprune='docker system prune'
+
+# Functions
 
 ex () {
   if [ -f $1 ] ; then
