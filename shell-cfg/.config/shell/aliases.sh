@@ -3,7 +3,6 @@ alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias lla='ls -lah'
 alias ups='sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y'
-alias mkdir='mkdir -p'
 alias rm='rm -r'
 alias vim='vim -p'
 alias du='du -h'
@@ -13,9 +12,17 @@ alias reload='source $HOME/.bashrc'
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias l='less'
 
+# Verbose commands
+alias mkdir='mkdir -pv'
+alias ln='ln -v'
+alias rm='rm -v'
+alias mv='mv -v'
+alias cp='cp -v'
+alias chmod='chmod -v'
+alias chown='chown -v'
+
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
-alias python='python3'
 
 # Git
 alias gst='git status'
