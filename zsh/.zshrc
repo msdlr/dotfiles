@@ -26,7 +26,7 @@ function precmd() { # Execute after every command
 }
 
 # Setup $PATH, other envvars, aliases, etc
-for cfg in ${HOME}/.config/shell/*
+for cfg in ${HOME}/.config/shell/*[\.sh,\.zsh]
 do
     #echo "Loaded ${cfg}"
     source ${cfg}
