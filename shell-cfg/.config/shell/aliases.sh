@@ -85,3 +85,9 @@ ex () {
 which () {
 	sh -c "which $1"
 }
+
+# Go to (symlinked) file's original directory
+cds () {
+	dir=${1:=.} # Do nothing if a file is not specified
+	cd $(dirname $(realpath ${dir}))	
+}
