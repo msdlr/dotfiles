@@ -91,3 +91,12 @@ cds () {
 	dir=${1:=.} # Do nothing if a file is not specified
 	cd $(dirname $(realpath ${dir}))	
 }
+
+# notify-send-like in WSL
+if [[ "$(uname --kernel-release)" == *"WSL"* ]]
+then
+	#echo "Running in WSL"
+	notify-send () {
+		wsl-notify-send.exe --category ${1} ${2}	
+	}
+fi
