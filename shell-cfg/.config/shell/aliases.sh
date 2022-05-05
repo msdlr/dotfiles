@@ -93,10 +93,11 @@ cds () {
 }
 
 # notify-send-like in WSL
-if [[ "$(uname --kernel-release)" == *"WSL"* ]]
+if [ $(( $(expr "$(uname --kernel-release)" : ".*WSL.*") )) ]
 then
 	#echo "Running in WSL"
-	notify-send () {
+	notifysend () {
 		wsl-notify-send.exe --category ${1} ${2}	
 	}
+	alias notify-send='notifysend'
 fi
