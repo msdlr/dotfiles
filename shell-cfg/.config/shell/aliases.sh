@@ -58,6 +58,10 @@ alias dstop='docker stop'
 alias dstop-all='docker stop $(docker ps -a -q)'
 alias dsprune='docker system prune'
 
+# Slurm
+alias scancel-all="scancel --user=${USER}"
+alias sq="squeue -u ${USER}"
+
 # Functions
 
 ex () {
