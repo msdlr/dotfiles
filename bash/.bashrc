@@ -9,7 +9,8 @@ function git_branch() {
 }
 
 function cur_short_path() {
-	pwd | sed "s|./|\n/|g" | cut -c1-2 |  tr ':\n' ':' | sed "s/://g ; s/.$/$(basename $PWD)/g"
+	[ "${PWD}" = "${HOME}" ] && echo "~" && return
+	pwd | sed " s|${HOME}|~|g ; s|/|\n|g ; /^$/d" | cut -c1-1 |  tr '\n' '/' | sed "s|./$|$(basename $PWD)|g"
 }
 
 PS1='\[\e[0;31m\]\u\[\e[0;31m\]@\[\e[0;31m\]\h \[\e[0;32m\]$(cur_short_path) \[\e[0;1;35m\]$(git_branch)\[\e[0;93m\]\$ \[\e[0m\]'
