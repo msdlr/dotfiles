@@ -19,14 +19,18 @@ function git_branch() {
     fi
 }
 
+function cur_short_path() {
+	pwd | sed "s|./|\n/|g" | cut -c1-2 |  tr ':\n' ':' | sed "s/://g ; s/.$/$(basename $PWD)/g"
+}
+
 function precmd() { # Execute after every command
     # Prompt
-    PS1="%F{red}%n@%m%f %F{green}%1~%f %F{yellow}%#%f "
+    PS1="%F{red}%n@%m%f %F{green}$(cur_short_path)%f %F{yellow}%#%f "
     RPROMPT="%B%F{magenta}$(git_branch)%f%b"
 }
 
 # Setup $PATH, other envvars, aliases, etc
-for cfg in ${HOME}/.config/shell/*[\.sh,\.zsh]
+for cfg in ${HOME}/.config/shell/*[\.sh,\.zsh] 
 do
     #echo "Loaded ${cfg}"
     source ${cfg}
