@@ -61,6 +61,7 @@ alias dsprune='docker system prune'
 # Slurm
 alias scancel-all="scancel --user=${USER}"
 alias sq="squeue -u ${USER}"
+alias sqr="squeue | grep '\sR\s.*'"
 
 # Functions
 
