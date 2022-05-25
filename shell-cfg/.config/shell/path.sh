@@ -9,23 +9,5 @@
 
 stty -ixon # disable CTRL-S/Q
 
-if [ "$(id -u)" -ne "0" ]
-then
-    # GOLANG
-    if [ -d /opt/go/bin ]; then
-        # Add go binary to PATH
-        [[ ":${PATH}:" == *"/opt/go/bin"* ]] || export PATH=/opt/go/bin:${PATH}
-    fi
-
-    if  (command -v go >/dev/null); then
-        # Create default go workspace
-        export GOPATH=${HOME}/.go
-	[ -d ${GOPATH} ] || mkdir -p ${GOPATH}/{bin,src,pkg} 
-        export GOBIN=${GOPATH}/bin
-        [[ ":${PATH}:" == *"${GOBIN}"* ]] || export PATH=${PATH}:${GOBIN}
-        export PATH
-    fi
-fi
-
 CARGOBIN=${HOME}/.cargo/bin
 [[ ":${PATH}:" == *"${CARGOBIN}"* ]] || export PATH=${CARGOBIN}:${PATH}
