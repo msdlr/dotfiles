@@ -2,9 +2,9 @@
 
 [ -d "${HOME}/.goenv" ] || git clone https://github.com/syndbg/goenv.git ${HOME}/.goenv
 
-export GOENV_ROOT=${GOENV_ROOT:="$HOME/.goenv"}
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
+GOENV_ROOT=${GOENV_ROOT:="${HOME}/.goenv"}
+[ $(expr "${PATH}" : "${GOENV_ROOT}/bin") = "0" ] && export PATH="${GOENV_ROOT}/bin:${PATH}"
+eval "$(${GOENV_ROOT}/bin/goenv init -)"
 
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
+[ $(expr "${PATH}" : ".*$GOROOT.*") = "0" ] && export PATH="${GOROOT}/bin:${PATH}"
+[ $(expr "${PATH}" : ".*$GOPATH.*") = "0" ] && export PATH="${GOPATH}/bin:${PATH}"
