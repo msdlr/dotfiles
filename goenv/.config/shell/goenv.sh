@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-git clone https://github.com/syndbg/goenv.git ${HOME}/.goenv
+[ -d "${HOME}/.goenv" ] || git clone https://github.com/syndbg/goenv.git ${HOME}/.goenv
 
-export GOENV_ROOT="$HOME/.goenv"
+export GOENV_ROOT=${GOENV_ROOT:="$HOME/.goenv"}
 export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
 
