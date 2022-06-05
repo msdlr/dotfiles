@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
 # Method that links the files in the repo and creates the directory structure and then links regular files
 stowlike () {
