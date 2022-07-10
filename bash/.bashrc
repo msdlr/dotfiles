@@ -1,5 +1,7 @@
 # Source default conf
 . /etc/skel/.bashrc
+# Source bash_completion
+[ -f /etc/bash_completion ] && . /etc/bash_completion
 
 function git_branch() {
     GIT_BRANCH="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
