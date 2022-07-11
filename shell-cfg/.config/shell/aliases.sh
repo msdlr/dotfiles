@@ -11,6 +11,7 @@ alias reload='source $HOME/.$(basename ${SHELL})rc'
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias l='less'
 alias make='make -j'
+alias rsync='rsync -avhzP'
 
 # Verbose commands
 alias mkdir='mkdir -pv'
