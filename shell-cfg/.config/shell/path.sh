@@ -5,7 +5,7 @@
 [ -d ${HOME}/.local/lib ] && [[ ":${LD_LIBRARY_PATH}:" == *"${HOME}/.local/lib"* ]] || export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}
 
 # PATH for scripts directory
-[ -d ${HOME}/.local/scripts ] && [[ ":${PATH}:" == *"${HOME}/.local/scripts"* ]] || export PATH=${HOME}/.local/scripts:${PATH}
+[ -d ${HOME}/.local/sh ] && [[ ":${PATH}:" == *"${HOME}/.local/sh"* ]] || export PATH=${HOME}/.local/sh:${PATH}
 
 stty -ixon # disable CTRL-S/Q
 
