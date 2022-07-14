@@ -12,6 +12,9 @@ alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias l='less'
 alias make='make -j'
 alias rsync='rsync -avhzP'
+alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
+alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
+which pigz >/dev/null && alias tzip='tar -I pigz -cvf' && alias tunzip='tar -I pigz -xvf' # Multithreaded
 
 # Verbose commands
 alias mkdir='mkdir -pv'
@@ -23,8 +26,6 @@ alias chmod='chmod -v'
 alias chown='chown -v'
 
 alias ups='sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y'
-alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
-alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
 
 # Git
 alias gst='git status'
