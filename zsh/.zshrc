@@ -37,9 +37,14 @@ do
     source ${cfg}
 done
 
-# Ctrl + arrows
+# Movement
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+
+# Search like bash
+bindkey '^R' history-incremental-search-backward
 
 # Del key writing '~'
 bindkey "^[[3~" delete-char
