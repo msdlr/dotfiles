@@ -15,6 +15,7 @@ alias rsync='rsync -avhzP'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
 which pigz >/dev/null && alias tzip='tar -I pigz -cvf' && alias tunzip='tar -I pigz -xvf' # Multithreaded
+alias sudo='sudo '
 
 # Verbose commands
 alias mkdir='mkdir -pv'
