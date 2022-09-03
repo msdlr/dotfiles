@@ -7,17 +7,19 @@ alias vim='vim -p'
 alias du='du -h'
 alias du1='du -h --max-depth=1'
 alias df='df -h'
-alias reload='source $HOME/.$(basename ${SHELL})rc'
+alias reload="source $HOME/.$(basename $(readlink /proc/$$/exe))rc"
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias l='less'
 alias make='make -j'
 alias rsync='rsync -avhzP'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
-which pigz >/dev/null && alias tzip='tar -I pigz -cvf' && alias tunzip='tar -I pigz -xvf' # Multithreaded
 alias sudo='sudo '
-which nala >/dev/null && alias apt='nala'
-which python >/dev/null || alias python='python3'
+
+# Conditional aliases
+which pigz >/dev/null 2>/dev/null && alias tzip='tar -I pigz -cvf' && alias tunzip='tar -I pigz -xvf' # Multithreaded
+which nala >/dev/null 2>/dev/null && alias apt='nala'
+which python >/dev/null 2>/dev/null || alias python='python3'
 
 # Verbose commands
 alias mkdir='mkdir -pv'
