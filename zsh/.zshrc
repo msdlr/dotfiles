@@ -6,6 +6,7 @@ autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
+unsetopt no_match
 
 # History
 HISTSIZE=10000000
