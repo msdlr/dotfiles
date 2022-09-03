@@ -17,6 +17,7 @@ alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
 which pigz >/dev/null && alias tzip='tar -I pigz -cvf' && alias tunzip='tar -I pigz -xvf' # Multithreaded
 alias sudo='sudo '
 which nala >/dev/null && alias apt='nala'
+which python >/dev/null || alias python='python3'
 
 # Verbose commands
 alias mkdir='mkdir -pv'
@@ -92,7 +93,7 @@ ex () {
 
 # So that zsh does not print 'aliased to' is overriden
 which () {
-	sh -c "which $1"
+	sh -c "which $1" || echo "$(alias $1 | sed 's/^.*=//')"
 }
 
 # Go to (symlinked) file's original directory
