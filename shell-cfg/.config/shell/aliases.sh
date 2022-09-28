@@ -105,6 +105,22 @@ cds () {
 	cd $(dirname $(realpath ${dir}))	
 }
 
+mass-tar () {
+  for f in ${@}
+  do
+    file=$(realpath ${f})
+
+    if [ -d ${file} ]; then
+      cd $(dirname ${file})
+      tzip $(basename ${file}).tgz $(basename ${file})
+    fi
+
+    if [ -f ${file} ]; then
+      tzip $(basename ${file}).tgz -C $(dirname ${file}) $(basename ${file})
+    fi
+  done
+}
+
 # notify-send-like in WSL
 if [ $(expr "$(uname --kernel-release)" : ".*WSL.*") != "0"  ]
 then
