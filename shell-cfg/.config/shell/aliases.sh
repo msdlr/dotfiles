@@ -19,7 +19,6 @@ alias sudo='sudo '
 
 # Conditional aliases
 which pigz >/dev/null 2>/dev/null && alias tzip='tar -I pigz -cvf' && alias tunzip='tar -I pigz -xvf' # Multithreaded
-which nala >/dev/null 2>/dev/null && alias apt='nala'
 which python >/dev/null 2>/dev/null || alias python='python3'
 
 # Verbose commands
