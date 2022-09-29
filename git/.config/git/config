@@ -9,6 +9,7 @@
 	pll = pull
 	pshf = push -f
 	pllf = pull -f
+	root = rev-parse --show-toplevel
 [user]
 	email = miguelsrosa97@gmail.com
 	name = msdlr
