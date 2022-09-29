@@ -30,8 +30,6 @@ alias cp='cp -v'
 alias chmod='chmod -v'
 alias chown='chown -v'
 
-alias ups='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
-
 # Git
 alias gst='git status'
 alias ga='git add'
