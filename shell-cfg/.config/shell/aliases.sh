@@ -14,11 +14,10 @@ alias l='less'
 alias make='make -j'
 alias rsync='rsync -avhzP'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
-alias tunzip='tar -xzvf' # tar -xzvf archive.tar.gz
 alias sudo='sudo '
 
 # Conditional aliases
-which pigz >/dev/null 2>/dev/null && alias tzip='tar -I pigz -cvf' && alias tunzip='tar -I pigz -xvf' # Multithreaded
+which pigz >/dev/null 2>/dev/null && alias tzip='tar -I pigz -cvf'# Multithreaded
 which nala >/dev/null 2>/dev/null && alias apt='nala'
 which python >/dev/null 2>/dev/null || alias python='python3'
 
@@ -97,6 +96,19 @@ ex () {
 # So that zsh does not print 'aliased to' is overriden
 which () {
 	sh -c "which $1" || echo "$(alias $1 | sed 's/^.*=//')"
+}
+
+tunzip () {
+	for file in $@
+	do
+		echo "File: $file"
+		if [ "$(which pigz 2>/dev/null)" = ""  ]
+		then
+			tar -xzvf ${file}
+		else
+			tar -I pigz -xvf ${file}
+		fi
+	done
 }
 
 # Go to (symlinked) file's original directory
