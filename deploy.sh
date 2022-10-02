@@ -41,13 +41,13 @@ case $# in
         ;;
     "1")
         #echo "Installing ${1}"
-        stowlike ${1}
+        [ -d ${1} ] && stowlike ${1}
         ;;
     *)
         #echo "Installing $# pkgs"
         for p in $@
         do
-            stowlike ${p}
+            [ -d ${p} ] && stowlike ${p}
         done
         ;;
 esac
