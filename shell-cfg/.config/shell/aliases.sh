@@ -120,23 +120,23 @@ mass-tar () {
 
 ups () {
   # Debian-based
-  if [ $(which apt) >/dev/null != "" ]
+  if [ "$(which apt)" >/dev/null != "" ]
   then
-    which deb-get >/dev/null && deb-get upgrade
+    [ "$(which deb-get)" >/dev/null != "" ] && deb-get upgrade
     sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
     return
   fi
 
   # Arch-based
-  if [ $(which pacman) >/dev/null != "" ]
+  if [ "$(which pacman)" >/dev/null != "" ]
   then
-    which yay >/dev/null && yay -Syyu
+    [ "$(which pacman)" >/dev/null != "" ] >/dev/null && yay -Syyu
     sudo pacman -Syyu
     return
   fi
 
   # RPM-based
-  if [ $(which dnf) >/dev/null != "" ]
+  if [ "$(which dnf)" >/dev/null != "" ]
   then
     dnf upgrade -y
     return
