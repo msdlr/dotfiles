@@ -118,6 +118,13 @@ mass-tar () {
   done
 }
 
+mass-untar () {
+	for f in ${@}
+	do
+		[ -f ${f} ] && tunzip ${f}
+	done
+}
+
 ups () {
   # Debian-based
   if [ "$(which apt)" >/dev/null != "" ]
