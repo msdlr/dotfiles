@@ -30,8 +30,6 @@ alias cp='cp -v'
 alias chmod='chmod -v'
 alias chown='chown -v'
 
-alias ups='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
-
 # Git
 alias gst='git status'
 alias ga='git add'
@@ -115,6 +113,54 @@ tunzip () {
 cds () {
 	dir=${1:=.} # Do nothing if a file is not specified
 	cd $(dirname $(realpath ${dir}))	
+}
+
+mass-tar () {
+  for f in ${@}
+  do
+    file=$(realpath ${f})
+
+    if [ -d ${file} ]; then
+      cd $(dirname ${file})
+      tzip $(basename ${file}).tgz $(basename ${file})
+    fi
+
+    if [ -f ${file} ]; then
+      tzip $(basename ${file}).tgz -C $(dirname ${file}) $(basename ${file})
+    fi
+  done
+}
+
+mass-untar () {
+	for f in ${@}
+	do
+		[ -f ${f} ] && tunzip ${f}
+	done
+}
+
+ups () {
+  # Debian-based
+  if [ "$(which apt)" >/dev/null != "" ]
+  then
+    [ "$(which deb-get)" >/dev/null != "" ] && deb-get upgrade
+    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    return
+  fi
+
+  # Arch-based
+  if [ "$(which pacman)" >/dev/null != "" ]
+  then
+    [ "$(which pacman)" >/dev/null != "" ] >/dev/null && yay -Syyu
+    sudo pacman -Syyu
+    return
+  fi
+
+  # RPM-based
+  if [ "$(which dnf)" >/dev/null != "" ]
+  then
+    dnf upgrade -y
+    return
+  fi
 }
 
 # notify-send-like in WSL
