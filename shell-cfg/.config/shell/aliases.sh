@@ -10,6 +10,7 @@ alias du0='du -hc --max-depth=0'
 alias df='df -h'
 alias reload="source $HOME/.$(basename $(readlink /proc/$$/exe))rc"
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
+alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
 alias l='less'
 alias make='make -j'
 alias rsync='rsync -avhzP'
