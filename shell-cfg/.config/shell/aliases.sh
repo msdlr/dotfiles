@@ -21,6 +21,7 @@ alias sudo='sudo '
 which pigz >/dev/null 2>/dev/null && alias tzip='tar -I pigz -cvf'# Multithreaded
 which nala >/dev/null 2>/dev/null && alias apt='nala'
 which python >/dev/null 2>/dev/null || alias python='python3'
+which nvim >/dev/null 2>/dev/null && alias vim='nvim -p'
 
 # Verbose commands
 alias mkdir='mkdir -pv'
