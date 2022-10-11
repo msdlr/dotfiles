@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
-# Dependencies: openssl
-# Optional: readline-common sqlite3 bzip2
+# Dependencies: https://github.com/pyenv/pyenv/wiki#suggested-build-environment 
 
 export PYENV_ROOT=${PYENVROOT:="${HOME}/.pyenv"}
 
