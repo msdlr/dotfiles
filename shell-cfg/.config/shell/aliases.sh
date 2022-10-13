@@ -140,6 +140,13 @@ mass-untar () {
 	done
 }
 
+eps2pdf () {
+	for f in ${@}
+	do
+		[ -f ${f} ] && epstopdf ${f}
+	done
+}
+
 ups () {
   # Debian-based
   if [ "$(which apt)" >/dev/null != "" ]
