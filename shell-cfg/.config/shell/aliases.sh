@@ -46,6 +46,8 @@ alias gclean='git clean -df'
 alias gnuke='git clean -dfx' # Git clean of untracked files too
 alias gua='git remote | xargs -L1 git push --all'
 alias gdiff='git diff'
+alias gs='git stash'
+alias gsp='git stash pop'
 
 # Docker
 alias dps='docker ps'
