@@ -18,10 +18,10 @@ alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
 
 # Conditional aliases
-[ ! -z "$(which pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
-[ ! -z "$(which nala)" 2>/dev/null ] && alias apt='nala'
-[ ! -z "$(which python)" 2>/dev/null ] || alias python='python3'
-[ ! -z "$(which nvim)" 2>/dev/null ] && alias vim='nvim -p'
+[ -f "$(which pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
+[ -f "$(which nala)" 2>/dev/null ] && alias apt='nala'
+[ -f "$(which python)" 2>/dev/null ] || alias python='python3'
+[ -f "$(which nvim)" 2>/dev/null ] && alias vim='nvim -p'
 
 # Verbose commands
 alias mkdir='mkdir -pv'
