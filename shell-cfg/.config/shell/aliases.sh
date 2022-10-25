@@ -33,44 +33,50 @@ alias chmod='chmod -v'
 alias chown='chown -v'
 
 # Git
-alias gst='git status'
-alias ga='git add'
-alias gcm='git commit -m'
-alias gpush='git push'
-alias gpull='git pull'
-alias grh='git reset --hard'
-alias grs='git reset --soft'
-alias grm='git reset --mixed'
-alias gcout='git checkout'
-alias gclean='git clean -df'
-alias gnuke='git clean -dfx' # Git clean of untracked files too
-alias gua='git remote | xargs -L1 git push --all'
-alias gdiff='git diff'
-alias gs='git stash'
-alias gsp='git stash pop'
+if [ -x "$(command -v git)" ]
+then
+  alias gst='git status'
+  alias ga='git add'
+  alias gcm='git commit -m'
+  alias gpush='git push'
+  alias gpull='git pull'
+  alias grh='git reset --hard'
+  alias grs='git reset --soft'
+  alias grm='git reset --mixed'
+  alias gcout='git checkout'
+  alias gclean='git clean -df'
+  alias gnuke='git clean -dfx' # Git clean of untracked files too
+  alias gua='git remote | xargs -L1 git push --all'
+  alias gdiff='git diff'
+  alias gs='git stash'
+  alias gsp='git stash pop'
+fi
 
 # Docker
-alias dps='docker ps'
-alias dimgs='docker images'
-drmi () {
-	docker rmi $1
-}
-alias drmi-all='docker rmi $(docker images -a -q)'
-drem () {
-	docker rm $1
-}
-alias drem-all='docker rm $(docker ps -a -q)'
-alias drun='docker run'
-alias dbuild='docker build'
-alias dkill='docker kill'
-alias dstop='docker stop'
-alias dstop-all='docker stop $(docker ps -a -q)'
-alias dsprune='docker system prune'
+if [ -x "$(command -v docker)" ]
+then
+  alias dps='docker ps'
+  alias dimgs='docker images'
+  drmi () {
+    docker rmi $1
+  }
+  alias drmi-all='docker rmi $(docker images -a -q)'
+  drem () {
+    docker rm $1
+  }
+  alias drem-all='docker rm $(docker ps -a -q)'
+  alias drun='docker run'
+  alias dbuild='docker build'
+  alias dkill='docker kill'
+  alias dstop='docker stop'
+  alias dstop-all='docker stop $(docker ps -a -q)'
+  alias dsprune='docker system prune'
+fi
 
-# Slurm
-alias scancel-all="scancel --user=${USER}"
-alias sq="squeue -u ${USER}"
-alias sqr="squeue | grep '\sR\s.*'"
+  # Slurm
+[ -x "$(command -v scancel)" ] && alias scancel-all="scancel --user=${USER}"
+[ -x "$(command -v squeue)" ] && alias sq="squeue -u ${USER}"
+[ -x "$(command -v squeue)" ] && alias sqr="squeue | grep '\sR\s.*'"
 
 # Functions
 
