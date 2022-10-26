@@ -155,6 +155,11 @@ eps2pdf () {
 	done
 }
 
+rmdir_recursive () {
+  where=${1:=.}
+  find ${where} -mindepth 1 -type d | tac | xargs -I {} rmdir --ignore-fail-on-non-empty {}
+}
+
 ups () {
   # Debian-based
   if [ "$(which apt)" >/dev/null != "" ]
