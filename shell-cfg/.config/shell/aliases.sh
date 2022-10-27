@@ -19,7 +19,6 @@ alias sudo='sudo '
 
 # Conditional aliases
 [ -f "$(which pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
-[ -f "$(which nala)" 2>/dev/null ] && alias apt='nala'
 [ -f "$(which python)" 2>/dev/null ] || alias python='python3'
 [ -f "$(which nvim)" 2>/dev/null ] && alias vim='nvim -p'
 
