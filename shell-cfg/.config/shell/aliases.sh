@@ -121,7 +121,8 @@ tunzip () {
 
 # Go to (symlinked) file's original directory
 cds () {
-	dir=${1:=.} # Do nothing if a file is not specified
+	dir=${1}
+	dir=${dir:=.} # Do nothing if a file is not specified
 	cd $(dirname $(realpath ${dir}))	
 }
 
@@ -156,7 +157,8 @@ eps2pdf () {
 }
 
 rmdir_recursive () {
-  where=${1:=.}
+  where=${1}
+  where=${where:=.}
   find ${where} -mindepth 1 -type d | tac | xargs -I {} rmdir --ignore-fail-on-non-empty {}
 }
 
