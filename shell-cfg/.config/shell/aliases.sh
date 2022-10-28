@@ -111,9 +111,9 @@ tunzip () {
 		echo "File: $file"
 		if [ "$(which pigz 2>/dev/null)" = ""  ]
 		then
-			tar -xzvf ${file}
+			tar -xzvf "${file}"
 		else
-			tar -I pigz -xvf ${file}
+			tar -I pigz -xvf "${file}"
 		fi
 	done
 }
@@ -132,11 +132,11 @@ mass-tar () {
 
     if [ -d ${file} ]; then
       cd $(dirname ${file})
-      tzip $(basename ${file}).tgz $(basename ${file})
+      tzip "$(basename ${file}).tgz" "$(basename ${file})"
     fi
 
     if [ -f ${file} ]; then
-      tzip $(basename ${file}).tgz -C $(dirname ${file}) $(basename ${file})
+      tzip "$(basename ${file}).tgz" -C "$(dirname ${file})" "$(basename ${file})"
     fi
   done
 }
