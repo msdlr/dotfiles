@@ -5,7 +5,7 @@ export U=${U:=$(ssh ${R} whoami)}
 
 [ "${R}" = "$(hostname)" ] || ssh-copy-id ${U}@${R} 2>/dev/null
 
-[ $# -eq 0 ] && ${0} $(find . -maxdepth 1 -type d -not -name '.' -not -name '.git')
+[ $# -eq 0 ] && $(realpath ${0}) $(find $(dirname $0) -maxdepth 1 -type d -not -name '.' -not -name '.git')
 
 for pkg in $@
 do
