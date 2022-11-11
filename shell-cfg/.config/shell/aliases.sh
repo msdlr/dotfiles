@@ -144,7 +144,12 @@ mass-tar () {
 mass-untar () {
 	for f in ${@}
 	do
-		[ -f ${f} ] && tunzip ${f}
+		if [ -f ${f} ]
+		then
+		cd $(dirname ${f})
+			tunzip ${f}
+		cd ${OLDPWD}
+		fi
 	done
 }
 
