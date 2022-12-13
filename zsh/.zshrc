@@ -9,6 +9,7 @@ compinit
 unsetopt no_match
 
 # History
+setopt HIST_IGNORE_SPACE
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=${HOME}/.zsh_history
