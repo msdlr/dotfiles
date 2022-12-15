@@ -191,6 +191,15 @@ ups () {
   fi
 }
 
+cdr () {
+	if [ -x "$(command -v locate)" ]
+	then
+		cd $(locate $(pwd)*.git | sed 's/\/.git//' | fzf)
+	else
+		cd $(find . -name '*.git' 2>/dev/null | sed 's/\/.git//' | fzf)
+	fi
+}
+
 # notify-send-like in WSL
 if [ $(expr "$(uname --kernel-release)" : ".*WSL.*") != "0"  ]
 then
