@@ -192,11 +192,15 @@ ups () {
 }
 
 cdr () {
+    [ "$1" = "~" ] && cdr $HOME && return
+
 	if [ -x "$(command -v locate)" ]
 	then
-		cd $(locate $(pwd)*.git | sed 's/\/.git//' | fzf)
+		dst=$(locate $(pwd)*.git | sed 's/\/.git//' | grep "${1}" | fzf)
+		[ "${dst}" != "" ] && cd ${dst}
 	else
-		cd $(find . -name '*.git' 2>/dev/null | sed 's/\/.git//' | fzf)
+		dst=$(find . -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}" | fzf)
+		[ "${dst}" != "" ] && cd ${dst}
 	fi
 }
 
