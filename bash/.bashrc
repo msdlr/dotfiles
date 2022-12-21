@@ -24,8 +24,8 @@ do
     source ${cfg}
 done
 
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
+bind 'set show-all-if-ambiguous on' 2>/dev/null
+bind 'TAB:menu-complete' 2>/dev/null
 
 setxkbmap es 2>/dev/null
 xset led 2>/dev/null
