@@ -125,6 +125,14 @@ cds () {
 	cd $(dirname $(realpath ${dir}))	
 }
 
+# Go to a dir's realpath
+cdsd () {
+	dir=${1}
+	dir=${dir:=.} # Do nothing if a dir is not specified
+	cd $(realpath ${dir})
+}
+
+
 mass-tar () {
   for f in ${@}
   do
