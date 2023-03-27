@@ -38,7 +38,7 @@ then
   alias ga='git add'
   alias gcm='git commit -m'
   alias gpush='git push'
-  alias gpull='git pull'
+  alias gpull='git pull; git submodule update --recursive'
   alias grh='git reset --hard'
   alias grs='git reset --soft'
   alias grm='git reset --mixed'
