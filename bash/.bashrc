@@ -4,7 +4,7 @@
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 
 function git_branch() {
-    GIT_BRANCH="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
+	GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     if [ -n "$GIT_BRANCH" ]; then
         echo "[$GIT_BRANCH] "
     fi
