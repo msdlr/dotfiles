@@ -15,7 +15,7 @@ SAVEHIST=10000000
 HISTFILE=${HOME}/.zsh_history
 
 function git_branch() {
-    GIT_BRANCH="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
+    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     if [ -n "${GIT_BRANCH}" ]; then
         echo "git:${GIT_BRANCH}"
     fi
