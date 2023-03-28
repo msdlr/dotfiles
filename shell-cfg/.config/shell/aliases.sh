@@ -38,6 +38,7 @@ then
   alias ga='git add'
   alias gcm='git commit -m'
   alias gpush='git push'
+  alias gpushu='git push --set-upstream $(git remote show) $(git rev-parse --abbrev-ref HEAD)'
   alias gpull='git pull; git submodule update --recursive'
   alias grh='git reset --hard'
   alias grs='git reset --soft'
