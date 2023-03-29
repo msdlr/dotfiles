@@ -133,6 +133,10 @@ cdsd () {
 	cd $(realpath ${dir})
 }
 
+unln () {
+	cp -r --remove-destination $(realpath ${1}) ${1}
+}
+
 
 mass-tar () {
   for f in ${@}
