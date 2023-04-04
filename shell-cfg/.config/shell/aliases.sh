@@ -180,6 +180,11 @@ rmdir_recursive () {
 }
 
 ups () {
+  if [ "$(which flatpak)" >/dev/null != "" ]
+  then
+    yes | flatpak update 
+  fi
+
   # Debian-based
   if [ "$(which apt)" >/dev/null != "" ]
   then
@@ -202,6 +207,8 @@ ups () {
     dnf upgrade -y
     return
   fi
+ 
+
 }
 
 cdr () {
