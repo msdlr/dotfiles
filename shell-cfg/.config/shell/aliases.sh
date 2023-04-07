@@ -182,7 +182,7 @@ rmdir_recursive () {
 ups () {
   if [ "$(which flatpak)" >/dev/null != "" ]
   then
-    yes | flatpak update 
+    flatpak update -y 
   fi
 
   # Debian-based
