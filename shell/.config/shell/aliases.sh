@@ -177,6 +177,14 @@ eps2pdf () {
 	done
 }
 
+eps2svg () {
+	for f in ${@}
+	do
+		[ -f ${f} ] && epstopdf ${f}
+		pdf2svg $(echo "${f}" | sed 's/.eps/.pdf/g') $(echo "${f}" | sed 's/.eps/.svg/g') 
+	done
+}
+
 rmdir_recursive () {
   where=${1}
   where=${where:=.}
