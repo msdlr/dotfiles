@@ -30,13 +30,6 @@ function precmd() { # Execute after every command
     # Prompt
     PS1="%F{red}%n@%m%f %F{green}$(cur_short_path)%f %F{yellow}%#%f "
     RPROMPT="%B%F{magenta}$(git_branch)%f%b"
-    
-    # Setup $PATH, other envvars, aliases, etc
-    for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.zsh] 2>/dev/null)
-    do
-        #echo "Loaded ${cfg}"
-        source ${cfg}
-    done
 }
 
 # Movement
@@ -50,3 +43,10 @@ bindkey '^R' history-incremental-search-backward
 
 # Del key writing '~'
 bindkey "^[[3~" delete-char
+
+
+# Setup $PATH, other envvars, aliases, etc
+for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.zsh] 2>/dev/null)
+do
+    source ${cfg}
+done
