@@ -200,8 +200,8 @@ ups () {
   # Debian-based
   if [ "$(which apt)" >/dev/null != "" ]
   then
-    [ "$(which deb-get)" >/dev/null != "" ] && deb-get upgrade
     sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    [ "$(which deb-get)" >/dev/null != "" ] && deb-get update && deb-get upgrade
     return
   fi
 
