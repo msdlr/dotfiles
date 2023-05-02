@@ -150,6 +150,7 @@ mass-tar () {
     if [ -d ${file} ]; then
       cd $(dirname ${file})
       tzip "$(basename ${file}).tgz" "$(basename ${file})"
+      cd -
     fi
 
     if [ -f ${file} ]; then
