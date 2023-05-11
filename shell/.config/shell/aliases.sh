@@ -196,6 +196,7 @@ ups () {
   if [ "$(which flatpak)" >/dev/null != "" ]
   then
     flatpak update -y 
+    flatpak uninstall --unused -y
   fi
 
   # Debian-based
