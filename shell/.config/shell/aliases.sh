@@ -8,6 +8,7 @@ alias du='du -hc'
 alias du1='du -hc --max-depth=1'
 alias du0='du -hc --max-depth=0'
 alias df='df -h'
+alias diff='diff --color=auto --side-by-side'
 alias reload="source $HOME/.$(basename $(readlink /proc/$$/exe))rc"
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
