@@ -79,6 +79,12 @@ fi
 [ -x "$(command -v squeue)" ] && alias sq="squeue -u ${USER}"
 [ -x "$(command -v squeue)" ] && alias sqr="squeue | grep '\sR\s.*'"
 
+# diff with meld instead
+if [ -x "$(command -v meld)" ]
+then
+	alias diff='meld'
+fi
+
 # Functions
 
 ex () {
