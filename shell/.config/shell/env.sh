@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 
-export XDG_CONFIG_HOME=${HOME}/.config
-export XDG_CACHE_HOME=${HOME}/.cache
-export XDG_DATA_HOME=${HOME}/.local/share
+# Load XDG directories
+[ -f ${HOME}/.config/user-dirs.dirs ] && . ${HOME}/.config/user-dirs.dirs
+
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=${HOME}/.config}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:=${HOME}/.cache}
+export XDG_DATA_HOME=${XDG_DATA_HOME:=${HOME}/.local/share}
 
 # Flatpak XDG stuff
 if [ "$(which flatpak)" >/dev/null != "" ]
