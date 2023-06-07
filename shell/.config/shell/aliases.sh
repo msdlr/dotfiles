@@ -18,9 +18,9 @@ alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
 
 # Conditional aliases
-[ -f "$(which pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
-[ -f "$(which python)" 2>/dev/null ] || alias python='python3'
-[ -f "$(which nvim)" 2>/dev/null ] && alias vim='nvim -p'
+[ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
+[ -f "$(command -v python)" 2>/dev/null ] || alias python='python3'
+[ -f "$(command -v nvim)" 2>/dev/null ] && alias vim='nvim -p'
 [ -n "$COLUMNS" ] && alias diff='diff --color=auto --side-by-side -W $COLUMNS' || diff='diff --color=auto --side-by-side'
 
 # Verbose commands
@@ -110,14 +110,14 @@ ex () {
 
 # So that zsh does not print 'aliased to' is overriden
 which () {
-	sh -c "which $1" || echo "$(alias $1 | sed 's/^.*=//')"
+	sh -c "command -v $1" || echo "$(alias $1 | sed 's/^.*=//')"
 }
 
 tunzip () {
 	for file in $@
 	do
 		echo "File: $file"
-		if [ "$(which pigz 2>/dev/null)" = ""  ]
+		if [ "$(command -v pigz 2>/dev/null)" = ""  ]
 		then
 			tar -xzvf "${file}"
 		else
@@ -200,30 +200,30 @@ rmdir_recursive () {
 }
 
 ups () {
-  if [ "$(which flatpak)" >/dev/null != "" ]
+  if [ "$(command -v flatpak)" >/dev/null != "" ]
   then
     flatpak update -y 
     flatpak uninstall --unused -y
   fi
 
   # Debian-based
-  if [ "$(which apt)" >/dev/null != "" ]
+  if [ "$(command -v apt)" >/dev/null != "" ]
   then
     sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-    [ "$(which deb-get)" >/dev/null != "" ] && deb-get update && deb-get upgrade
+    [ "$(command -v deb-get)" >/dev/null != "" ] && deb-get update && deb-get upgrade
     return
   fi
 
   # Arch-based
-  if [ "$(which pacman)" >/dev/null != "" ]
+  if [ "$(command -v pacman)" >/dev/null != "" ]
   then
-    [ "$(which pacman)" >/dev/null != "" ] >/dev/null && yay -Syyu
+    [ "$(command -v pacman)" >/dev/null != "" ] >/dev/null && yay -Syyu
     sudo pacman -Syyu
     return
   fi
 
   # RPM-based
-  if [ "$(which dnf)" >/dev/null != "" ]
+  if [ "$(command -v dnf)" >/dev/null != "" ]
   then
     dnf upgrade -y
     return
