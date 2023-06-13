@@ -25,7 +25,13 @@ do
 done
 
 bind 'set show-all-if-ambiguous on' 2>/dev/null
-bind 'TAB:menu-complete' 2>/dev/null
+
+# FZF completion
+if [ ${HOME}/.config/shell/fzf-tab-completion/bash/fzf-bash-completion.sh ] && [ -f "$(command -v fzf)" ]
+then
+	. ${HOME}/.config/shell/fzf-tab-completion/bash/fzf-bash-completion.sh
+	bind -x '"\t": fzf_bash_completion'
+fi
 
 setxkbmap es 2>/dev/null
 xset led 2>/dev/null
