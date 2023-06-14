@@ -16,6 +16,7 @@ alias make="make -j$(getconf _NPROCESSORS_ONLN)"
 alias rsync='rsync -avhzP'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
+alias py='python'
 
 # Conditional aliases
 [ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
