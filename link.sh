@@ -4,31 +4,23 @@
 stowlike () {
     TARGET=${HOME}
     PACKAGE=${1}
-    
-    cd ${PACKAGE}
-    cp -rsv $(pwd)/ ${TARGET}
-    
-    cd $OLDPWD
+    find $(realpath ${PACKAGE}) -maxdepth 1 -mindepth 1 | xargs -I {} cp -rsv --remove-destination {} ${TARGET}
+    cd -
 }
 
 case $# in
     "0")
-        #echo "No params, installing all..."
-        #find . -type d -maxdepth 1 2>/dev/null | sed '/^.*/d ; s|./||g'
-        for p in $(find . -type d -maxdepth 1 -mindepth 1 -not -name '.*' 2>/dev/null)
-        do
-            echo "Installing ${p} config"
-            stowlike ${p}
-        done
+        exit
         ;;
     "1")
-        echo "Installing ${1} config"
+        echo "> Installing ${1} configuration"
         [ -d ${1} ] && stowlike ${1}
         ;;
     *)
         #echo "Installing $# pkgs"
         for p in $@
         do
+            echo "> Installing ${p} configuration"
             [ -d ${p} ] && stowlike ${p}
         done
         ;;
