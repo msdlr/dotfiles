@@ -39,6 +39,7 @@ then
   alias gst='git status'
   alias ga='git add'
   alias gcm='git commit -m'
+  alias gsu='git branch --set-upstream-to=origin/"$(git symbolic-ref --short HEAD)" "$(git symbolic-ref --short HEAD)"'
   alias gpush='git push'
   alias gpushu='git push --set-upstream $(git remote show) $(git rev-parse --abbrev-ref HEAD)'
   alias gpull='git pull'
