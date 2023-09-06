@@ -42,7 +42,7 @@ then
   alias gsu='git branch --set-upstream-to=origin/"$(git symbolic-ref --short HEAD)" "$(git symbolic-ref --short HEAD)"'
   alias gpush='git push'
   alias gpushu='git push --set-upstream $(git remote show) $(git rev-parse --abbrev-ref HEAD)'
-  alias gpull='git submodule init; git pull --recurse-submodules --set-upstream $(git remote show) $(git rev-parse --abbrev-ref HEAD)'
+  alias gpull='git submodule init; git pull --recurse-submodules'
   alias grh='git reset --hard'
   alias grs='git reset --soft'
   alias grm='git reset --mixed'
