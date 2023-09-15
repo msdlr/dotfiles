@@ -17,6 +17,7 @@ alias rsync='rsync -avhzP'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
 alias py='python'
+alias pip3up='pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade'
 
 # Conditional aliases
 [ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
