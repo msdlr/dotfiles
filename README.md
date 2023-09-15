@@ -1,7 +1,7 @@
 # Dotfiles
 These are the dotfiles I use on Linux environments, mostly configuration items for quality-of-life changes for shells and command line programs.
 
-I originally used GNU `stow`. I like this approach because I find it quite messy to make your home directory a git repository, and files are also deployed as symlinks, which allow configurations to be deployed as soon as you save them.
+I originally used GNU `stow`. I like this approach because I find it quite messy to make your home directory a git repository, and files are also deployed as symlinks, which allow configurations to be deployed as soon as you save them. It also lets you install configuration items on a per-program, or even have various independent, separate configurations for the same program. This way you deploy the configuration files for whatever you use.
 
 I ended up making my own shell script that replaced `stow` because it complained too much when you wanted to deploy a file for which the destination already existed or whatever. I also made a (remote) copy script to deploy the configuration files to remote hosts, it works but still has room for improvement.
 
