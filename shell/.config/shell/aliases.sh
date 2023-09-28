@@ -184,16 +184,28 @@ mass-untar () {
 eps2pdf () {
 	for f in ${@}
 	do
-		[ -f ${f} ] && epstopdf ${f}
+		([ -f ${f} ] && epstopdf ${f}) &
 	done
+	wait
 }
 
 eps2svg () {
 	for f in ${@}
 	do
+		(
 		[ -f ${f} ] && epstopdf ${f}
 		pdf2svg $(echo "${f}" | sed 's/.eps/.pdf/g') $(echo "${f}" | sed 's/.eps/.svg/g') 
+		) &
 	done
+	wait
+}
+
+pdf2eps () {
+	for f in ${@}
+	do
+		([ -f "${f}" ] && inkscape -o $(echo "${f}" | sed 's/.pdf/.eps/g') ${f}) &
+	done
+	wait
 }
 
 rmdir_recursive () {
