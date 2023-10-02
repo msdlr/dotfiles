@@ -208,6 +208,15 @@ pdf2eps () {
 	wait
 }
 
+svg2pdf () {
+	for f in "${@}"
+	do
+	rsvg-convert -f pdf -o "$(echo "${f}" | sed 's/.svg/.pdf/g').pdf" ${f} &
+	done
+	wait
+}
+
+
 rmdir_recursive () {
   where=${1}
   where=${where:=.}
