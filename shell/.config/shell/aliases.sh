@@ -184,7 +184,10 @@ mass-untar () {
 eps2pdf () {
 	for f in ${@}
 	do
-		([ -f ${f} ] && epstopdf ${f}) &
+      while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
+        sleep 0.01
+      done
+      ([ -f ${f} ] && epstopdf ${f}) &
 	done
 	wait
 }
@@ -192,6 +195,9 @@ eps2pdf () {
 eps2svg () {
 	for f in ${@}
 	do
+      while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
+        sleep 0.01
+      done
 		(
 		[ -f ${f} ] && epstopdf ${f}
 		pdf2svg $(echo "${f}" | sed 's/.eps/.pdf/g') $(echo "${f}" | sed 's/.eps/.svg/g') 
@@ -203,7 +209,10 @@ eps2svg () {
 pdf2eps () {
 	for f in ${@}
 	do
-		([ -f "${f}" ] && inkscape -o $(echo "${f}" | sed 's/.pdf/.eps/g') ${f}) &
+      while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
+        sleep 0.01
+      done
+      ([ -f "${f}" ] && inkscape -o $(echo "${f}" | sed 's/.pdf/.eps/g') ${f}) &
 	done
 	wait
 }
@@ -211,6 +220,11 @@ pdf2eps () {
 svg2pdf () {
 	for f in "${@}"
 	do
+	
+	while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
+      sleep 0.01
+    done
+	
 	rsvg-convert -f pdf -o "$(echo "${f}" | sed 's/.svg/.pdf/g').pdf" ${f} &
 	done
 	wait
