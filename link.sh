@@ -5,7 +5,7 @@ stowlike () {
     TARGET=${HOME}
     PACKAGE=${1}
     find $(realpath ${PACKAGE}) -maxdepth 1 -mindepth 1 | xargs -I {} cp -rsv --remove-destination {} ${TARGET}
-    cd -
+    cd - >/dev/null
 }
 
 case $# in
