@@ -225,7 +225,7 @@ svg2pdf () {
       sleep 0.01
     done
 	
-	rsvg-convert -f pdf -o "$(echo "${f}" | sed 's/.svg/.pdf/g').pdf" ${f} &
+	rsvg-convert -f pdf -o "$(echo "${f}" | sed 's/.svg/.pdf/g')" ${f} &
 	done
 	wait
 }
