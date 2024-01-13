@@ -54,6 +54,7 @@ then
   alias gdiff='git diff'
   alias gs='git stash'
   alias gsp='git stash pop'
+  alias gbs='git submodule update --remote' # git bump-submodules
 fi
 
 # Docker
