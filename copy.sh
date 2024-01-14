@@ -1,10 +1,12 @@
 #!/usr/bin/env sh
 
 export R=${R:=$(hostname)}
-export U=${U:=$(ssh ${R} whoami)}
-
-# Copy ssh key if dest is remote
-[ "${R}" = "$(hostname)" ] || ssh-copy-id ${U}@${R} 2>/dev/null
+if [ "${R}" != "$(hostname)" ]
+then
+    # Copy ssh key if dest is remote
+    [ "${R}" != "$(hostname)" ] || ssh-copy-id ${R} 2>/dev/null
+    export U=${U:=$USER}
+fi
 
 [ $# -eq 0 ] && $(realpath ${0}) $(find $(dirname $0) -maxdepth 1 -type d -not -name '.' -not -name '.git')
 
