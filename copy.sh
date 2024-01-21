@@ -12,6 +12,7 @@ fi
 
 for pkg in $@
 do
+    echo "> Installing ${pkg} configuration"
     if [ "${R}" = "$(hostname)" ] 
     then
         [ -d ${pkg} ] && cp --remove-destination -rv $(find ${pkg} -mindepth 1 -maxdepth 1 -not -name ${pkg}) ~
