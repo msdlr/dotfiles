@@ -83,10 +83,13 @@ fi
 [ -x "$(command -v squeue)" ] && alias sq="squeue -u ${USER}"
 [ -x "$(command -v squeue)" ] && alias sqr="squeue | grep '\sR\s.*'"
 
-# diff with meld instead
-if [ -x "$(command -v meld)" ]
-then
-	alias diff='meld'
+# diff with kompare/meld instead
+if [ -x "$(command -v kompare)" ]; then
+    alias diff='kompare'
+    [ -x "$(command -v git)" ] && git config --global diff.tool kompare
+elif [ -x "$(command -v meld)" ]; then
+    alias diff='meld'
+    [ -x "$(command -v git)" ] && git config --global diff.tool meld
 fi
 
 # Functions
