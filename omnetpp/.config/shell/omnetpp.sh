@@ -20,3 +20,6 @@ fi
 cd $OMNET_ROOT
 . $OMNET_ROOT/setenv >/dev/null 2>/dev/null 
 cd - >/dev/null
+
+# Remove crash logs for the omnetpp IDE
+ls ~/hs_err_pid*log >/dev/null && rm ~/hs_err_pid*log >/dev/null
