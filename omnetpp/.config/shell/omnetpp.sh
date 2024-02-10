@@ -22,4 +22,4 @@ cd $OMNET_ROOT
 cd - >/dev/null
 
 # Remove omnet ide crash logs
-ls ~/hs_err_pid*log >/dev/null && rm ~/hs_err_pid*log >/dev/null 2>/dev/null
+ls ~/hs_err_pid*log >/dev/null 2>/dev/null && rm ~/hs_err_pid*log >/dev/null 2>/dev/null
