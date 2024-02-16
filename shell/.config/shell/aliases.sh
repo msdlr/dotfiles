@@ -83,6 +83,13 @@ fi
 [ -x "$(command -v squeue)" ] && alias sq="squeue -u ${USER}"
 [ -x "$(command -v squeue)" ] && alias sqr="squeue | grep '\sR\s.*'"
 
+if [ -x "$(command -v squeue)" ]
+then
+  alias jm='sacct -o jobid,partition,jobname%32,user,state,elapsed,start,end,nodelist -X -S $(date -d "last month" +"%m/%d")'
+  alias jw='sacct -o jobid,partition,jobname%32,user,state,elapsed,start,end,nodelist -X -S $(date -d "last week" +"%m/%d")'
+  alias jinfo='sacct --units=G -o jobname%32,jobid,partition,alloccpus,reqmem,maxrss,timelimit,elapsed,state -j'
+fi
+
 # diff with kompare/meld instead
 if [ -x "$(command -v kompare)" ]; then
     alias diff='kompare'
