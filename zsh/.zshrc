@@ -35,8 +35,8 @@ function precmd() { # Execute after every command
         RPROMPT="%B%F{magenta}$(git_branch)%f%b"
     else
         # Local shell
-        PS1="%F{blue}$(cur_short_path)%f %# "
-        RPROMPT="%B%F{yellow}$(git_branch)%f%b"
+        PS1="%F{blue}$(cur_short_path)%f %F{yellow}%#%f "
+        RPROMPT="%B%F{magenta}$(git_branch)%f%b"
     fi
     
 }

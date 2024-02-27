@@ -15,7 +15,15 @@ function cur_short_path() {
 	pwd | sed " s|${HOME}|~|g ; s|/|\n|g ; /^$/d" | cut -c1-1 |  tr '\n' '/' | sed "s|./$|$(basename $PWD)|g"
 }
 
-PS1='\[\e[0;31m\]\u\[\e[0;31m\]@\[\e[0;31m\]\h \[\e[0;32m\]$(cur_short_path) \[\e[0;1;35m\]$(git_branch)\[\e[0;93m\]\$ \[\e[0m\]'
+
+if [[ -n $SSH_CLIENT ]]
+    then
+        # SSH shell
+        PS1='\[\e[0;31m\]\u\[\e[0;31m\]@\[\e[0;31m\]\h \[\e[0;32m\]$(cur_short_path) \[\e[0;1;35m\]$(git_branch)\[\e[0;93m\]\$ \[\e[0m\]'
+    else
+        # Local shell
+        PS1='\[\e[0;31m\]\u\[\e[0;31m\]@\[\e[0;31m\]\h \[\e[0;32m\]$(cur_short_path) \[\e[0;1;35m\]$(git_branch)\[\e[0;93m\]\$ \[\e[0m\]'
+    fi
 
 # Setup $PATH, other envvars, aliases, etc
 for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.bash] 2>/dev/null)
