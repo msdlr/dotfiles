@@ -27,9 +27,18 @@ function cur_short_path() {
 }
 
 function precmd() { # Execute after every command
-    # Prompt
-    PS1="%F{red}%n@%m%f %F{green}$(cur_short_path)%f %F{yellow}%#%f "
-    RPROMPT="%B%F{magenta}$(git_branch)%f%b"
+
+    if [[ -n $SSH_CLIENT ]]
+    then
+        # SSH shell
+        PS1="%F{red}%n@%m%f %F{green}$(cur_short_path)%f %F{yellow}%#%f "
+        RPROMPT="%B%F{magenta}$(git_branch)%f%b"
+    else
+        # Local shell
+        PS1="%F{blue}$(cur_short_path)%f %# "
+        RPROMPT="%B%F{yellow}$(git_branch)%f%b"
+    fi
+    
 }
 
 # Movement
