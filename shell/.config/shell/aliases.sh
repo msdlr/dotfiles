@@ -157,7 +157,6 @@ cdsd () {
 unln () {
 	if [ "$(realpath -s ${1})" != "$(realpath ${1})" ]
 	then
-		rm ${1}
 		cp -r --remove-destination $(realpath ${1}) $(realpath -s ${1})
 	fi
 }
