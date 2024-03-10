@@ -53,6 +53,9 @@ bindkey '^R' history-incremental-search-backward
 # Del key writing '~'
 bindkey "^[[3~" delete-char
 
+# Remove whole words with CTRL
+bindkey '^H' backward-kill-word
+bindkey '5~' kill-word
 
 # Setup $PATH, other envvars, aliases, etc
 for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.zsh] 2>/dev/null)
