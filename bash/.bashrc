@@ -27,5 +27,9 @@ PS1='\[\e[0;31m\]\u\[\e[0;31m\]@\[\e[0;31m\]\h \[\e[0;32m\]$(cur_short_path) \[\
 bind 'set show-all-if-ambiguous on' 2>/dev/null
 bind 'TAB:menu-complete' 2>/dev/null
 
+# Remove whole words with CTRL
+bind '"\C-h":backward-kill-word'
+bind '"\C-f":kill-word'
+
 setxkbmap es 2>/dev/null
 xset led 2>/dev/null
