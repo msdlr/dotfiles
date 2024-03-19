@@ -11,6 +11,10 @@
 	pllf = pull -f
 	root = rev-parse --show-toplevel
 	bump-submodules = submodule update --remote
+	d = diff
+	ds = diff --staged
+	dt = difftool
+	dts = difftool --staged
 [user]
 	email = miguelsrosa97@gmail.com
 	name = msdlr
