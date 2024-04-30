@@ -12,7 +12,7 @@ function git_branch() {
 
 function cur_short_path() {
 	[ "${PWD}" = "${HOME}" ] && echo "~" && return
-	pwd | sed "s|^${HOME}|~|g"
+	pwd | sed "s|^${HOME}|~|g; s|^/home/|~|"
 }
 
 # Setup $PATH, other envvars, aliases, etc
