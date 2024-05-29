@@ -270,8 +270,10 @@ ups () {
   # Arch-based
   if [ "$(command -v pacman)" >/dev/null != "" ]
   then
-    [ "$(command -v pacman)" >/dev/null != "" ] >/dev/null && yay -Syyu
-    sudo pacman -Syyu
+    [ "$(command -v yay)" >/dev/null != "" ] >/dev/null && yay -Syyu
+      locale=$(cat $HOME/.config/user-dirs.locale)
+      export LC_ALL=$(cat $HOME/.config/user-dirs.locale).UTF-8
+      yes | sudo pacman -Syyu --noconfirm
     return
   fi
 
