@@ -20,3 +20,5 @@
 	name = msdlr
 [difftool]
 	prompt = false
+[fetch]
+	prune = true
