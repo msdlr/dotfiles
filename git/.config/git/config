@@ -4,7 +4,7 @@
 	rh = reset --hard
 	rs = reset --soft
 	rm = reset --mixed
-	cfg = !${EDITOR} "$(git rev-parse --show-toplevel)/.git/config"
+	cfg = vim /.git/config
 	psh = push
 	pll = pull
 	pshf = push -f

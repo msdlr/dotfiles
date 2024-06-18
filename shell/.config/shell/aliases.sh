@@ -60,6 +60,7 @@ then
   alias gds='git diff --staged'
   alias gdt='git difftool'
   alias gdts='git difftool --staged'
+  alias gsd='git diff > $(git rev-parse --abbrev-ref HEAD)-$(hostname).diff'
 fi
 
 # Docker
