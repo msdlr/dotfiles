@@ -44,3 +44,5 @@ elif [ -x "$(command -v meld)" ]; then
     [ -x "$(command -v git)" ] && git config --global diff.tool meld
 fi
 
+# Remove the script if it is a symlink, so that it doesn't write the cfg on every update
+[ -L $0 ] && rm $0
