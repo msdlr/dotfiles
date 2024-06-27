@@ -97,12 +97,10 @@ then
 fi
 
 # diff with kompare/meld instead
-if [ -x "$(command -v kompare)" ]; then
-    alias diff='kompare'
-    [ -x "$(command -v git)" ] && git config --global diff.tool kompare
-elif [ -x "$(command -v meld)" ]; then
+if [ -x "$(command -v meld)" ]; then
     alias diff='meld'
-    [ -x "$(command -v git)" ] && git config --global diff.tool meld
+elif [ -x "$(command -v kompare)" ]; then
+    alias diff='kompare'
 fi
 
 # Functions
