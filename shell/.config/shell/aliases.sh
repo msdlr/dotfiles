@@ -58,8 +58,8 @@ then
   alias gbs='git submodule update --remote' # git bump-submodules
   alias gd='dit diff'
   alias gds='git diff --staged'
-  alias gdt='git difftool'
-  alias gdts='git difftool --staged'
+  alias gdt='git difftool --dir-diff'
+  alias gdts='git difftool --staged --dir-diff'
   alias gsd='git diff > $(git rev-parse --abbrev-ref HEAD)-$(hostname).diff'
 fi
 
