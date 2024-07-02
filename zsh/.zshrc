@@ -23,7 +23,15 @@ function git_branch() {
 
 function cur_short_path() {
 	[ "${PWD}" = "${HOME}" ] && echo "~" && return
-	pwd | sed "s|^${HOME}|~|g; s|^/home/|~|"
+    
+    if [ -d "$(git rev-parse --show-toplevel 2>/dev/null)/.git" ]
+    then
+        # If on a git repo
+        pwd | sed "s|$(dirname $(git rev-parse --show-toplevel))/||"
+    else
+        # Wherever else
+	    pwd | sed "s|^${HOME}|~|g; s|^/home/|~|"
+    fi
 }
 
 function precmd() { # Execute after every command
