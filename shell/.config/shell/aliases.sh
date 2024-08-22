@@ -174,7 +174,7 @@ mass-tar () {
     if [ -d ${file} ]; then
       cd $(dirname ${file})
       tzip "$(basename ${file}).tgz" "$(basename ${file})"
-      cd -
+      cd - >/dev/null
     fi
 
     if [ -f ${file} ]; then
@@ -190,7 +190,7 @@ mass-untar () {
 		then
 		cd $(dirname ${f})
 			tunzip ${f}
-		cd ${OLDPWD}
+		cd - > /dev/null 
 		fi
 	done
 }
