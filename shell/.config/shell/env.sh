@@ -11,7 +11,7 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:=${HOME}/.local/share}
 if [ "$(command -v flatpak)" >/dev/null != "" ]
 then
     [ -d '/var/lib/flatpak/exports/share' ] && [[ ":${XDG_DATA_DIRS}:" == *"/var/lib/flatpak/exports/share"* ]] || export XDG_DATA_DIRS="/var/lib/flatpak/exports/share":${XDG_DATA_DIRS}
-    [ -d "${HOME}/.local/share/flatpak/exports/share" ] && [[ ":${XDG_DATA_DIRS}:" == *"${HOME}/.local/share/flatpak/exports/share"* ]] || export XDG_DATA_DIRS=/var/lib/flatpak/exports/share:${XDG_DATA_DIRS}
+    [ -d "${HOME}/.local/share/flatpak/exports/share" ] && [[ ":${XDG_DATA_DIRS}:" == *"${HOME}/.local/share/flatpak/exports/share"* ]] || export XDG_DATA_DIRS="${HOME}/.local/share/flatpak/exports/share":${XDG_DATA_DIRS}
 fi
 
 sh -c "command -v nvim" >/dev/null 2>/dev/null && VIM=nvim || VIM=vim
