@@ -56,7 +56,7 @@ then
   alias gs='git stash'
   alias gsp='git stash pop'
   alias gbs='git submodule update --remote' # git bump-submodules
-  alias gd='dit diff'
+  alias gd='git diff'
   alias gds='git diff --staged'
   alias gdt='git difftool --dir-diff'
   alias gdts='git difftool --staged --dir-diff'
