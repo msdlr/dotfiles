@@ -263,13 +263,14 @@ ups () {
   then
     sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
     [ "$(command -v deb-get)" >/dev/null != "" ] && deb-get update && deb-get upgrade
+    [ -x "$(command -v pacstall)" ] && sudo pacstall -Up
     return
   fi
 
   # Arch-based
   if [ "$(command -v pacman)" >/dev/null != "" ]
   then
-    [ "$(command -v pacman)" >/dev/null != "" ] >/dev/null && yay -Syyu
+    [ "$(command -v yay)" >/dev/null != "" ] >/dev/null && yay -Syyu
     sudo pacman -Syyu
     return
   fi
