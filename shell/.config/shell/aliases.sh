@@ -20,9 +20,9 @@ alias sudo='sudo '
 alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
 
-alias cdr='cd $(fgr | fzf)'
-alias icode='code $(fgr | fzf)'
-alias ivim='vim $(fgr | fzf)'
+alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
+alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
+alias ivim='dir=$(fgr | fzf) && [ -n "$dir" ] && vim $dir'
 
 # Conditional aliases
 [ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
