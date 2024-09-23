@@ -20,6 +20,10 @@ alias sudo='sudo '
 alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
 
+alias cdr='cd $(fgr | fzf)'
+alias icode='code $(fgr | fzf)'
+alias ivim='vim $(fgr | fzf)'
+
 # Conditional aliases
 [ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
 [ -f "$(command -v python)" 2>/dev/null ] || alias python='python3'
@@ -285,16 +289,13 @@ ups () {
 
 }
 
-cdr () {
-    [ "$1" = "~" ] && cdr $HOME && return
-
+fgr () {
+  [ "$1" = "~" ] && cdr $HOME && return
 	if [ -x "$(command -v locate)" ]
 	then
-		dst=$(locate $(pwd)*.git | sed 's/\/.git//' | grep "${1}" | fzf)
-		[ "${dst}" != "" ] && cd ${dst}
+	  locate "$(pwd)*/.git" | grep ".git$" | grep "^$(pwd)" | sed "s|.git||g; s|/$||g"
 	else
-		dst=$(find . -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}" | fzf)
-		[ "${dst}" != "" ] && cd ${dst}
+	  find . -maxdepth 4 -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}"
 	fi
 }
 
