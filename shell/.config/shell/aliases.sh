@@ -100,13 +100,16 @@ then
   alias jinfo='sacct --units=G -o jobname%32,jobid,partition,alloccpus,reqmem,maxrss,timelimit,elapsed,state -j'
 fi
 
-# diff with kompare/meld instead
-if [ -x "$(command -v meld)" ]; then
-    alias diff='meld'
-elif [ -x "$(command -v kompare)" ]; then
-    alias diff='kompare'
-fi
 
+# If on desktop diff with meld/kompare instead
+if [ x$DISPLAY != "x" ] 
+then
+  if [ -x "$(command -v kompare)" ]; then
+      alias diff='kompare'
+  elif [ -x "$(command -v meld)" ]; then
+      alias diff='meld'
+  fi
+fi
 # Functions
 
 ex () {
