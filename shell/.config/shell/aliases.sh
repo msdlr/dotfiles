@@ -133,11 +133,6 @@ ex () {
   fi
 }
 
-# So that zsh does not print 'aliased to' is overriden
-which () {
-	sh -c "command -v $1" || echo "$(alias $1 | sed 's/^.*=//')"
-}
-
 tunzip () {
 	for file in $@
 	do
