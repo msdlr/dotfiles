@@ -270,7 +270,7 @@ ups () {
   then
     sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
     [ "$(command -v deb-get)" >/dev/null != "" ] && deb-get update && deb-get upgrade
-    [ -x "$(command -v pacstall)" ] && sudo pacstall -Up
+    [ -x "$(command -v pacstall)" ] && yes | sudo pacstall -P -Up
     return
   fi
 
@@ -285,7 +285,7 @@ ups () {
   # RPM-based
   if [ "$(command -v dnf)" >/dev/null != "" ]
   then
-    dnf upgrade -y
+    sudo dnf upgrade -y
     return
   fi
  
