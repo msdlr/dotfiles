@@ -46,6 +46,8 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
 
 # Search like bash
 bindkey '^R' history-incremental-search-backward
