@@ -4,8 +4,14 @@ XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=${HOME}/.config}
 
 if [ ! -f ${XDG_CONFIG_HOME}/omnetpp ]
 then
-    SETENV_FILE=$(find /opt ${HOME}/.local/opt -type f -name "setenv" | fzf)
-    OMNET_ROOT=$(dirname ${SETENV_FILE})
+    # If the variable is not definedm search for it
+    if [ -z "${OMNET_ROOT}" ]
+    then
+        SETENV_FILE=$(find /opt ${HOME}/.local/opt -type f -name "setenv" | fzf)
+        OMNET_ROOT=$(dirname ${SETENV_FILE})
+    fi
+
+    # Once the variable is defined
     if [ -n "${OMNET_ROOT}" ]
     then
         echo "export OMNET_ROOT=$OMNET_ROOT" > ${XDG_CONFIG_HOME}/omnetpp
@@ -16,10 +22,6 @@ then
 else
     . ${XDG_CONFIG_HOME}/omnetpp 2>/dev/null
 fi
-
-cd $OMNET_ROOT
-. $OMNET_ROOT/setenv >/dev/null 2>/dev/null 
-cd - >/dev/null
 
 # Remove omnet ide crash logs
 ls ~/hs_err_pid*log >/dev/null 2>/dev/null && rm ~/hs_err_pid*log >/dev/null 2>/dev/null
