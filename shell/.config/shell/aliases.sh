@@ -8,6 +8,7 @@ alias du='du -hc'
 alias du1='du -hc --max-depth=1'
 alias du0='du -hc --max-depth=0'
 alias df='df -h'
+alias ip='ip -c=auto'
 alias reload="source $HOME/.$(basename $(readlink /proc/$$/exe))rc"
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
@@ -18,6 +19,10 @@ alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
 alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
+
+alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
+alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
+alias ivim='dir=$(fgr | fzf) && [ -n "$dir" ] && vim $dir'
 
 # Conditional aliases
 [ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
@@ -55,6 +60,11 @@ then
   alias gs='git stash'
   alias gsp='git stash pop'
   alias gbs='git submodule update --remote' # git bump-submodules
+  alias gd='git diff'
+  alias gds='git diff --staged'
+  alias gdt='git difftool --dir-diff'
+  alias gdts='git difftool --staged --dir-diff'
+  alias gsd='git diff > $(git rev-parse --abbrev-ref HEAD)-$(hostname).diff'
 fi
 
 # Docker
@@ -83,15 +93,23 @@ fi
 [ -x "$(command -v squeue)" ] && alias sq="squeue -u ${USER}"
 [ -x "$(command -v squeue)" ] && alias sqr="squeue | grep '\sR\s.*'"
 
-# diff with kompare/meld instead
-if [ -x "$(command -v kompare)" ]; then
-    alias diff='kompare'
-    [ -x "$(command -v git)" ] && git config --global diff.tool kompare
-elif [ -x "$(command -v meld)" ]; then
-    alias diff='meld'
-    [ -x "$(command -v git)" ] && git config --global diff.tool meld
+if [ -x "$(command -v squeue)" ]
+then
+  alias jm='sacct -o jobid,partition,jobname%32,user,state,elapsed,start,end,nodelist -X -S $(date -d "last month" +"%m/%d")'
+  alias jw='sacct -o jobid,partition,jobname%32,user,state,elapsed,start,end,nodelist -X -S $(date -d "last week" +"%m/%d")'
+  alias jinfo='sacct --units=G -o jobname%32,jobid,partition,alloccpus,reqmem,maxrss,timelimit,elapsed,state -j'
 fi
 
+
+# If on desktop diff with meld/kompare instead
+if [ x$DISPLAY != "x" ] 
+then
+  if [ -x "$(command -v kompare)" ]; then
+      alias diff='kompare'
+  elif [ -x "$(command -v meld)" ]; then
+      alias diff='meld'
+  fi
+fi
 # Functions
 
 ex () {
@@ -113,11 +131,6 @@ ex () {
   else
     echo "'$1' is not a valid file"
   fi
-}
-
-# So that zsh does not print 'aliased to' is overriden
-which () {
-	sh -c "command -v $1" || echo "$(alias $1 | sed 's/^.*=//')"
 }
 
 tunzip () {
@@ -150,7 +163,6 @@ cdsd () {
 unln () {
 	if [ "$(realpath -s ${1})" != "$(realpath ${1})" ]
 	then
-		rm ${1}
 		cp -r --remove-destination $(realpath ${1}) $(realpath -s ${1})
 	fi
 }
@@ -164,7 +176,7 @@ mass-tar () {
     if [ -d ${file} ]; then
       cd $(dirname ${file})
       tzip "$(basename ${file}).tgz" "$(basename ${file})"
-      cd -
+      cd - >/dev/null
     fi
 
     if [ -f ${file} ]; then
@@ -180,7 +192,7 @@ mass-untar () {
 		then
 		cd $(dirname ${f})
 			tunzip ${f}
-		cd ${OLDPWD}
+		cd - > /dev/null 
 		fi
 	done
 }
@@ -253,13 +265,14 @@ ups () {
   then
     sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
     [ "$(command -v deb-get)" >/dev/null != "" ] && deb-get update && deb-get upgrade
+    [ -x "$(command -v pacstall)" ] && yes | sudo pacstall -P -Up
     return
   fi
 
   # Arch-based
   if [ "$(command -v pacman)" >/dev/null != "" ]
   then
-    [ "$(command -v pacman)" >/dev/null != "" ] >/dev/null && yay -Syyu
+    [ "$(command -v yay)" >/dev/null != "" ] >/dev/null && yay -Syyu
     sudo pacman -Syyu
     return
   fi
@@ -267,23 +280,20 @@ ups () {
   # RPM-based
   if [ "$(command -v dnf)" >/dev/null != "" ]
   then
-    dnf upgrade -y
+    sudo dnf upgrade -y
     return
   fi
  
 
 }
 
-cdr () {
-    [ "$1" = "~" ] && cdr $HOME && return
-
+fgr () {
+  [ "$1" = "~" ] && cdr $HOME && return
 	if [ -x "$(command -v locate)" ]
 	then
-		dst=$(locate $(pwd)*.git | sed 's/\/.git//' | grep "${1}" | fzf)
-		[ "${dst}" != "" ] && cd ${dst}
+	  locate "$(pwd)*/.git" | grep ".git$" | grep "^$(pwd)" | sed "s|.git||g; s|/$||g"
 	else
-		dst=$(find . -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}" | fzf)
-		[ "${dst}" != "" ] && cd ${dst}
+	  find . -maxdepth 4 -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}"
 	fi
 }
 
