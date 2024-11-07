@@ -8,7 +8,7 @@ then
     if [ -z "${OMNET_ROOT}" ]
     then
         SETENV_FILE=$(find /opt ${HOME}/.local/opt -type f -name "setenv" | fzf)
-        OMNET_ROOT=$(dirname ${SETENV_FILE})
+        export OMNET_ROOT=$(dirname ${SETENV_FILE})
     fi
 
     # Once the variable is defined
