@@ -296,10 +296,10 @@ ups () {
   if [ "$(command -v pacman)" >/dev/null != "" ]
   then
     echo "\e[32m> Upgrading pacman packages...\e[97m"
-    sudo pacman -Syyu
+    sudo pacman -Syyu --noconfirm
     if [ "$(command -v yay)" >/dev/null != "" ]
     then
-      yay -Syyu
+      yay -Syyu --noconfirm
     fi
     return
   fi
