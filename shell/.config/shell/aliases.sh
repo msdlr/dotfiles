@@ -308,7 +308,7 @@ ups () {
   if [ "$(command -v dnf)" >/dev/null != "" ]
   then
     echo "\e[32m> Upgrading dnf packages...\e[97m"
-    sudo dnf upgrade -y
+    sudo dnf upgrade -y && sudo dnf autoremove -y
     return
   fi
  
