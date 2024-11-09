@@ -197,6 +197,35 @@ mass-untar () {
 	done
 }
 
+mass-zip () {
+  for f in "$@"
+  do
+    file=$(realpath "${f}")
+
+    if [ -d "${file}" ]; then
+      cd "$(dirname "${file}")"
+      zip -r "$(basename "${file}").zip" "$(basename "${file}")"
+      cd - >/dev/null
+    fi
+
+    if [ -f "${file}" ]; then
+      zip "$(basename "${file}").zip" -j "${file}"
+    fi
+  done
+}
+
+mass-unzip () {
+  for f in "$@"
+  do
+    if [ -f "${f}" ]; then
+      cd "$(dirname "${f}")"
+      unzip "${f}"
+      cd - >/dev/null
+    fi
+  done
+}
+
+
 eps2pdf () {
 	for f in ${@}
 	do
