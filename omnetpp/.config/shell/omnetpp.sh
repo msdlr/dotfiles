@@ -23,6 +23,7 @@ else
     . ${XDG_CONFIG_HOME}/omnetpp 2>/dev/null
 fi
 alias omnetpp='(source ${OMNET_ROOT}/setenv && omnetpp)'
+alias opp_scavetool='(source ${OMNET_ROOT}/setenv && opp_scavetool'
 
 # Remove omnet ide crash logs
 ls ~/hs_err_pid*log >/dev/null 2>/dev/null && rm ~/hs_err_pid*log >/dev/null 2>/dev/null
