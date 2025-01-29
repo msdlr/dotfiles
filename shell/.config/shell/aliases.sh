@@ -19,6 +19,7 @@ alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
 alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
+alias wi="echo "$USER@$HOST""
 
 alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
 alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
@@ -197,6 +198,35 @@ mass-untar () {
 	done
 }
 
+mass-zip () {
+  for f in "$@"
+  do
+    file=$(realpath "${f}")
+
+    if [ -d "${file}" ]; then
+      cd "$(dirname "${file}")"
+      zip -r "$(basename "${file}").zip" "$(basename "${file}")"
+      cd - >/dev/null
+    fi
+
+    if [ -f "${file}" ]; then
+      zip "$(basename "${file}").zip" -j "${file}"
+    fi
+  done
+}
+
+mass-unzip () {
+  for f in "$@"
+  do
+    if [ -f "${f}" ]; then
+      cd "$(dirname "${f}")"
+      unzip "${f}"
+      cd - >/dev/null
+    fi
+  done
+}
+
+
 eps2pdf () {
 	for f in ${@}
 	do
@@ -254,33 +284,61 @@ rmdir_recursive () {
 }
 
 ups () {
+  # Distro-agnostic package managers
   if [ "$(command -v flatpak)" >/dev/null != "" ]
   then
+    echo "\e[32m> Upgrading flatpak packages...\e[97m"
     flatpak update -y 
     flatpak uninstall --unused -y
+  fi
+
+  if [ "$(command -v snap)" >/dev/null != "" ]
+  then
+    echo "\e[32m> Upgrading snap packages...\e[97m"
+    sudo snap refresh
+  fi
+
+  if [ "$(command -v brew)" >/dev/null != "" ]
+  then
+
+  echo "\e[32m> Upgrading brew packages...\e[97m"
+    brew update && brew upgrade && brew cleanup
   fi
 
   # Debian-based
   if [ "$(command -v apt)" >/dev/null != "" ]
   then
+    echo "\e[32m> Upgrading apt packages...\e[97m"
     sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-    [ "$(command -v deb-get)" >/dev/null != "" ] && deb-get update && deb-get upgrade
-    [ -x "$(command -v pacstall)" ] && yes | sudo pacstall -P -Up
+    if [ "$(command -v deb-get)" >/dev/null != "" ]
+    then
+      echo "\e[32m> Upgrading deb-get packages...\e[97m"
+      deb-get update && deb-get upgrade
+    fi
+    if [ -x "$(command -v pacstall)" ]
+    then
+      echo "\e[32m> Upgrading pacstall packages...\e[97m" && yes | sudo pacstall -P -Up
+    fi
     return
   fi
 
   # Arch-based
   if [ "$(command -v pacman)" >/dev/null != "" ]
   then
-    [ "$(command -v yay)" >/dev/null != "" ] >/dev/null && yay -Syyu
-    sudo pacman -Syyu
+    echo "\e[32m> Upgrading pacman packages...\e[97m"
+    sudo pacman -Syyu --noconfirm
+    if [ "$(command -v yay)" >/dev/null != "" ]
+    then
+      yay -Syyu --noconfirm
+    fi
     return
   fi
 
   # RPM-based
   if [ "$(command -v dnf)" >/dev/null != "" ]
   then
-    sudo dnf upgrade -y
+    echo "\e[32m> Upgrading dnf packages...\e[97m"
+    sudo dnf upgrade -y && sudo dnf autoremove -y
     return
   fi
  

@@ -10,6 +10,7 @@ unsetopt no_match
 
 # History
 setopt HIST_IGNORE_SPACE
+setopt hist_ignore_dups
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=${HOME}/.zsh_history
@@ -58,6 +59,9 @@ bindkey "^[[3~" delete-char
 # Remove whole words with CTRL
 bindkey '^H' backward-kill-word
 bindkey '5~' kill-word
+
+# Silent cd -
+setopt cdsilent
 
 # Setup $PATH, other envvars, aliases, etc
 for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.zsh] 2>/dev/null)
