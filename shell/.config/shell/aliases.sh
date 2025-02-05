@@ -12,7 +12,7 @@ alias ip='ip -c=auto'
 alias reload="source $HOME/.$(basename $(readlink /proc/$$/exe))rc"
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
-alias l='less'
+alias l='less -R'
 alias make="make -j$(getconf _NPROCESSORS_ONLN)"
 alias rsync='rsync -avhzP'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
