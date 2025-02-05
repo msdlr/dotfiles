@@ -305,6 +305,13 @@ ups () {
     brew update && brew upgrade && brew cleanup
   fi
 
+  # Nix
+  if [ "$(command -v nix)" ]
+  then
+    nix-channel --update
+    nix-env -u '*'
+  fi
+
   # Debian-based
   if [ "$(command -v apt)" >/dev/null != "" ]
   then
