@@ -182,13 +182,16 @@ mass-tar () {
     file=$(realpath "$f")
 
     if [ -d "$file" ]; then
+      (
       cd "$(dirname "$file")"
       tzip "$(basename "$file")${date_suffix}.tgz" "$(basename "$file")"
-      cd - >/dev/null
+      )
     fi
 
     if [ -f "$file" ]; then
+      (
       tzip "$(basename "$file")${date_suffix}.tgz" -C "$(dirname "$file")" "$(basename "$file")"
+      )
     fi
   done
 }
@@ -218,13 +221,16 @@ mass-zip () {
     file=$(realpath "${f}")
 
     if [ -d "${file}" ]; then
+      (
       cd "$(dirname "${file}")"
       zip -r "$(basename "${file}")${date_suffix}.zip" "$(basename "${file}")"
-      cd - >/dev/null
+      )
     fi
 
     if [ -f "${file}" ]; then
+      (
       zip "$(basename "${file}")${date_suffix}.zip" -j "${file}"
+      )
     fi
   done
 }
