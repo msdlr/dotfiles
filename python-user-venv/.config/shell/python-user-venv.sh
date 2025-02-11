@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
-PYTHON_HOME_VENV="${XDG_CONFIG_HOME}/python-user-venv"
+PYTHON_HOME_VENV="${HOME}/.local/opt/python"
 
-if [ ! -d "${XDG_CONFIG_HOME}/python-user-venv" ]
+if [ ! -d "${PYTHON_HOME_VENV}" ]
 then
     echo "Creating Python venv..."
-    python -m venv "${XDG_CONFIG_HOME}/python-user-venv"
+    python -m venv "${PYTHON_HOME_VENV}"
 fi
 
 source ${PYTHON_HOME_VENV}/bin/activate
