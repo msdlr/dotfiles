@@ -22,6 +22,9 @@ nix_setup_all() {
     done
 }
 
+alias nix-install-nodaemon='sh <(curl -L https://nixos.org/nix/install) --no-daemon'
+alias nix-install-daemon='sh <(curl -L https://nixos.org/nix/install) --daemon'
+
 # Detect local user installation
 if [ -f ${HOME}/.nix-profile/etc/profile.d/nix.sh ]
 then
