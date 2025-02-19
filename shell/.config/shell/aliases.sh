@@ -12,7 +12,7 @@ alias ip='ip -c=auto'
 alias reload="source $HOME/.$(basename $(readlink /proc/$$/exe))rc"
 alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
 alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
-alias l='less'
+alias l='less -R'
 alias make="make -j$(getconf _NPROCESSORS_ONLN)"
 alias rsync='rsync -avhzP'
 alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
@@ -170,18 +170,28 @@ unln () {
 
 
 mass-tar () {
-  for f in ${@}
-  do
-    file=$(realpath ${f})
+  date_suffix=""
+  
+  # Check for the -d flag
+  if [ "$1" == "-d" ]; then
+    date_suffix="-$(date +%Y%m%d_%H%M)"
+    shift  # Remove the -d argument from the list
+  fi
 
-    if [ -d ${file} ]; then
-      cd $(dirname ${file})
-      tzip "$(basename ${file}).tgz" "$(basename ${file})"
-      cd - >/dev/null
+  for f in "$@"; do
+    file=$(realpath "$f")
+
+    if [ -d "$file" ]; then
+      (
+      cd "$(dirname "$file")"
+      tzip "$(basename "$file")${date_suffix}.tgz" "$(basename "$file")"
+      )
     fi
 
-    if [ -f ${file} ]; then
-      tzip "$(basename ${file}).tgz" -C "$(dirname ${file})" "$(basename ${file})"
+    if [ -f "$file" ]; then
+      (
+      tzip "$(basename "$file")${date_suffix}.tgz" -C "$(dirname "$file")" "$(basename "$file")"
+      )
     fi
   done
 }
@@ -199,18 +209,28 @@ mass-untar () {
 }
 
 mass-zip () {
-  for f in "$@"
-  do
+  date_suffix=""
+
+  # Check for the -d flag
+  if [ "$1" == "-d" ]; then
+    date_suffix="-$(date +%Y%m%d_%H%M)"
+    shift  # Remove the -d argument from the list
+  fi
+
+  for f in "$@"; do
     file=$(realpath "${f}")
 
     if [ -d "${file}" ]; then
+      (
       cd "$(dirname "${file}")"
-      zip -r "$(basename "${file}").zip" "$(basename "${file}")"
-      cd - >/dev/null
+      zip -r "$(basename "${file}")${date_suffix}.zip" "$(basename "${file}")"
+      )
     fi
 
     if [ -f "${file}" ]; then
-      zip "$(basename "${file}").zip" -j "${file}"
+      (
+      zip "$(basename "${file}")${date_suffix}.zip" -j "${file}"
+      )
     fi
   done
 }
