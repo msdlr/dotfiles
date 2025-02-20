@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 PYTHON_HOME_VENV="${HOME}/.local/opt/python"
+mkdir -pv ${PYTHON_HOME_VENV}
 
 if [ ! -d "${PYTHON_HOME_VENV}" ]
 then
