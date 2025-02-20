@@ -22,6 +22,14 @@ then
 else
     . ${XDG_CONFIG_HOME}/omnetpp 2>/dev/null
 fi
+
+# Import the python package in the current venv
+site_packages="$(python3 -c "import site; print(site.getsitepackages()[0])")"
+if [ ! -L "$site_packages/omnetpp" ] || [ "$(realpath "$site_packages/omnetpp")" != "$OMNET_ROOT/python/omnetpp" ]; then
+    ln -sfn "$OMNET_ROOT/python/omnetpp" "$site_packages/omnetpp"
+fi
+unset site_packages
+
 alias omnetpp='(source ${OMNET_ROOT}/setenv && omnetpp)'
 alias opp_shell='(source ${OMNET_ROOT}/setenv && $SHELL)'
 
