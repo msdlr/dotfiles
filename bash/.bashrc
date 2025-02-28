@@ -32,6 +32,10 @@ else
 fi
 
 
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --bash)"
+fi
+
 bind 'set show-all-if-ambiguous on' 2>/dev/null
 bind 'TAB:menu-complete' 2>/dev/null
 
