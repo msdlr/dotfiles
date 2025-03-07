@@ -36,7 +36,7 @@ if command -v fzf &> /dev/null; then
     eval "$(fzf --bash)"
 fi
 
-export SHELL=$(which $0)
+export SHELL=$(which bash)
 
 bind 'set show-all-if-ambiguous on' 2>/dev/null
 bind 'TAB:menu-complete' 2>/dev/null

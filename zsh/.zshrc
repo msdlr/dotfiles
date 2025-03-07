@@ -73,4 +73,4 @@ do
     source ${cfg}
 done
 
-export SHELL=$(which $0)
+export SHELL=$(which zsh)
