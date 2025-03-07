@@ -72,3 +72,5 @@ for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.zsh] 2>/dev/null)
 do
     source ${cfg}
 done
+
+export SHELL=$(which $0)
