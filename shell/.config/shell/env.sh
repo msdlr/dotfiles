@@ -23,7 +23,7 @@ export SCREENRC="${XDG_CONFIG_HOME}"/screen/screenrc
 
 # $DISPLAY for WSL
 
-if [ $(expr "$(uname --kernel-release)" : ".*WSL.*") != "0"  ]
+if [ $(expr "$(uname --kernel-release 2>/dev/null)" : ".*WSL.*") != "0"  ]
 then
 	DISPLAY=${DISPLAY:="$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0"}
 fi
