@@ -367,7 +367,7 @@ ups () {
 
 fgr () {
   [ "$1" = "~" ] && cdr $HOME && return
-	if [ -x "$(command -v locate)" ]
+	if [ "$(uname)" != "Darwin" && -x "$(command -v locate)" ]
 	then
 	  locate "$(pwd)*/.git" | grep ".git$" | grep "^$(pwd)" | sed "s|.git||g; s|/$||g"
 	else
