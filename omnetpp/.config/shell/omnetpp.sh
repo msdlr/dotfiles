@@ -1,15 +1,9 @@
 #!/usr/bin/env sh
 
-XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=${HOME}/.config}
+set_omnet_root() {
+    SETENV_FILE=$(find /opt ${HOME}/.local/opt -type f -name "setenv" | fzf)
+    export OMNET_ROOT=$(dirname ${SETENV_FILE})
 
-if [ ! -f ${XDG_CONFIG_HOME}/omnetpp ]
-then
-    # If the variable is not definedm search for it
-    if [ -z "${OMNET_ROOT}" ]
-    then
-        SETENV_FILE=$(find /opt ${HOME}/.local/opt -type f -name "setenv" | fzf)
-        export OMNET_ROOT=$(dirname ${SETENV_FILE})
-    fi
 
     # Once the variable is defined
     if [ -n "${OMNET_ROOT}" ]
@@ -18,6 +12,17 @@ then
         echo "[[ ":\${LD_LIBRARY_PATH}:" == *"${OMNET_ROOT}/lib"* ]] || export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:${OMNET_ROOT}/lib" >> ${XDG_CONFIG_HOME}/omnetpp
         echo "[[ ":\${C_INCLUDE_PATH}:" == *"${OMNET_ROOT}/include"* ]] || export C_INCLUDE_PATH=\${C_INCLUDE_PATH}:${OMNET_ROOT}/include" >> ${XDG_CONFIG_HOME}/omnetpp
         echo "[[ ":\${CPLUS_INCLUDE_PATH}:" == *"${OMNET_ROOT}/include"* ]] || export CPLUS_INCLUDE_PATH=\${CPLUS_INCLUDE_PATH}:${OMNET_ROOT}/include" >> ${XDG_CONFIG_HOME}/omnetpp
+    fi
+}
+
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=${HOME}/.config}
+
+if [ ! -f ${XDG_CONFIG_HOME}/omnetpp ]
+then
+    # If the variable is not definedm search for it
+    if [ -z "${OMNET_ROOT}" ]
+    then
+        set_omnet_root
     fi
 else
     . ${XDG_CONFIG_HOME}/omnetpp 2>/dev/null
