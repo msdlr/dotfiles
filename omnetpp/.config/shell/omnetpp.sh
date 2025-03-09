@@ -31,7 +31,7 @@ fi
 # Import the python package in the current venv
 site_packages="$(python3 -c "import site; print(site.getsitepackages()[0])")"
 if [ ! -L "$site_packages/omnetpp" ] || [ "$(realpath "$site_packages/omnetpp")" != "$OMNET_ROOT/python/omnetpp" ]; then
-    ln -sfn "$OMNET_ROOT/python/omnetpp" "$site_packages/omnetpp"
+    ln -sfn "$OMNET_ROOT/python/omnetpp" "$site_packages/omnetpp" 2> /dev/null
 fi
 unset site_packages
 
