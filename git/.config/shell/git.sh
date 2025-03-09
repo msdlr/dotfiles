@@ -42,3 +42,14 @@ if [ -x "$(command -v kompare)" ]; then
 elif [ -x "$(command -v meld)" ]; then
     [ -x "$(command -v git)" ] && git config --global diff.tool meld
 fi
+
+# Diff with meld on MacOS
+
+if [ "$(uname)" = "Darwin" ]
+then
+    # Meld for MacOS: https://gitlab.com/dehesselle/meld_macos
+    alias meld='/Applications/Meld.app/Contents/MacOS/Meld'
+    git config --global diff.tool meld
+    git config --global difftool.prompt false
+    git config --global difftool.meld.cmd "/Applications/Meld.app/Contents/MacOS/Meld \$LOCAL \$REMOTE"s
+fi
