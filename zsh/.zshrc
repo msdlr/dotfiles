@@ -73,4 +73,4 @@ do
     source ${cfg}
 done
 
-alias reload="source $HOME/.bashrc"
+alias reload="source $HOME/.zshrc"
