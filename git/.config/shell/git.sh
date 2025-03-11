@@ -43,8 +43,7 @@ elif [ -x "$(command -v meld)" ]; then
     [ -x "$(command -v git)" ] && git config --global diff.tool meld
 fi
 
-# Diff with meld on MacOS
-
+# difftool with meld on MacOS
 if [ "$(uname)" = "Darwin" ]
 then
     # Meld for MacOS: https://gitlab.com/dehesselle/meld_macos
@@ -52,4 +51,12 @@ then
     git config --global diff.tool meld
     git config --global difftool.prompt false
     git config --global difftool.meld.cmd "/Applications/Meld.app/Contents/MacOS/Meld \$LOCAL \$REMOTE"s
+fi
+
+if [ -x "$(command -v delta)" ]
+then
+    git config --global core.pager delta
+    git config --global interactive.diffFilter 'delta --color-only'
+    git config --global delta.navigate true
+    git config --global merge.conflictStyle zdiff3
 fi
