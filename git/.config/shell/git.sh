@@ -42,3 +42,12 @@ if [ -x "$(command -v kompare)" ]; then
 elif [ -x "$(command -v meld)" ]; then
     [ -x "$(command -v git)" ] && git config --global diff.tool meld
 fi
+
+
+if [ -x "$(command -v delta)" ]
+then
+    git config --global core.pager delta
+    git config --global interactive.diffFilter 'delta --color-only'
+    git config --global delta.navigate true
+    git config --global merge.conflictStyle zdiff3
+fi
