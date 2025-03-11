@@ -38,9 +38,5 @@ unset site_packages
 alias omnetpp='(source ${OMNET_ROOT}/setenv && omnetpp)'
 alias opp_shell='(source ${OMNET_ROOT}/setenv && $SHELL)'
 
-function opp_scavetool () {
-    (source ${OMNET_ROOT}/setenv && command opp_scavetool "$@")
-}
-
 # Remove omnet ide crash logs
 ls ~/hs_err_pid*log >/dev/null 2>/dev/null && rm ~/hs_err_pid*log >/dev/null 2>/dev/null
