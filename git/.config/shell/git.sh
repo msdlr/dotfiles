@@ -50,7 +50,7 @@ then
     alias meld='/Applications/Meld.app/Contents/MacOS/Meld'
     git config --global diff.tool meld
     git config --global difftool.prompt false
-    git config --global difftool.meld.cmd "/Applications/Meld.app/Contents/MacOS/Meld \$LOCAL \$REMOTE"s
+    git config --global difftool.meld.cmd "/Applications/Meld.app/Contents/MacOS/Meld \$LOCAL \$REMOTE"
 fi
 
 if [ -x "$(command -v delta)" ]
