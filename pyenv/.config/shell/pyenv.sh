@@ -2,7 +2,7 @@
 
 # Dependencies: https://github.com/pyenv/pyenv/wiki#suggested-build-environment 
 
-export PYENV_ROOT=${PYENVROOT:="${HOME}/.pyenv"}
+export PYENV_ROOT=${PYENVROOT:="${HOME}/.local/opt/pyenv"}
 
 # Clone if not available
 if [ ! -d "${PYENV_ROOT}" ]
