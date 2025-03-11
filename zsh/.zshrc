@@ -73,4 +73,4 @@ do
     source ${cfg}
 done
 
-export SHELL=$(which $0)
+alias reload="source $HOME/.bashrc"
