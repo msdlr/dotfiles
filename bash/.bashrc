@@ -1,5 +1,5 @@
 # Source default conf
-. /etc/skel/.bashrc
+[ -f /etc/skel/.bashrc ] && . /etc/skel/.bashrc
 # Source bash_completion
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 
