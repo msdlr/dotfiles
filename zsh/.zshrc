@@ -73,4 +73,4 @@ do
     source ${cfg}
 done
 
-export SHELL=$(which zsh)
+alias reload="source $HOME/.zshrc"

@@ -17,6 +17,6 @@ do
     then
         [ -d ${pkg} ] && cp --remove-destination -rv $(find ${pkg} -mindepth 1 -maxdepth 1 -not -name ${pkg}) ~
     else    
-        [ -d ${pkg} ] && scp -r $(find ${pkg} -maxdepth 1 -mindepth 1 -not -name ${pkg}) ${U}@${R}:
+        [ -d ${pkg} ] && scp -q -r $(find ${pkg} -maxdepth 1 -mindepth 1 -not -name ${pkg}) ${U}@${R}:
     fi
 done
