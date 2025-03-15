@@ -68,3 +68,9 @@ for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.zsh] 2>/dev/null)
 do
     source ${cfg}
 done
+
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --zsh)"
+fi
+
+alias reload="source $HOME/.zshrc"

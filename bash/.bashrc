@@ -1,5 +1,5 @@
 # Source default conf
-. /etc/skel/.bashrc
+[ -f /etc/skel/.bashrc ] && . /etc/skel/.bashrc
 # Source bash_completion
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 
@@ -31,6 +31,12 @@ else
 	PS1='\[\e[0;34m\]$(cur_short_path) \[\e[0;1;35m\]$(git_branch)\[\e[0;93m\]\$ \[\e[0m\]'
 fi
 
+
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --bash)"
+fi
+
+alias reload="source $HOME/.bashrc"
 
 bind 'set show-all-if-ambiguous on' 2>/dev/null
 bind 'TAB:menu-complete' 2>/dev/null
