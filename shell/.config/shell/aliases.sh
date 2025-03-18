@@ -374,6 +374,23 @@ fgr () {
 	fi
 }
 
+lastgrep() {
+  if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
+    echo "Usage: lastgrep [directory] <pattern>"
+    return 1
+  fi
+
+  if [ "$#" -eq 2 ]; then
+    directory="$1"
+    pattern="$2"
+  else
+    directory="."
+    pattern="$1"
+  fi
+
+    grep -rHn "$pattern" "$directory" | awk -F: '{file=$1; line=$2; text=$0} {lines[file]=line; texts[file]=text} END {for (f in lines) print texts[f]}'
+}
+
 # notify-send-like in WSL
 if [ $(expr "$(uname --kernel-release 2>/dev/null)" : ".*WSL.*") != "0"  ]
 then
