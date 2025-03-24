@@ -60,3 +60,7 @@ then
     git config --global delta.navigate true
     git config --global merge.conflictStyle zdiff3
 fi
+
+# Prune tags on fetch
+git config --global fetch.pruneTags true
+git config --global fetch.prune true
