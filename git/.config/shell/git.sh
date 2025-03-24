@@ -53,4 +53,5 @@ then
 fi
 
 # Prune tags on fetch
-git config fetch.pruneTags true
+git config --global fetch.pruneTags true
+git config --global fetch.prune true
