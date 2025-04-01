@@ -4,7 +4,8 @@
 # ~/.config/git/config
 # ~/.gitconfig
 
-GIT_DIR=${XDG_CONFIG_HOME}/git
+export GIT_CONFIG_GLOBAL=${XDG_CONFIG_HOME}/git/config
+mkdir -p $(dirname ${GIT_CONFIG_GLOBAL})
 
 # Set aliases
 git config --global alias.c "clone --recursive"
