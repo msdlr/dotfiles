@@ -24,7 +24,6 @@ git config --global alias.d "diff"
 git config --global alias.ds "diff --staged"
 git config --global alias.dt "difftool --dir-diff"
 git config --global alias.dts "difftool  --staged --dir-diff"
-git config --global alias.cfg "$EDITOR"
 git config --global alias.savediff "!f() { git diff > \"\$(git rev-parse --abbrev-ref HEAD)-\$(hostname).diff\"; }; f"
 
 # Set user information
