@@ -37,11 +37,12 @@ git config --global difftool.prompt false
 git config --global fetch.prune true
 
 # Difftool with kompare/meld
-if [ -x "$(command -v kompare)" ]; then
-    [ -x "$(command -v git)" ] && git config --global diff.tool kompare
-elif [ -x "$(command -v meld)" ]; then
-    [ -x "$(command -v git)" ] && git config --global diff.tool meld
-fi
+for tool in kompare meld; do
+    if command -v "$tool" >/dev/null 2>&1; then
+        git config --global diff.tool "$tool"
+        break
+    fi
+done
 
 
 if [ -x "$(command -v delta)" ]
