@@ -297,9 +297,8 @@ svg2pdf () {
 
 
 rmdir_recursive () {
-  where=${1}
-  where=${where:=.}
-  find ${where} -mindepth 1 -type d | tac | xargs -I {} rmdir --ignore-fail-on-non-empty {}
+    where=${1:-.}
+    find "$where" -mindepth 1 -type d -print0 | tac -s '' | xargs -0 rmdir --ignore-fail-on-non-empty
 }
 
 ups () {
