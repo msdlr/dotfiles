@@ -33,7 +33,7 @@ fi
 
 
 if command -v fzf &> /dev/null; then
-    eval "$(fzf --bash)"
+    eval "$(fzf --bash 2>/dev/null)"
 fi
 
 alias reload="source $HOME/.bashrc"
