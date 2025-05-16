@@ -360,7 +360,18 @@ ups () {
     sudo dnf upgrade -y && sudo dnf autoremove -y
     return
   fi
- 
+
+  # MacOS
+  if [ "$(uname)" = "Darwin "]
+  then
+    sudo softwareupdate -ia
+
+    if [ "$(command -v mas)" >/dev/null != "" ]
+    then
+      updates=$(mas outdated)
+      [ -n "$updates" ] && mas upgrade
+    fi
+  fi
 
 }
 
