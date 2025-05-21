@@ -361,7 +361,7 @@ ups () {
   fi
 
   # MacOS
-  if [ "$(uname)" = "Darwin "]
+  if [ "$(uname)" = "Darwin" ]
   then
     sudo softwareupdate -ia
 
