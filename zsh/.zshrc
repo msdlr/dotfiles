@@ -70,7 +70,7 @@ do
 done
 
 if command -v fzf &> /dev/null; then
-    eval "$(fzf --zsh)"
+    eval "$(fzf --zsh 2>/dev/null)"
 fi
 
 alias reload="source $HOME/.zshrc"

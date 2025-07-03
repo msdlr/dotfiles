@@ -33,7 +33,7 @@ fi
 
 
 if command -v fzf &> /dev/null; then
-    eval "$(fzf --bash)"
+    eval "$(fzf --bash 2>/dev/null)" || source /usr/share/doc/fzf/examples/key-bindings.bash
 fi
 
 alias reload="source $HOME/.bashrc"
