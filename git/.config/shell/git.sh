@@ -45,7 +45,7 @@ for tool in kompare meld; do
 done
 
 # difftool with meld on MacOS
-if [ "$(uname)" = "Darwin" ]
+if [ "$(uname)" = "Darwin" ] && [ -x "/Applications/Meld.app/Contents/MacOS/Meld" ]
 then
     # Meld for MacOS: https://gitlab.com/dehesselle/meld_macos
     alias meld='/Applications/Meld.app/Contents/MacOS/Meld'
