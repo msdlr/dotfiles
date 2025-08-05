@@ -11,3 +11,4 @@ fi
 [ -d "${homebrew_prefix}/bin" ] && echo "$PATH" | grep -q "${homebrew_prefix}/bin" || export PATH="${homebrew_prefix}/bin:${PATH}"
 # [ -d ${homebrew_prefix}/lib ] && [[ ":${LD_LIBRARY_PATH}:" == *"${homebrew_prefix}/lib"* ]] || export LD_LIBRARY_PATH=${homebrew_prefix}/lib:${LD_LIBRARY_PATH}
 
+unset homebrew_prefix
