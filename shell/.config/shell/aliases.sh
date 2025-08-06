@@ -320,7 +320,7 @@ ups () {
   then
 
   echo "\e[32m> Upgrading brew packages...\e[97m"
-    brew update && brew upgrade && 
+    brew update
     if [ "$(uname)" = "Darwin" ]
     then
       brew upgrade --greedy && 
