@@ -3,7 +3,7 @@
 PYTHON_HOME_VENV="${HOME}/.local/opt/python"
 mkdir -pv ${PYTHON_HOME_VENV}
 
-if [ ! -f "${PYTHON_HOME_VENV}/bin/activate" ]
+if [ ! -d "${PYTHON_HOME_VENV}" ]
 then
     echo "Creating Python venv..."
     python -m venv "${PYTHON_HOME_VENV}"
