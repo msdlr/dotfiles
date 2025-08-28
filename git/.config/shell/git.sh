@@ -7,6 +7,9 @@
 export GIT_CONFIG_GLOBAL=${XDG_CONFIG_HOME}/git/config
 mkdir -p $(dirname ${GIT_CONFIG_GLOBAL})
 
+git config --global core.excludesfile $(dirname ${GIT_CONFIG_GLOBAL})/gitignore
+[ -f ${GIT_CONFIG_GLOBAL} ] || touch ${GIT_CONFIG_GLOBAL}
+
 # Set aliases
 git config --global alias.c "clone --recursive"
 git config --global alias.co "checkout"
