@@ -63,6 +63,9 @@ bindkey '5~' kill-word
 # Silent cd -
 setopt cdsilent
 
+# Correct mistyped commands
+setopt correct
+
 # Setup $PATH, other envvars, aliases, etc
 for cfg in $(ls ${HOME}/.config/shell/*[\.sh,\.zsh] 2>/dev/null)
 do
