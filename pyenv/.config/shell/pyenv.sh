@@ -7,6 +7,7 @@ export PYENV_ROOT=${PYENVROOT:="${HOME}/.local/opt/pyenv"}
 # Clone if not available
 if [ ! -d "${PYENV_ROOT}" ]
 then
+	mkdir -p $(dirname ${PYENV_ROOT})
 	git clone --recursive https://github.com/pyenv/pyenv.git ${PYENV_ROOT}
 fi
 
