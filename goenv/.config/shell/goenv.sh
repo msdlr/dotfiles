@@ -8,3 +8,5 @@ eval "$(${GOENV_ROOT}/bin/goenv init -)"
 
 [ $(expr "${PATH}" : ".*$GOROOT.*") = "0" ] && export PATH="${GOROOT}/bin:${PATH}"
 [ $(expr "${PATH}" : ".*$GOPATH.*") = "0" ] && export PATH="${GOPATH}/bin:${PATH}"
+
+unset GOENV_ROOT
