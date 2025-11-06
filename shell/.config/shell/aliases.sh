@@ -24,8 +24,19 @@ alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
 alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
 alias ivim='dir=$(fgr | fzf) && [ -n "$dir" ] && vim $dir'
 
-# Conditional aliases
-[ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
+# (GNU) tar + pigz
+if [ -f "$(command -v pigz)" 2>/dev/null ]; then
+  if [ "$(uname)" = "Darwin" ]; then
+    fi [ -x "$(command -v gtar)" ]; then
+      alias tzip='gtar -I pigz -cvf' # Multithreaded
+    else
+      alias tzip='tar -czvf'
+    fi
+  else
+    alias tzip='tar -I pigz -cvf' # Multithreaded
+  fi
+fi
+
 [ -f "$(command -v python)" 2>/dev/null ] || alias python='python3'
 [ -f "$(command -v nvim)" 2>/dev/null ] && alias vim='nvim -p'
 [ -n "$COLUMNS" ] && alias diff='diff --color=auto --side-by-side -W $COLUMNS' || diff='diff --color=auto --side-by-side'
