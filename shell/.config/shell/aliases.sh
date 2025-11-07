@@ -27,7 +27,7 @@ alias ivim='dir=$(fgr | fzf) && [ -n "$dir" ] && vim $dir'
 # (GNU) tar + pigz
 if [ -f "$(command -v pigz)" 2>/dev/null ]; then
   if [ "$(uname)" = "Darwin" ]; then
-    fi [ -x "$(command -v gtar)" ]; then
+    if [ -x "$(command -v gtar)" ]; then
       alias tzip='gtar -I pigz -cvf' # Multithreaded
     else
       alias tzip='tar -czvf'
