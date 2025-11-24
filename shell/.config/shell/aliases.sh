@@ -390,6 +390,27 @@ lastgrep() {
     grep -rHn "$pattern" "$directory" | awk -F: '{file=$1; line=$2; text=$0} {lines[file]=line; texts[file]=text} END {for (f in lines) print texts[f]}'
 }
 
+maketex() {
+  if [ -f "$1" ]; then
+    prefix=$(echo $1 | sed 's/.tex//g')
+    pdflatex -synctex=1 -interaction=nonstopmode $1 && notify-send "LaTeX" "First pdflatex pass complete." &&
+    biber ${prefix} && notify-send "LaTeX" "BibTeX pass complete." &&
+    pdflatex -synctex=1 -interaction=nonstopmode $1 && notify-send "LaTeX" "Second pdflatex pass complete." &&
+    biber ${prefix} && notify-send "LaTeX" "Biber pass complete." &&
+    makeglossaries ${prefix} && notify-send "LaTeX" "Makeglossaries pass complete." &&
+    pdflatex -synctex=1 -interaction=nonstopmode $1 && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready."
+    # rm *.aux *.log *.bbl *.blg *.glo *.gls *.glg *.acr *.acn *.ist *.out *.alg *.bcf *.fls *.lof *.lot *.toc *.run.xml *.synctex.gz *.fdb_latexmk
+  else
+    # If number of parameters is 0, print usage
+    if [ "$#" -eq 0 ]; then
+    echo "Usage: maketex <file.tex>"
+    return 1
+    fi
+    echo "File '$1' not found!"
+    return 1
+  fi
+}
+
 # notify-send-like in WSL
 if [ $(expr "$(uname --kernel-release)" : ".*WSL.*") != "0"  ]
 then
