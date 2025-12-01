@@ -334,9 +334,10 @@ ups () {
     brew update
     if [ "$(uname)" = "Darwin" ]
     then
-      brew upgrade --greedy && 
+      brew upgrade --cask &&
+      brew upgrade --greedy
     else 
-      brew upgrade &&
+      brew upgrade
     fi
     brew cleanup
   fi
