@@ -4,7 +4,18 @@
 stowlike () {
     TARGET=${HOME}
     PACKAGE=${1}
-    find $(realpath ${PACKAGE}) -maxdepth 1 -mindepth 1 | xargs -I {} cp -rsv --remove-destination {} ${TARGET}
+
+    if [ "$(uname)" = "Darwin" ]
+    then
+        PACKAGE_PATH=$(cd "${PACKAGE}" && pwd)  # Get the full absolute path of the PACKAGE
+        find "$PACKAGE_PATH" -maxdepth 1 -mindepth 1 | while read -r item; do
+            rm -f "${TARGET}/$(basename "$item")" 2>/dev/null
+            cp -rsv "$item" "$TARGET"
+        done
+
+    else
+        find $(realpath ${PACKAGE}) -maxdepth 1 -mindepth 1 | xargs -I {} cp -rsv --remove-destination {} ${TARGET}
+    fi
 }
 
 case $# in

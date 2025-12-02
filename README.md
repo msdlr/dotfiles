@@ -1,5 +1,5 @@
 # Dotfiles
-These are the dotfiles I use on Linux environments, mostly configuration items for quality-of-life changes for shells and command line programs.
+These are the dotfiles I use on Linux and MacOS environments, mostly configuration items for quality-of-life changes for shells and command line programs.
 
 I originally used GNU `stow`. I like this approach because I find it quite messy to make your home directory a git repository, and files are also deployed as symlinks, which allow configurations to be deployed as soon as you save them. It also lets you install configuration items on a per-program, or even have various independent, separate configurations for the same program. This way you deploy the configuration files for whatever you use.
 
