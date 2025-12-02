@@ -4,9 +4,28 @@
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 
 function git_branch() {
-	GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+    # Current branch
+    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" || return
+
     if [ -n "$GIT_BRANCH" ]; then
-        echo "[$GIT_BRANCH] "
+        # Ahead/behind counts
+        ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null)
+        behind=$(git rev-list --count HEAD..@{u} 2>/dev/null)
+
+        local gst=""
+
+        [ -n "$ahead" ]  && [ "$ahead" -gt 0 ]  && gst="${gst}↑${ahead} "
+        [ -n "$behind" ] && [ "$behind" -gt 0 ] && gst="${gst}↓${behind}"
+
+        # Trim trailing space
+        gst="${gst%" "}"
+
+        # Wrap in brackets only if non-empty
+        if [ -n "$gst" ]; then
+            echo "(${GIT_BRANCH} ${gst}) "
+        else
+            echo "(${GIT_BRANCH}) "
+        fi
     fi
 }
 
