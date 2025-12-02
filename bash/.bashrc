@@ -14,8 +14,8 @@ function git_branch() {
 
         local gst=""
 
-        [ -n "$ahead" ]  && [ "$ahead" -gt 0 ]  && gst="${gst}↑${ahead} "
-        [ -n "$behind" ] && [ "$behind" -gt 0 ] && gst="${gst}↓${behind}"
+        [ -n "$ahead" ]  && [ "$ahead" -gt 0 ]  && gst="${gst}▲${ahead} "
+        [ -n "$behind" ] && [ "$behind" -gt 0 ] && gst="${gst}▼${behind}"
 
         # Trim trailing space
         gst="${gst%" "}"
