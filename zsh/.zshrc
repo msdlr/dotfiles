@@ -16,9 +16,28 @@ SAVEHIST=10000000
 HISTFILE=${HOME}/.zsh_history
 
 function git_branch() {
-    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+    # Current branch
+    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" || return
+
     if [ -n "${GIT_BRANCH}" ]; then
-        echo "git:${GIT_BRANCH}"
+        # Ahead/behind counts
+        ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null)
+        behind=$(git rev-list --count HEAD..@{u} 2>/dev/null)
+
+        local gst=""
+
+        [ -n "$ahead" ]  && [ "$ahead" -gt 0 ]  && gst="${gst}↑${ahead} "
+        [ -n "$behind" ] && [ "$behind" -gt 0 ] && gst="${gst}↓${behind}"
+
+        # Trim trailing space
+        gst="${gst%" "}"
+
+        # Wrap in brackets only if non-empty
+        if [ -n "$gst" ]; then
+            echo "${GIT_BRANCH} [${gst}]"
+        else
+            echo "git:${GIT_BRANCH}"
+        fi
     fi
 }
 
@@ -74,6 +93,10 @@ done
 
 if command -v fzf &> /dev/null; then
     eval "$(fzf --zsh 2>/dev/null)"
+fi
+
+if command -v atuin &> /dev/null; then
+    eval "$(atuin init zsh)"
 fi
 
 alias reload="source $HOME/.zshrc"
