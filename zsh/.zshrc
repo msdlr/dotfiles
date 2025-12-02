@@ -95,4 +95,8 @@ if command -v fzf &> /dev/null; then
     eval "$(fzf --zsh 2>/dev/null)"
 fi
 
+if command -v atuin &> /dev/null; then
+    eval "$(atuin init zsh)"
+fi
+
 alias reload="source $HOME/.zshrc"

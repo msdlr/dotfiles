@@ -55,6 +55,10 @@ if command -v fzf &> /dev/null; then
     eval "$(fzf --bash 2>/dev/null)" || source /usr/share/doc/fzf/examples/key-bindings.bash
 fi
 
+if command -v atuin &> /dev/null; then
+    eval "$(atuin init bash)"
+fi
+
 alias reload="source $HOME/.bashrc"
 
 bind 'set show-all-if-ambiguous on' 2>/dev/null
