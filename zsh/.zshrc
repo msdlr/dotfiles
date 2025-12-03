@@ -34,7 +34,7 @@ function git_branch() {
 
         # Wrap in brackets only if non-empty
         if [ -n "$gst" ]; then
-            echo "${GIT_BRANCH} [${gst}]"
+            echo "git:${GIT_BRANCH} [${gst}]"
         else
             echo "git:${GIT_BRANCH}"
         fi
