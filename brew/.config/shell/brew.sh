@@ -1,12 +1,11 @@
 #!/usr/bin/env sh
 
-# Homebrew on Linux
-homebrew_prefix=/home/linuxbrew/.linuxbrew
-
-if [ ! -d ${homebrew_prefix} ]
-then
+if [ -d "/opt/homebrew" ]; then
+    HOMEBREW_PREFIX="/opt/homebrew"  # MacOS 
+elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
+    HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"  # Linux
+else
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-eval $(${homebrew_prefix}/bin/brew shellenv)
-unset homebrew_prefix
+eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
