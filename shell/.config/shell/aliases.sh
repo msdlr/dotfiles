@@ -14,7 +14,6 @@ alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
 alias l='less -R'
 alias make="make -j$(getconf _NPROCESSORS_ONLN)"
 alias rsync='rsync -avhzP'
-alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
 alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
@@ -23,6 +22,19 @@ alias wi="echo "$USER@$HOST""
 alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
 alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
 alias ivim='dir=$(fgr | fzf) && [ -n "$dir" ] && vim $dir'
+
+# (GNU) tar + pigz
+if [ -f "$(command -v pigz)" 2>/dev/null ]; then
+  if [ "$(uname)" = "Darwin" ]; then
+    if [ -x "$(command -v gtar)" ]; then
+      alias tzip='gtar -I pigz -cvf' # Multithreaded
+    else
+      alias tzip='tar -czvf'
+    fi
+  else
+    alias tzip='tar -I pigz -cvf' # Multithreaded
+  fi
+fi
 
 # Conditional aliases
 [ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded

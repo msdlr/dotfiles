@@ -50,6 +50,15 @@ for tool in kompare meld; do
     fi
 done
 
+# difftool with meld on MacOS
+if [ "$(uname)" = "Darwin" ] && [ -x "/Applications/Meld.app/Contents/MacOS/Meld" ]
+then
+    # Meld for MacOS: https://gitlab.com/dehesselle/meld_macos
+    alias meld='/Applications/Meld.app/Contents/MacOS/Meld'
+    git config --global diff.tool meld
+    git config --global difftool.prompt false
+    git config --global difftool.meld.cmd "/Applications/Meld.app/Contents/MacOS/Meld \$LOCAL \$REMOTE"
+fi
 
 if [ -x "$(command -v delta)" ]
 then
