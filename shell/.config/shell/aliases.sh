@@ -424,7 +424,7 @@ maketex() {
 }
 
 # notify-send-like in WSL
-if [ $(expr "$(uname --kernel-release)" : ".*WSL.*") != "0"  ]
+if [ $(expr "$(uname --kernel-release 2>/dev/null)" : ".*WSL.*") != "0"  ]
 then
 	#echo "Running in WSL"
 	notifysend () {
