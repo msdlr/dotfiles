@@ -126,14 +126,14 @@ cdsd () {
 	cd $(realpath ${dir})
 }
 
-fgr () {
+fgr() {
   [ "$1" = "~" ] && cdr $HOME && return
-	if [ -x "$(command -v locate)" ]
-	then
-	  locate "$(pwd)*/.git" | grep ".git$" | grep "^$(pwd)" | sed "s|.git||g; s|/$||g"
-	else
-	  find . -maxdepth 4 -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}"
-	fi
+  
+  if [ "$(uname)" = "Darwin" ] || ! command -v locate &>/dev/null; then
+    find . -maxdepth 4 -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}"
+  else
+    locate "$(pwd)*/.git" | grep ".git$" | grep "^$(pwd)" | sed "s|.git||g; s|/$||g"
+  fi
 }
 
 # notify-send-like in WSL
