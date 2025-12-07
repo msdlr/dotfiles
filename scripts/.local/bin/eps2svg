@@ -6,6 +6,12 @@ then
     exit 1
 fi
 
+if [ "$(command -v epstopdf)" = "" ]
+then
+    echo "Command epstopdf not found"
+    exit 1
+fi
+
 PATH="$(realpath $(dirname $0))":$PATH # Get the pdf2svg script in the same repo just in case
 
 for f in ${@}
