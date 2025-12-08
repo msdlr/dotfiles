@@ -5,7 +5,7 @@ print () {
     then
         printf "$1\n"
     else
-        echo -e "$1"
+        echo "$1"
     fi
 }
 
