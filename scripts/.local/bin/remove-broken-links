@@ -14,7 +14,10 @@ fi
 
 for link in $(find . -type l)
 do
-    realpath $link 2>/dev/null || rm -fv $link && continue # Shortcut for MacOS
+    if [ "$(uname)" = "Darwin" ]; then
+        # Shortcut for MacOS
+        realpath $link >/dev/null 2>/dev/null || rm -fv $link && continue
+    fi
 
     rp=$(realpath "$link" 2>/dev/null)
     if [ ! -f "$rp" ] && [ ! -d "$rp" ]
