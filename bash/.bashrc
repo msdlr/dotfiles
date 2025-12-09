@@ -59,6 +59,10 @@ if command -v atuin &> /dev/null; then
     eval "$(atuin init bash)"
 fi
 
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init bash)"
+fi
+
 alias reload="source $HOME/.bashrc"
 
 bind 'set show-all-if-ambiguous on' 2>/dev/null

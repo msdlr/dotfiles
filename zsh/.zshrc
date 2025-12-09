@@ -99,4 +99,8 @@ if command -v atuin &> /dev/null; then
     eval "$(atuin init zsh)"
 fi
 
+if command -v atuin &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
 alias reload="source $HOME/.zshrc"
