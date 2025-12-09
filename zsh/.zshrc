@@ -43,7 +43,7 @@ function git_branch() {
 
 function cur_short_path() {
 	[ "${PWD}" = "${HOME}" ] && echo "~" && return
-	pwd | sed "s|^${HOME}|~|g; s|^/home/|~|"
+	pwd | sed "s|^${HOME}|~|g; s|^/home/|~|; s|^/Users/|~|"
 }
 
 function precmd() { # Execute after every command
