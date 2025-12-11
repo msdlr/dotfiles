@@ -22,7 +22,7 @@ fi
 date_suffix=""
   
 # Check for the -d flag
-if [ "$1" == "-d" ]; then
+if [ "$1" = "-d" ]; then
   date_suffix="-$(date +%Y%m%d_%H%M)"
   shift  # Remove the -d argument from the list
 fi
