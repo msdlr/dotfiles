@@ -18,6 +18,8 @@ alias sudo='sudo '
 alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
 alias wi="echo "$USER@$HOST""
+alias sd='date +%Y%m%d'
+alias sdt='date +%Y%m%d_%H%M'
 
 alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
 alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
