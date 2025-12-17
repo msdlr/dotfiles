@@ -33,6 +33,66 @@ function git_branch
     end
 end
 
+function cur_short_path
+    if test "$PWD" = "$HOME"
+        echo "~"
+        return
+    end
+    
+    # Using string replace instead of sed
+    string replace "$HOME" '~' -- $PWD | \
+    string replace '/home/' '~' -- | \
+    string replace '/Users/' '~' -- 
+end
+
+# Prompt
+if set -q SSH_CLIENT
+    # SSH shell
+    function fish_prompt
+        set -l ssh_color red
+        set -l path_color green
+        set -l git_color magenta -o
+        set -l prompt_color yellow
+        
+        set_color $ssh_color
+        echo -n (whoami)
+        echo -n "@"
+        echo -n (hostname -s)
+        echo -n " "
+        
+        set_color $path_color
+        echo -n (cur_short_path)
+        echo -n " "
+        
+        set_color $git_color
+        echo -n (git_branch)
+        
+        set_color $prompt_color
+        echo -n '$ '
+        
+        set_color normal
+    end
+else
+    # Local shell
+    function fish_prompt
+        set -l path_color blue
+        set -l git_color magenta -o
+        set -l prompt_color yellow
+        
+        set_color $path_color
+        echo -n (cur_short_path)
+        echo -n " "
+        
+        set_color $git_color
+        echo -n (git_branch)
+        
+        set_color $prompt_color
+        echo -n '$ '
+        
+        set_color normal
+    end
+end
+
 # --- Movement ---
 # Ctrl+← and Ctrl+→ move by word
 bind \e\[1\;5D backward-word
