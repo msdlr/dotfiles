@@ -106,3 +106,5 @@ bind \ce end-of-line
 bind \e\[H beginning-of-line
 bind \e\[F end-of-line
 
+# Remove welcome message
+set -U fish_greeting ""
