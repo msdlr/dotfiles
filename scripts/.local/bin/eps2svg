@@ -14,14 +14,14 @@ fi
 
 PATH="$(realpath $(dirname $0))":$PATH # Get the pdf2svg script in the same repo just in case
 
-for f in ${@}
+for f in "${@}"
 do
     while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
       sleep 0.01
     done
 	(
-	[ -f ${f} ] && epstopdf ${f}
-	pdf2svg $(echo "${f}" | sed 's/.eps/.pdf/g') $(echo "${f}" | sed 's/.eps/.svg/g') 
+	[ -f "${f}" ] && epstopdf "${f}"
+	pdf2svg "$(echo "${f}" | sed 's/.eps/.pdf/g')" "$(echo "${f}" | sed 's/.eps/.svg/g')" 
 	) &
 done
 wait
