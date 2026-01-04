@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 
 where=${1:-.}
 find "$where" -depth -mindepth 1 -type d -print0 | xargs -0 rmdir -v --ignore-fail-on-non-empty
