@@ -17,7 +17,7 @@ if [ -f "$1" ]; then
 	makeglossaries $prefix && notify-send "LaTeX" "Makeglossaries pass complete." &&
 	eval $tex_command $1 && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready."
 	unset tex_command
-	for ext in aux log bbl blg glo gls glg acr acn ist out alg bcf fls lof lot toc run.xml synctex.gz fdb_latexmk snm nav; do
+	for ext in aux log bbl blg glo gls glg acr acn ist out alg bcf fls lof lot toc run.xml synctex.gz fdb_latexmk snm nav spl; do
     	[ -f $prefix.$ext ] && rm *.$ext 2>/dev/null
 	done
 else
