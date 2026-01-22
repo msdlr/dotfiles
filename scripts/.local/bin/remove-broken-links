@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <directory>"
+    exit 1
+fi
+
+if [ ! -d "$1" ]; then
+    echo "Directory $1 does not exist."
+    exit 1
+else 
+    cd "$1" # For relative links
+fi
+
+for link in $(find . -type l)
+do
+    if [ "$(uname)" = "Darwin" ]; then
+        # Shortcut for MacOS
+        realpath $link >/dev/null 2>/dev/null || rm -fv $link && continue
+    fi
+
+    rp=$(realpath "$link" 2>/dev/null)
+    if [ ! -f "$rp" ] && [ ! -d "$rp" ]
+    then
+        rm -v "$1/$(basename "$link")"
+    fi
+done
+
+exit 0

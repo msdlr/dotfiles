@@ -1,12 +1,16 @@
 #!/usr/bin/env sh
 
-# Homebrew on Linux
-homebrew_prefix=/home/linuxbrew/.linuxbrew
+if [ "$(uname)" = "Darwin" ]; then
+    HOMEBREW_PREFIX="/opt/homebrew"  # MacOS 
+elif [ "$(uname)" = "Linux" ]; then
+    HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"  # Linux
+else
+    echo "Unsupported OS"
+    return 1
+fi
 
-if [ ! -d ${homebrew_prefix} ]
-then
+if [ ! -f "${HOMEBREW_PREFIX}/bin/brew" ]; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-eval $(${homebrew_prefix}/bin/brew shellenv)
-unset homebrew_prefix
+eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)

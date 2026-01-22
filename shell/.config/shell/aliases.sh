@@ -14,15 +14,29 @@ alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
 alias l='less -R'
 alias make="make -j$(getconf _NPROCESSORS_ONLN)"
 alias rsync='rsync -avhzP'
-alias tzip='tar -czvf' # tar -czvf archive.tar.gz stuff
 alias sudo='sudo '
 alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
 alias wi="echo "$USER@$HOST""
+alias sd='date +%Y%m%d'
+alias sdt='date +%Y%m%d_%H%M'
 
 alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
 alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
 alias ivim='dir=$(fgr | fzf) && [ -n "$dir" ] && vim $dir'
+
+# (GNU) tar + pigz
+if [ -f "$(command -v pigz)" 2>/dev/null ]; then
+  if [ "$(uname)" = "Darwin" ]; then
+    if [ -x "$(command -v gtar)" ]; then
+      alias tzip='gtar -I pigz -cvf' # Multithreaded
+    else
+      alias tzip='tar -czvf'
+    fi
+  else
+    alias tzip='tar -I pigz -cvf' # Multithreaded
+  fi
+fi
 
 # Conditional aliases
 [ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
@@ -47,6 +61,7 @@ then
   alias gcm='git commit -m'
   alias gsu='git branch --set-upstream-to=origin/"$(git symbolic-ref --short HEAD)" "$(git symbolic-ref --short HEAD)"'
   alias gpush='git push'
+  alias gf='git fetch'
   alias gpushu='git push --set-upstream $(git remote show) $(git rev-parse --abbrev-ref HEAD)'
   alias gpull='git submodule init; git pull --recurse-submodules'
   alias grh='git reset --hard'
@@ -112,40 +127,6 @@ then
 fi
 # Functions
 
-ex () {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
-
-tunzip () {
-	for file in $@
-	do
-		echo "File: $file"
-		if [ "$(command -v pigz 2>/dev/null)" = ""  ]
-		then
-			tar -xzvf "${file}"
-		else
-			tar -I pigz -xvf "${file}"
-		fi
-	done
-}
-
 # Go to (symlinked) file's original directory
 cds () {
 	dir=${1}
@@ -160,266 +141,13 @@ cdsd () {
 	cd $(realpath ${dir})
 }
 
-unln () {
-	if [ "$(realpath -s ${1})" != "$(realpath ${1})" ]
-	then
-		cp -r --remove-destination $(realpath ${1}) $(realpath -s ${1})
-	fi
-}
-
-
-mass-tar () {
-  date_suffix=""
-  
-  # Check for the -d flag
-  if [ "$1" == "-d" ]; then
-    date_suffix="-$(date +%Y%m%d_%H%M)"
-    shift  # Remove the -d argument from the list
-  fi
-
-  for f in "$@"; do
-    file=$(realpath "$f")
-
-    if [ -d "$file" ]; then
-      (
-      cd "$(dirname "$file")"
-      tzip "$(basename "$file")${date_suffix}.tgz" "$(basename "$file")"
-      )
-    fi
-
-    if [ -f "$file" ]; then
-      (
-      tzip "$(basename "$file")${date_suffix}.tgz" -C "$(dirname "$file")" "$(basename "$file")"
-      )
-    fi
-  done
-}
-
-mass-untar () {
-	for f in ${@}
-	do
-		if [ -f ${f} ]
-		then
-		cd $(dirname ${f})
-			tunzip ${f}
-		cd - > /dev/null 
-		fi
-	done
-}
-
-mass-zip () {
-  date_suffix=""
-
-  # Check for the -d flag
-  if [ "$1" == "-d" ]; then
-    date_suffix="-$(date +%Y%m%d_%H%M)"
-    shift  # Remove the -d argument from the list
-  fi
-
-  for f in "$@"; do
-    file=$(realpath "${f}")
-
-    if [ -d "${file}" ]; then
-      (
-      cd "$(dirname "${file}")"
-      zip -r "$(basename "${file}")${date_suffix}.zip" "$(basename "${file}")"
-      )
-    fi
-
-    if [ -f "${file}" ]; then
-      (
-      zip "$(basename "${file}")${date_suffix}.zip" -j "${file}"
-      )
-    fi
-  done
-}
-
-mass-unzip () {
-  for f in "$@"
-  do
-    if [ -f "${f}" ]; then
-      cd "$(dirname "${f}")"
-      unzip "${f}"
-      cd - >/dev/null
-    fi
-  done
-}
-
-
-eps2pdf () {
-	for f in ${@}
-	do
-      while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
-        sleep 0.01
-      done
-      ([ -f ${f} ] && epstopdf ${f}) &
-	done
-	wait
-}
-
-eps2svg () {
-	for f in ${@}
-	do
-      while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
-        sleep 0.01
-      done
-		(
-		[ -f ${f} ] && epstopdf ${f}
-		pdf2svg $(echo "${f}" | sed 's/.eps/.pdf/g') $(echo "${f}" | sed 's/.eps/.svg/g') 
-		) &
-	done
-	wait
-}
-
-pdf2eps () {
-	for f in ${@}
-	do
-      while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
-        sleep 0.01
-      done
-      ([ -f "${f}" ] && inkscape -o $(echo "${f}" | sed 's/.pdf/.eps/g') ${f}) &
-	done
-	wait
-}
-
-svg2pdf () {
-	for f in "${@}"
-	do
-	
-	while [ "$(jobs | wc -l)" -ge "$(getconf _NPROCESSORS_ONLN)" ]; do
-      sleep 0.01
-    done
-	
-	rsvg-convert -f pdf -o "$(echo "${f}" | sed 's/.svg/.pdf/g')" ${f} &
-	done
-	wait
-}
-
-
-rmdir_recursive () {
-    where=${1:-.}
-    find "$where" -mindepth 1 -type d -print0 | tac -s '' | xargs -0 rmdir --ignore-fail-on-non-empty
-}
-
-ups () {
-  # Distro-agnostic package managers
-  if [ "$(command -v flatpak)" >/dev/null != "" ]
-  then
-    echo "\e[32m> Upgrading flatpak packages...\e[97m"
-    flatpak update -y 
-    flatpak uninstall --unused -y
-  fi
-
-  if [ "$(command -v snap)" >/dev/null != "" ]
-  then
-    echo "\e[32m> Upgrading snap packages...\e[97m"
-    sudo snap refresh
-  fi
-
-  if [ "$(command -v brew)" >/dev/null != "" ]
-  then
-
-  echo "\e[32m> Upgrading brew packages...\e[97m"
-    brew update && brew upgrade && brew cleanup
-  fi
-
-  # Debian-based
-  if [ "$(command -v apt)" >/dev/null != "" ]
-  then
-    echo "\e[32m> Upgrading apt packages...\e[97m"
-    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-    if [ "$(command -v deb-get)" >/dev/null != "" ]
-    then
-      echo "\e[32m> Upgrading deb-get packages...\e[97m"
-      deb-get update && deb-get upgrade
-    fi
-    if [ -x "$(command -v pacstall)" ]
-    then
-      echo "\e[32m> Upgrading pacstall packages...\e[97m" && yes | sudo pacstall -P -Up
-    fi
-    return
-  fi
-
-  # Arch-based
-  if [ "$(command -v pacman)" >/dev/null != "" ]
-  then
-    echo "\e[32m> Upgrading pacman packages...\e[97m"
-    sudo pacman -Syyu --noconfirm
-    if [ "$(command -v yay)" >/dev/null != "" ]
-    then
-      yay -Syyu --noconfirm
-    fi
-    return
-  fi
-
-  # RPM-based
-  if [ "$(command -v dnf)" >/dev/null != "" ]
-  then
-    echo "\e[32m> Upgrading dnf packages...\e[97m"
-    sudo dnf upgrade -y && sudo dnf autoremove -y
-    return
-  fi
- 
-
-}
-
-fgr () {
+fgr() {
   [ "$1" = "~" ] && cdr $HOME && return
-	if [ -x "$(command -v locate)" ]
-	then
-	  locate "$(pwd)*/.git" | grep ".git$" | grep "^$(pwd)" | sed "s|.git||g; s|/$||g"
-	else
-	  find . -maxdepth 4 -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}"
-	fi
-}
-
-lastgrep() {
-  if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
-    echo "Usage: lastgrep [directory] <pattern>"
-    return 1
-  fi
-
-  if [ "$#" -eq 2 ]; then
-    directory="$1"
-    pattern="$2"
+  
+  if [ "$(uname)" = "Darwin" ] || ! command -v locate &>/dev/null; then
+    find . -maxdepth 4 -name '*.git' 2>/dev/null | sed 's/\/.git//' | grep "${1}"
   else
-    directory="."
-    pattern="$1"
-  fi
-
-    grep -rHn "$pattern" "$directory" | awk -F: '{file=$1; line=$2; text=$0} {lines[file]=line; texts[file]=text} END {for (f in lines) print texts[f]}'
-}
-
-maketex() {
-  if [ "$#" -eq 0 ]; then
-    echo "Usage: maketex <file.tex>"
-    exit 1
-  fi
-
-  tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode"
-  eval $tex_command
-
-  if [ -f "$1" ]; then
-    cd $(dirname $1)
-    prefix=$(echo $1 | sed 's/.tex//g')
-    eval $tex_command $1 && notify-send "LaTeX" "First pdflatex pass complete." &&
-    biber $prefix && notify-send "LaTeX" "BibTeX pass complete." &&
-    eval $tex_command $1 && notify-send "LaTeX" "Second pdflatex pass complete." &&
-    biber $prefix && notify-send "LaTeX" "Biber pass complete." &&
-    makeglossaries $prefix && notify-send "LaTeX" "Makeglossaries pass complete." &&
-    eval $tex_command $1 && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready."
-    unset tex_command
-    for ext in aux log bbl blg glo gls glg acr acn ist out alg bcf fls lof lot toc run.xml synctex.gz fdb_latexmk snm nav; do
-      [ "$(ls *.$ext 2>/dev/null)" != "" ] && rm *.$ext 2>/dev/null
-    done
-  else
-    # If number of parameters is 0, print usage
-    if [ "$#" -eq 0 ]; then
-      echo "Usage: maketex <file.tex>"
-      return 1
-    fi
-    echo "File '$1' not found!"
-    return 1
+    locate "$(pwd)*/.git" | grep ".git$" | grep "^$(pwd)" | sed "s|.git||g; s|/$||g"
   fi
 }
 
