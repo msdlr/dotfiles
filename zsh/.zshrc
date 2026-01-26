@@ -91,6 +91,13 @@ do
     source ${cfg}
 done
 
+# Fish-like yntax highlighting
+if [ "$(uname)" = "Linux" ] && [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ "$(uname)" = "Darwin" ] && [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
 if command -v fzf &> /dev/null; then
     eval "$(fzf --zsh 2>/dev/null)"
 fi
