@@ -39,7 +39,6 @@ if [ -f "$(command -v pigz)" 2>/dev/null ]; then
 fi
 
 # Conditional aliases
-[ -f "$(command -v pigz)" 2>/dev/null ] && alias tzip='tar -I pigz -cvf' # Multithreaded
 [ -f "$(command -v python)" 2>/dev/null ] || alias python='python3'
 [ -f "$(command -v nvim)" 2>/dev/null ] && alias vim='nvim -p'
 [ -n "$COLUMNS" ] && alias diff='diff --color=auto --side-by-side -W $COLUMNS' || diff='diff --color=auto --side-by-side'
