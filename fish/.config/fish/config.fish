@@ -109,6 +109,21 @@ bind \e\[F end-of-line
 # Remove welcome message
 set -U fish_greeting ""
 
+# fzf for completion
+if type -q fzf
+    fzf --fish | source
+
+    function __fzf_complete_files
+        if type -q fd
+            fd . --hidden --follow --exclude .git
+        else
+            find . -type f 2>/dev/null
+        end | fzf --height=40% --reverse --multi
+    end
+
+    complete -c '*' -f -a "(__fzf_complete_files)"
+end
+
 # Aliases
 abbr -a reload 'exec fish'
 
