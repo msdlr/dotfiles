@@ -160,12 +160,12 @@ end
 if command -v pigz > /dev/null 2>&1
     if test (uname) = "Darwin"
         if command -v gtar > /dev/null 2>&1
-            abbr -a tzip 'gtar -I pigz -cvf' # Multithreaded
+            abbr -a tzip 'gtar -I (command -v pigz) -cvf' # Multithreaded
         else
             abbr -a tzip 'tar -czvf'
         end
     else
-        abbr -a tzip 'tar -I pigz -cvf' # Multithreaded
+        abbr -a tzip 'tar -I (command -v pigz) -cvf' # Multithreaded
     end
 end
 
