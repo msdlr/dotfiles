@@ -18,9 +18,9 @@ fi
 tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode"
 
 if [ -f "$1" ]; then
-	file=$(realpath $1)
-	prefix=$(echo $file | sed 's/.tex$//g')
-	cd $(dirname $file) # Needed to generate the tmp files besides the .tex file
+	file="$(realpath "$1")"
+	prefix="${file%.tex}"
+	cd "$(dirname "$file")" # Needed to generate the tmp files besides the .tex file
 	(eval $tex_command $file && notify-send "LaTeX" "First pdflatex pass complete." 2>/dev/null) &&
 	(biber $prefix && notify-send "LaTeX" "BibTeX pass complete." 2>/dev/null) &&
 	(eval $tex_command $file && notify-send "LaTeX" "Second pdflatex pass complete." 2>/dev/null) &&
