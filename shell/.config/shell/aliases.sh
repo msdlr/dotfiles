@@ -45,6 +45,7 @@ fi
 [ -f "$(command -v python)" 2>/dev/null ] || alias python='python3'
 [ -f "$(command -v nvim)" 2>/dev/null ] && alias vim='nvim -p'
 [ -n "$COLUMNS" ] && alias diff='diff --color=auto --side-by-side -W $COLUMNS' || diff='diff --color=auto --side-by-side'
+[ -x "$(command -v latexdiff)" 2>/dev/null ] && alias latexdiff="latexdiff --flatten"
 
 # Verbose commands
 alias mkdir='mkdir -pv'
