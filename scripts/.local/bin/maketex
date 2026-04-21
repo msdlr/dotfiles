@@ -15,19 +15,19 @@ if [ "$#" -gt 1 ]; then
 	wait
 fi
 
-tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode"
+tmpdir="/tmp"
+
+tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode -output-directory=$tmpdir -aux-directory=$tmpdir"
 
 if [ -f "$1" ]; then
 	file="$(realpath "$1")"
 	prefix="${file%.tex}"
 	cd "$(dirname "$file")" # Needed to generate the tmp files besides the .tex file
 	($tex_command "$file" && notify-send "LaTeX" "First pdflatex pass complete." 2>/dev/null)
-	(biber $prefix && notify-send "LaTeX" "Biber pass complete." 2>/dev/null)
+	(biber --input-directory "$tmpdir" --output-directory "$tmpdir" "$prefix" && notify-send "LaTeX" "Biber pass complete." 2>/dev/null)
 	($tex_command "$file" && notify-send "LaTeX" "Second pdflatex pass complete." 2>/dev/null)
-	(makeglossaries "$(basename $prefix)" && $tex_command "$file" && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready.")
-	# for ext in aux log bbl blg glo gls glg acr acn ist out alg bcf fls lof lot toc run.xml synctex.gz fdb_latexmk snm nav spl; do
-    # 	[ -f $prefix.$ext ] && rm *.$ext 2>/dev/null
-	# done
+	(makeglossaries -d "$tmpdir" "$(basename $prefix)" && $tex_command "$file" && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready.")
+	mv "$tmpdir/$(basename "$prefix").pdf" "$(dirname "$file")/"
 else
 	# If number of parameters is 0, print usage
 	if [ "$#" -eq 0 ]; then
