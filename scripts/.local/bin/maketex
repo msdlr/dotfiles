@@ -21,12 +21,10 @@ if [ -f "$1" ]; then
 	file="$(realpath "$1")"
 	prefix="${file%.tex}"
 	cd "$(dirname "$file")" # Needed to generate the tmp files besides the .tex file
-	(eval $tex_command $file && notify-send "LaTeX" "First pdflatex pass complete." 2>/dev/null) &&
-	(biber $prefix && notify-send "LaTeX" "BibTeX pass complete." 2>/dev/null) &&
-	(eval $tex_command $file && notify-send "LaTeX" "Second pdflatex pass complete." 2>/dev/null) &&
-	(biber $prefix && notify-send "LaTeX" "Biber pass complete." 2>/dev/null) &&
-	(makeglossaries $prefix && notify-send "LaTeX" "Makeglossaries pass complete." 2>/dev/null) &&
-	eval $tex_command $file && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready."
+	($tex_command "$file" && notify-send "LaTeX" "First pdflatex pass complete." 2>/dev/null)
+	(biber $prefix && notify-send "LaTeX" "Biber pass complete." 2>/dev/null)
+	($tex_command "$file" && notify-send "LaTeX" "Second pdflatex pass complete." 2>/dev/null)
+	(makeglossaries "$(basename $prefix)" && $tex_command "$file" && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready.")
 	# for ext in aux log bbl blg glo gls glg acr acn ist out alg bcf fls lof lot toc run.xml synctex.gz fdb_latexmk snm nav spl; do
     # 	[ -f $prefix.$ext ] && rm *.$ext 2>/dev/null
 	# done
