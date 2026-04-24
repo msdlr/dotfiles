@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-CONFIG_FILE="$HOME/src/dotfiles/koi/.config/koi/koirc"
+CONFIG_FILE="$HOME/.config/koirc"
 
 # Get public IP
 IP="$(curl -s https://ipinfo.io/ip)"
