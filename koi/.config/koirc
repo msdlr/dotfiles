@@ -10,6 +10,11 @@ dark=BreezeDark
 enabled=true
 light=BreezeLight
 
+[GTKTheme]
+dark=Adwaita
+enabled=false
+light=Adwaita
+
 [KonsoleProfile]
 dark=Dark
 enabled=true
