@@ -1,0 +1,10 @@
+[git]
+max_concurrency = 5
+repos = [
+    "~/src/*/",
+    "~/tex/*/"
+]
+fetch_only = true
+
+[firmware]
+upgrade = false
