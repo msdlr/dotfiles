@@ -67,6 +67,3 @@ bind 'TAB:menu-complete' 2>/dev/null
 # Remove whole words with CTRL
 bind '"\C-h":backward-kill-word'
 bind '"\C-f":kill-word'
-
-setxkbmap es 2>/dev/null
-xset led 2>/dev/null
