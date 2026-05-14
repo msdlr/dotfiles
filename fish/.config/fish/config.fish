@@ -142,7 +142,6 @@ abbr -a echoldpath 'echo $LD_LIBRARY_PATH | string replace ":" "\n" | uniq'
 abbr -a l 'less -R'
 abbr -a make 'make -j(getconf _NPROCESSORS_ONLN)'
 abbr -a rsync 'rsync -avhzP'
-abbr -a tzip 'tar -czvf'  # tar -czvf archive.tar.gz stuff
 abbr -a sudo 'sudo '
 abbr -a py 'python3'
 abbr -a wi 'echo "$USER@$HOST"'
@@ -157,15 +156,18 @@ function cdr --description 'Change to directory found by fgr and fzf'
     end
 end
 
+abbr -a tzip 'tar -czvf'
+abbr -a tunzip 'tar -xvf'
+
 if command -v pigz > /dev/null 2>&1
     if test (uname) = "Darwin"
         if command -v gtar > /dev/null 2>&1
             abbr -a tzip 'gtar -I pigz -cvf' # Multithreaded
-        else
-            abbr -a tzip 'tar -czvf'
+            abbr -a untzip 'gtar -I pigz -xvf'
         end
     else
         abbr -a tzip 'tar -I pigz -cvf' # Multithreaded
+        abbr -a untzip 'tar -I pigz -xvf'
     end
 end
 
