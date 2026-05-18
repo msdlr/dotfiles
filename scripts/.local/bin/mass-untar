@@ -13,9 +13,9 @@ do
 	    cd $(dirname ${f})
         if [ "$(command -v pigz 2>/dev/null)" = ""  ]
         then
-            tar -xzvf "${f}"
-        else
             tar -I pigz -xvf "${f}"
+        else
+            tar -xzvf "${f}"
         fi
         cd - > /dev/null 
 	fi
