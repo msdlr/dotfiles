@@ -24,6 +24,12 @@ sh -c "command -v nvim" >/dev/null 2>/dev/null && VIM=nvim || VIM=vim
 sh -c "command -v vim" >/dev/null && export EDITOR="${VIM}" || export EDITOR="nano"
 sh -c "command -v vim" >/dev/null && export VISUAL="${VIM}" || export VISUAL="nano"
 
+# Bat as pager if present
+if [ -x $(command -v bat) ]
+then
+    export MANPAGER="bat -l man -p"
+fi
+
 # XDG partially-supported configs
 export SCREENRC="${XDG_CONFIG_HOME}"/screen/screenrc
 
