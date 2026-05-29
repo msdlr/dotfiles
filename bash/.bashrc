@@ -67,3 +67,17 @@ bind 'TAB:menu-complete' 2>/dev/null
 # Remove whole words with CTRL
 bind '"\C-h":backward-kill-word'
 bind '"\C-f":kill-word'
+
+cd() {
+  builtin cd "$@" || return
+  if [ "$OLDPWD" != "$PWD" ]; then
+    # Load python venv
+    OLDPS1="$PS1"
+    if [ -d ".venv/bin" ]
+    then
+        source .venv/bin/activate
+    fi
+    PS1="$OLDPS1"
+    unset OLDPS1
+  fi
+}

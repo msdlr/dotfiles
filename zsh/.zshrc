@@ -61,6 +61,14 @@ function precmd() { # Execute after every command
     
 }
 
+function chpwd() {
+    # Load python venv
+    if [ -d ".venv/bin" ]
+    then
+        source .venv/bin/activate
+    fi
+}
+
 # Movement
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
