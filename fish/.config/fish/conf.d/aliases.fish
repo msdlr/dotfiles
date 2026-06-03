@@ -1,24 +1,26 @@
 # QoL
-abbr -a ls 'ls --color=auto'
+abbr -a df 'df -h'
+abbr -a du 'du -hc'
+abbr -a du0 'du -hc --max-depth=0'
+abbr -a du1 'du -hc --max-depth=1'
+abbr -a echoldpath 'echo $LD_LIBRARY_PATH | string replace ":" "\n" | uniq'
+abbr -a echopath 'echo $PATH | string replace ":" "\n" | uniq'
+abbr -a ip 'ip -c=auto'
+abbr -a l 'less -R'
 abbr -a ll 'ls -lh'
 abbr -a lla 'ls -lah'
-abbr -a vim 'vim -p'
-abbr -a du 'du -hc'
-abbr -a du1 'du -hc --max-depth=1'
-abbr -a du0 'du -hc --max-depth=0'
-abbr -a df 'df -h'
-abbr -a ip 'ip -c=auto'
-abbr -a echopath 'echo $PATH | string replace ":" "\n" | uniq'
-abbr -a echoldpath 'echo $LD_LIBRARY_PATH | string replace ":" "\n" | uniq'
-abbr -a l 'less -R'
+abbr -a ls 'ls --color=auto'
 abbr -a make 'make -j(getconf _NPROCESSORS_ONLN)'
-abbr -a rsync 'rsync -avhzP'
-abbr -a sudo 'sudo '
-abbr -a py 'python3'
 abbr -a pip3up 'pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade'
-abbr -a wi 'echo "$USER@$hostname"'
+abbr -a py 'python3'
+abbr -a rsync 'rsync -avhzP'
 abbr -a sd 'date +%Y%m%d'
 abbr -a sdt 'date +%Y%m%d_%H%M'
+abbr -a sudo 'sudo '
+abbr -a tunzip 'tar -xvf'
+abbr -a tzip 'tar -czvf'
+abbr -a vim 'vim -p'
+abbr -a wi 'echo "$USER@$hostname"'
 
 function cdr --description 'Change to directory found by fgr and fzf'
     set dir (fgr | fzf)
@@ -26,9 +28,6 @@ function cdr --description 'Change to directory found by fgr and fzf'
         cd $dir
     end
 end
-
-abbr -a tzip 'tar -czvf'
-abbr -a tunzip 'tar -xvf'
 
 if command -v pigz > /dev/null 2>&1
     if test (uname) = "Darwin"
