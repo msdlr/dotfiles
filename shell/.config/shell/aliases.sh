@@ -1,32 +1,32 @@
 #!/usr/bin/env sh
 # QOL
-alias ls='ls --color=auto'
-alias ll='ls -lh'
-alias lla='ls -lah'
-alias vim='vim -p'
-alias du='du -hc'
-alias du1='du -hc --max-depth=1'
-alias du0='du -hc --max-depth=0'
+alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir
 alias df='df -h'
-alias ip='ip -c=auto'
-alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
+alias du0='du -hc --max-depth=0'
+alias du1='du -hc --max-depth=1'
+alias du='du -hc'
 alias echoldpath='echo $LD_LIBRARY_PATH | sed s/:/\\n/g | uniq'
+alias echopath='echo $PATH | sed s/:/\\n/g | uniq'
+alias ip='ip -c=auto'
+alias lla='ls -lah'
 alias l='less -R'
+alias ll='ls -lh'
+alias ls='ls --color=auto'
 alias make="make -j$(getconf _NPROCESSORS_ONLN)"
-alias rsync='rsync -avhzP'
-alias sudo='sudo '
-alias py='python'
 alias pip3up="pip3 list --outdated | tail -n +3 | cut -d' ' -f1 | xargs -n1 pip3 install --upgrade"
-alias wi="echo "$USER@$HOST""
+alias py='python3'
+alias rsync='rsync -avhzP'
 alias sd='date +%Y%m%d'
 alias sdt='date +%Y%m%d_%H%M'
+alias sudo='sudo '
+alias tunzip='tar -xzvf'
+alias tzip='tar -czvf'
+alias vim='vim -p'
+alias wi="echo "$USER@$HOST""
 
-alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
 alias icode='dir=$(fgr | fzf) && [ -n "$dir" ] && code $dir'
 alias ivim='dir=$(fgr | fzf) && [ -n "$dir" ] && vim $dir'
 
-alias tzip='tar -czvf'
-alias tunzip='tar -xzvf'
 
 # (GNU) tar + pigz
 if [ -f "$(command -v pigz)" 2>/dev/null ]; then
