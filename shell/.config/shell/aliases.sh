@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 # QOL
-alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir
+alias cdr='dir=$(fgr | fzf) && [ -n "$dir" ] && cd $dir'
 alias df='df -h'
 alias du0='du -hc --max-depth=0'
 alias du1='du -hc --max-depth=1'
