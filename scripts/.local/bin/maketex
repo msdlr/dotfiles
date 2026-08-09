@@ -19,6 +19,10 @@ tmpdir="/tmp/$(basename $(dirname $(realpath $1)))"
 
 tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode -output-directory=$tmpdir -aux-directory=$tmpdir"
 
+if [ -f "$1".tex ] && [ ! -f "$1" ]; then
+	$0 "$1".tex
+fi
+
 if [ -f "$1" ]; then
 	file="$(realpath "$1")"
 	prefix="${file%.tex}"
