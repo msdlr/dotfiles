@@ -4,6 +4,21 @@
 [ -d ${HOME}/.local/bin ] && [[ ":${PATH}:" == *"${HOME}/.local/bin"* ]] || export PATH=${HOME}/.local/bin:${PATH}
 [ -d ${HOME}/.local/lib ] && [[ ":${LD_LIBRARY_PATH}:" == *"${HOME}/.local/lib"* ]] || export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}
 
+if [ -x $(command -v go) ] && [ $USER != "root" ]
+then
+    export GOPATH=${GOPATH:=$HOME/go}
+    export GOBIN=${GOBIN:=$GOPATH/bin}
+    mkdir -pv $GOBIN
+    [[ ":${PATH}:" == *"${GOBIN}"* ]] || export PATH="${GOBIN}":${PATH}
+fi
+
+if [ -x "$(command -v cargo)" ] && [ $USER != "root" ]
+then
+    export CARGO_HOME=${CARGO_HOME:="$HOME/.cargo"}
+    mkdir -pv $CARGO_HOME
+    [[ ":${PATH}:" == *"${CARGO_HOME}"* ]] || export PATH="${CARGO_HOME}":${PATH}
+fi
+
 stty -ixon # disable CTRL-S/Q
 
 # Load XDG directories
