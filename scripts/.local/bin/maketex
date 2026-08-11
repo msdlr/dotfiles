@@ -15,7 +15,7 @@ if [ "$#" -gt 1 ]; then
 	wait
 fi
 
-tmpdir="/tmp/$(basename $(dirname $(realpath $1)))"
+tmpdir=".tex"
 
 tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode -output-directory=$tmpdir -aux-directory=$tmpdir"
 
@@ -28,15 +28,35 @@ if [ ! -f "$1" ]; then
 	fi
 fi
 
+more_passes=0
+
 if [ -f "$1" ]; then
 	file="$(realpath "$1")"
 	prefix="${file%.tex}"
-	cd "$(dirname "$file")" # Needed to generate the tmp files besides the .tex file
-	($tex_command "$file" && notify-send "LaTeX" "First pdflatex pass complete." 2>/dev/null)
-	(biber --input-directory "$tmpdir" --output-directory "$tmpdir" "$prefix" && notify-send "LaTeX" "Biber pass complete." 2>/dev/null)
-	($tex_command "$file" && notify-send "LaTeX" "Second pdflatex pass complete." 2>/dev/null)
-	(makeglossaries -d "$tmpdir" "$(basename $prefix)" && $tex_command "$file" && notify-send "LaTeX" "Final pdflatex pass complete. PDF is ready.")
-	mv "$tmpdir/$(basename "$prefix").pdf" "$(dirname "$file")/"
+	dir="$(dirname "$file")"
+	name="$(basename "$prefix")"
+
+	cd "$dir" || exit 1 
+	mkdir -p $tmpdir
+
+	$tex_command "$file" || exit 1
+
+	if [ ! -s "$tmpdir/$name.bbl" ]; then
+    	biber --input-directory "$tmpdir" --output-directory "$tmpdir" "$name" || exit 1
+		more_passes=1
+	fi
+
+	if latexdiff --flatten "$file" "$file" | grep -n 'usepackage.*{glossaries}' 2>/dev/null; then
+		makeglossaries -d "$tmpdir" "$name" || exit 1
+		more_passes=1
+	fi
+
+	if [ "$more_passes" != 0 ]; then
+		$tex_command "$file" || exit 1
+	fi
+
+	mv "$tmpdir/$name.pdf" "$dir/"
+
 else
 	# If number of parameters is 0, print usage
 	if [ "$#" -eq 0 ]; then
