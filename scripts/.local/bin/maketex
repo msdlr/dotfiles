@@ -21,7 +21,7 @@ tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode -output-directory=
 
 if [ ! -f "$1" ]; then
 	if [ -f "$1".tex ]; then
-		$0 "$1".tex
+		exec $0 "$1".tex
 	else
 		echo "File $1 or $1.tex not found"
 		exit 1
