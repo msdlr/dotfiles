@@ -107,4 +107,8 @@ if command -v atuin &> /dev/null; then
     eval "$(atuin init zsh)"
 fi
 
+if command -v docker &> /dev/null; then
+    eval "$(docker completion zsh)"
+fi
+
 alias reload="source $HOME/.zshrc"
