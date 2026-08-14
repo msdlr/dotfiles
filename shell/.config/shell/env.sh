@@ -39,3 +39,8 @@ if [ $(expr "$(uname --kernel-release 2>/dev/null)" : ".*WSL.*") != "0"  ]
 then
 	DISPLAY=${DISPLAY:="$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0"}
 fi
+
+if [ -L XDG_CONFIG_HOME/systemd/user/sockets.target.wants/podman.socket ]
+then
+    export KUBEVIRTCI_PODMAN_SOCKET=${XDG_RUNTIME_DIR}/podman/podman.sock
+fi
