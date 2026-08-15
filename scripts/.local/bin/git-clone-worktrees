@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+
+# Clone a bare repo and then let the user choose which branches to deploy as worktrees
+
+# $1: repo URL
+# $2: clone path
+
+print () {
+    if [ "$(uname)" = Darwin ]
+    then
+        printf "$1\n"
+    else
+        echo "$1"
+    fi
+}
+
+if [ "$#" -lt 1 ]
+then 
+    echo "Usage:
+    $0 <repo URL>
+    $0 <repo URL> <clone path>"
+    exit 1
+fi
+
+CLONE_URL=$1
+CLONE_DST=$2
+CLONE_DST=${CLONE_DST:=$(basename ${CLONE_URL%.tex})}
+
+mkdir -pv ${CLONE_DST}
+
+cd $(dirname ${CLONE_DST})
+
+git clone --bare ${CLONE_URL} ${CLONE_DST}/.git
+
+cd ${CLONE_DST}
+branches=$(git ls-remote --heads origin | awk '{print $2}' | sed 's#refs/heads/##' | fzf --reverse -m --prompt="Select branch(es)> ")
+
+for branch in ${branches}
+do
+    git worktree add $branch $branch && 
+    print "\e[32m${CLONE_DST}/${branch}/ -> origin/${branch}\e[39m"
+done
