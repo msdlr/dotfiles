@@ -2,14 +2,8 @@
 
 # Method that links the files in the repo and creates the directory structure and then links regular files
 stowlike () {
-    TARGET=${HOME}
     PACKAGE=$(realpath "$1") || return
     cd "${PACKAGE}" || return
-
-    find . -mindepth 1 -type d -print |
-    while IFS= read -r d; do
-        mkdir -p "${TARGET}/${d}"
-    done
 
     find . -mindepth 1 -type f -print |
     while IFS= read -r f; do
@@ -21,7 +15,8 @@ stowlike () {
     cd - >/dev/null
 }
 
-cd $(dirname $0)
+
+TARGET=${HOME}
 
 case $# in
     "0")
