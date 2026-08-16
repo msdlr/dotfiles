@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+remotes=$(git remote) || exit 1
+count=$(printf '%s\n' "$remotes" | wc -l)
+
+if [ "$count" -gt 1 ]; then
+    remote=$(printf '%s\n' "$remotes" | fzf --prompt="Select remote>")
+else
+    remote=$remotes
+fi
+
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+if [ "${remote}" != "" ]
+then
+  git push --set-upstream "$remote" "$branch"
+fi

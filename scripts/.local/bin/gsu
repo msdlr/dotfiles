@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+remotes=$(git remote) || exit 1
+count=$(printf '%s\n' "$remotes" | wc -l)
+
+if [ "$count" -gt 1 ]; then
+    remote=$(printf '%s\n' "$remotes" | fzf --prompt="Select remote>")
+else
+    remote=$remotes
+fi
+
+branch=$(git symbolic-ref --short HEAD)
+if [ "${remote}" != "" ]
+then
+  git branch --set-upstream-to="$remote/$branch" "$branch"
+fi
