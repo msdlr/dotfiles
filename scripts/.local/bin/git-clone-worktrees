@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# Clone a bare repo and then let the user choose which branches to deploy as worktrees
+# Clone a repo and then let the user choose which branches to deploy as worktrees (main branch holds the .git directory)
 
 # $1: repo URL
 # $2: clone path
@@ -22,21 +22,25 @@ then
     exit 1
 fi
 
-CLONE_URL=$1
-CLONE_DST=$2
-CLONE_DST=${CLONE_DST:=$(basename ${CLONE_URL%.tex})}
+CLONE_URL="$1"
+CLONE_DST="$2"
+CLONE_DST="${CLONE_DST:=$(basename "${CLONE_URL%.tex}")}"
 
-mkdir -pv ${CLONE_DST}
+# Clone repo in /tmp directory to get the main branch
+tmp_dir=$(mktemp -d)
+mkdir -pv "${tmp_dir}"
+mkdir -pv "${CLONE_DST}"
+git clone "${CLONE_URL}" "${tmp_dir}"
+main_branch=$(git -C "${tmp_dir}" rev-parse --abbrev-ref HEAD)
 
-cd $(dirname ${CLONE_DST})
+# Move the main branch to the destination
+rm -rf "${CLONE_DST}/${main_branch}"
+mv "${tmp_dir}" "${CLONE_DST}/${main_branch}"
 
-git clone --bare ${CLONE_URL} ${CLONE_DST}/.git
-
-cd ${CLONE_DST}
-branches=$(git ls-remote --heads origin | awk '{print $2}' | sed 's#refs/heads/##' | fzf --reverse -m --prompt="Select branch(es)> ")
+branches=$(git -C "${CLONE_DST}/${main_branch}" ls-remote --heads origin | awk '{print $2}' | sed 's#refs/heads/##' | fzf --reverse -m --prompt="Select branch(es)> ")
 
 for branch in ${branches}
 do
-    git worktree add $branch $branch && 
+    git -C "${CLONE_DST}/${main_branch}" worktree add "${CLONE_DST}/$branch" "$branch" && 
     print "\e[32m${CLONE_DST}/${branch}/ -> origin/${branch}\e[39m"
 done
