@@ -41,11 +41,14 @@ else
 fi
 
 # Import the python package in the current venv
-site_packages="$(python3 -c "import site; print(site.getsitepackages()[0])")"
-if [ ! -L "$site_packages/omnetpp" ] || [ "$(realpath "$site_packages/omnetpp")" != "$OMNET_ROOT/python/omnetpp" ]; then
-    ln -sfn "$OMNET_ROOT/python/omnetpp" "$site_packages/omnetpp" 2> /dev/null
-fi
-unset site_packages
+import_omnetpp_python() {
+    site_packages="$(python3 -c 'import site; print(site.getsitepackages()[0])')" || return
+
+    rm -rf "$site_packages/omnetpp"
+    cp -r "$OMNET_ROOT/python/omnetpp" "$site_packages/"
+
+    unset site_packages
+}
 
 alias omnetpp='(cd ${OMNET_ROOT};  source ${OMNET_ROOT}/setenv && omnetpp)'
 alias opp_shell='(cd ${OMNET_ROOT};  source ${OMNET_ROOT}/setenv; cd - >/dev/null && $SHELL)'
