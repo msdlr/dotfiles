@@ -25,6 +25,14 @@ cd $(dirname $0)
 
 case $# in
     "0")
+        if [ -x "$(command -v fzf)" ]
+        then
+            pkgs="$(find . -mindepth 1 -maxdepth 1 -type d | sed 's|./||g' | fzf -m --reverse --prompt='Select configs> ')"
+            for p in $pkgs
+            do
+                stowlike $p
+            done
+        fi
         exit
         ;;
     "1")
