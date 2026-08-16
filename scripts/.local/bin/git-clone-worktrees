@@ -26,21 +26,27 @@ CLONE_URL="$1"
 CLONE_DST="$2"
 CLONE_DST="${CLONE_DST:=$(basename "${CLONE_URL%.tex}")}"
 
-# Clone repo in /tmp directory to get the main branch
-tmp_dir=$(mktemp -d)
-mkdir -pv "${tmp_dir}"
 mkdir -pv "${CLONE_DST}"
-git clone "${CLONE_URL}" "${tmp_dir}"
-main_branch=$(git -C "${tmp_dir}" rev-parse --abbrev-ref HEAD)
 
-# Move the main branch to the destination
-rm -rf "${CLONE_DST}/${main_branch}"
-mv "${tmp_dir}" "${CLONE_DST}/${main_branch}"
+# Find existing .git directory or clone+move
+git_dir="$(find ${CLONE_DST} -type d -maxdepth 2 -name '.git')"
+if [ "${git_dir}" = "" ]
+then 
+    # Clone repo in /tmp directory to get the main branch
+    tmp_dir=$(mktemp -d)
+    git clone "${CLONE_URL}" "${tmp_dir}"
+    main_branch=$(git -C "${tmp_dir}" rev-parse --abbrev-ref HEAD)
+    rm -rf "${CLONE_DST}/${main_branch}"
+    mv "${tmp_dir}" "${CLONE_DST}/${main_branch}"
+    git_dir="${CLONE_DST}/${main_branch}/.git"
+fi
 
+main_branch=$(git -C "${git_dir}/.." rev-parse --abbrev-ref HEAD)
 branches=$(git -C "${CLONE_DST}/${main_branch}" ls-remote --heads origin | awk '{print $2}' | sed 's#refs/heads/##' | fzf --reverse -m --prompt="Select branch(es)> ")
 
+cd ${git_dir}/..
 for branch in ${branches}
 do
-    git -C "${CLONE_DST}/${main_branch}" worktree add "${CLONE_DST}/$branch" "$branch" && 
+    git worktree add ../"$branch" "$branch" && 
     print "\e[32m${CLONE_DST}/${branch}/ -> origin/${branch}\e[39m"
 done
