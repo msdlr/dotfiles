@@ -9,9 +9,9 @@ set_omnet_root() {
     if [ -n "${OMNET_ROOT}" ]
     then
         echo "export OMNET_ROOT=$OMNET_ROOT" > ${XDG_CONFIG_HOME}/omnetpp
-        echo "[[ ":\${LD_LIBRARY_PATH}:" == *"${OMNET_ROOT}/lib"* ]] || export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:${OMNET_ROOT}/lib" >> ${XDG_CONFIG_HOME}/omnetpp
-        echo "[[ ":\${C_INCLUDE_PATH}:" == *"${OMNET_ROOT}/include"* ]] || export C_INCLUDE_PATH=\${C_INCLUDE_PATH}:${OMNET_ROOT}/include" >> ${XDG_CONFIG_HOME}/omnetpp
-        echo "[[ ":\${CPLUS_INCLUDE_PATH}:" == *"${OMNET_ROOT}/include"* ]] || export CPLUS_INCLUDE_PATH=\${CPLUS_INCLUDE_PATH}:${OMNET_ROOT}/include" >> ${XDG_CONFIG_HOME}/omnetpp
+        echo "[[ ":\${LD_LIBRARY_PATH}:" == *"\${OMNET_ROOT}/lib"* ]] || export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:\${OMNET_ROOT}/lib" >> ${XDG_CONFIG_HOME}/omnetpp
+        echo "[[ ":\${C_INCLUDE_PATH}:" == *"\${OMNET_ROOT}/include"* ]] || export C_INCLUDE_PATH=\${C_INCLUDE_PATH}:\${OMNET_ROOT}/include" >> ${XDG_CONFIG_HOME}/omnetpp
+        echo "[[ ":\${CPLUS_INCLUDE_PATH}:" == *"\${OMNET_ROOT}/include"* ]] || export CPLUS_INCLUDE_PATH=\${CPLUS_INCLUDE_PATH}:\${OMNET_ROOT}/include" >> ${XDG_CONFIG_HOME}/omnetpp
     fi
 }
 
