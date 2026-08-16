@@ -47,8 +47,8 @@ if [ ! -L "$site_packages/omnetpp" ] || [ "$(realpath "$site_packages/omnetpp")"
 fi
 unset site_packages
 
-alias omnetpp='(source ${OMNET_ROOT}/setenv && omnetpp)'
-alias opp_shell='(source ${OMNET_ROOT}/setenv && $SHELL)'
+alias omnetpp='(cd ${OMNET_ROOT};  source ${OMNET_ROOT}/setenv && omnetpp)'
+alias opp_shell='(cd ${OMNET_ROOT};  source ${OMNET_ROOT}/setenv; cd - >/dev/null && $SHELL)'
 
 # Remove omnet ide crash logs
 ls ~/hs_err_pid*log >/dev/null 2>/dev/null && rm ~/hs_err_pid*log >/dev/null 2>/dev/null
