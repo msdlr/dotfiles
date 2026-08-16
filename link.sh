@@ -3,20 +3,25 @@
 # Method that links the files in the repo and creates the directory structure and then links regular files
 stowlike () {
     TARGET=${HOME}
-    PACKAGE=${1}
+    PACKAGE=$(realpath "$1") || return
+    cd "${PACKAGE}" || return
 
-    if [ "$(uname)" = "Darwin" ]
-    then
-        PACKAGE_PATH=$(cd "${PACKAGE}" && pwd)  # Get the full absolute path of the PACKAGE
-        find "$PACKAGE_PATH" -maxdepth 1 -mindepth 1 | while read -r item; do
-            rm -f "${TARGET}/$(basename "$item")" 2>/dev/null
-            cp -rsv "$item" "$TARGET"
-        done
+    find . -mindepth 1 -type d -print |
+    while IFS= read -r d; do
+        mkdir -p "${TARGET}/${d}"
+    done
 
-    else
-        find $(realpath ${PACKAGE}) -maxdepth 1 -mindepth 1 | xargs -I {} cp -rsv --remove-destination {} ${TARGET}
-    fi
+    find . -mindepth 1 -type f -print |
+    while IFS= read -r f; do
+        f=${f#./}
+        mkdir -p "${TARGET}/$(dirname "${f}")"
+        rm -f "${TARGET}/$f"
+        ln -sv "${PACKAGE}/$f" "${TARGET}/${f}"
+    done
+    cd - >/dev/null
 }
+
+cd $(dirname $0)
 
 case $# in
     "0")
