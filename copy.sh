@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 
+if [ "$#" = "0" ] && [ -x "$(command -v fzf)" ]
+then
+    pkgs="$(find . -mindepth 1 -maxdepth 1 -type d | sed 's|./||g' | fzf -m --reverse --prompt='Select configs> ')"
+    for p in $pkgs
+    do
+        $0 $p
+    done
+    exit
+fi
+
 export R=${R:=$(hostname)}
 if [ "${R}" != "$(hostname)" ]
 then
@@ -7,8 +17,6 @@ then
     [ "${R}" != "$(hostname)" ] || ssh-copy-id ${R} 2>/dev/null
     export U=${U:=$USER}
 fi
-
-[ $# -eq 0 ] && $(realpath ${0}) $(find $(dirname $0) -maxdepth 1 -type d -not -name '.' -not -name '.git')
 
 for pkg in $@
 do
