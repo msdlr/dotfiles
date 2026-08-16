@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+TARGET=${TARGET:=$HOME}
+
 if [ "$#" = "0" ] && [ -x "$(command -v fzf)" ]
 then
     pkgs="$(find . -mindepth 1 -maxdepth 1 -type d | sed 's|./||g' | fzf -m --reverse --prompt='Select configs> ')"
@@ -20,11 +22,21 @@ fi
 
 for pkg in $@
 do
-    echo "> Installing ${pkg} configuration"
-    if [ "${R}" = "$(hostname)" ] 
+    if [ -d ${pkg} ]
     then
-        [ -d ${pkg} ] && cp --remove-destination -rv $(find ${pkg} -mindepth 1 -maxdepth 1 -not -name ${pkg}) ~
-    else    
-        [ -d ${pkg} ] && scp -q -r $(find ${pkg} -maxdepth 1 -mindepth 1 -not -name ${pkg}) ${U}@${R}:
+        echo "> Installing ${pkg} configuration"
+    
+        if [ "${R}" = "$(hostname)" ] 
+        then
+            rsync -avhzP ${pkg}/ ${TARGET}
+        else
+            rsync -avhzP ${pkg}/ ${U}@${R}:
+        fi
     fi
 done
+
+
+if [ "${R}" != "$(hostname)" ]
+then
+    ssh ${U}@${R} rm /tmp/$(basename $0)
+fi
