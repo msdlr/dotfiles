@@ -1,11 +1,14 @@
 #!/usr/bin/env sh
 
 git_user=${git_user:="git"}
+git_url=$(git config --get remote.origin.url)
 
 # Use existing value if already set, otherwise prompt user
 if [ -z "$git_url" ]; then
   printf "Enter Git repository URL (example: https://github.com or https://github.com/user/repo or git@github.com:user/repo.git): "
   read git_url
+else
+  printf "Local repository remote origin is $git_url\n"
 fi
 
 if [ -z "$git_token" ]; then
