@@ -3,9 +3,8 @@
 # Selects downloads directory
 [ -f ${HOME}/.config/user-dirs.dirs ] && . ${HOME}/.config/user-dirs.dirs
 
-dirs="${XDG_DOWNLOAD_DIR}
-${XDG_CACHE_HOME}
-${HOME}/Downloads
+dirs="${XDG_DOWNLOAD_DIR:="$HOME/Downloads"}
+${XDG_CACHE_HOME:="$HOME/.cache"}
 /storage/emulated/0/Download
 /storage/emulated/0/DCIM
 ${HOME}/.var/app/org.telegram.desktop/data/TelegramDesktop/tdata/temp_data/
