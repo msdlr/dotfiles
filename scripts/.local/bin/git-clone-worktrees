@@ -24,7 +24,7 @@ fi
 
 CLONE_URL="$1"
 CLONE_DST="$2"
-CLONE_DST="${CLONE_DST:=$(basename "${CLONE_URL%.tex}")}"
+CLONE_DST="${CLONE_DST:=$(basename "${CLONE_URL%.git}")}"
 
 mkdir -pv "${CLONE_DST}"
 
