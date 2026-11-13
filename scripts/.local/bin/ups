@@ -29,12 +29,12 @@ then
     print "\e[32m> Upgrading brew packages...\e[39m"
     if [ "$(uname)" = "Darwin" ]
     then
-        brew upgrade --cask &&
+        brew upgrade --cask -y &&
         brew upgrade --greedy
     else 
-        brew upgrade
+        brew upgrade -y
     fi
-    brew cleanup
+    brew cleanup --prune=all
 fi
 
 # Debian-based
