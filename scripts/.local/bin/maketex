@@ -15,6 +15,8 @@ if [ "$#" -gt 1 ]; then
 	wait
 fi
 
+
+file=$(realpath $1)
 tmpdir=".tex"
 
 tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode -output-directory=$tmpdir -aux-directory=$tmpdir"
