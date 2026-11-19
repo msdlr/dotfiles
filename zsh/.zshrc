@@ -112,3 +112,12 @@ if command -v docker &> /dev/null; then
 fi
 
 alias reload="source $HOME/.zshrc"
+
+# Auto execute on cd
+cd () {
+    builtin cd "$@"
+    OLDPS1=$PS1
+    [ -f "${XDG_CONFIG_HOME}/shell/python-venv.sh" ] && source "${XDG_CONFIG_HOME}/shell/python-venv.sh"
+    PS1=$OLDPS1
+    unset OLDPS1
+}

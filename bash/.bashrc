@@ -72,16 +72,11 @@ bind 'TAB:menu-complete' 2>/dev/null
 bind '"\C-h":backward-kill-word'
 bind '"\C-f":kill-word'
 
-cd() {
-  builtin cd "$@" || return
-  if [ "$OLDPWD" != "$PWD" ]; then
-    # Load python venv
-    OLDPS1="$PS1"
-    if [ -d ".venv/bin" ]
-    then
-        source .venv/bin/activate
-    fi
-    PS1="$OLDPS1"
+# Auto execute on cd
+cd () {
+    builtin cd "$@"
+    OLDPS1=$PS1
+    [ -f "${XDG_CONFIG_HOME}/shell/python-venv.sh" ] && source "${XDG_CONFIG_HOME}/shell/python-venv.sh"
+    PS1=$OLDPS1
     unset OLDPS1
-  fi
 }
