@@ -9,6 +9,17 @@ print () {
     fi
 }
 
+if [ "$(command -v topgrade)" != "" ]
+then
+    topgrade -y
+
+    # Cleanup after topgrade
+    command -v flatpak >/dev/null 2>&1 && flatpak uninstall --unused -y
+    command -v brew >/dev/null 2>&1 && brew cleanup --prune=all
+    command -v apt >/dev/null 2>&1 && sudo apt autoremove -y
+    command -v dnf >/dev/null 2>&1 && sudo dnf autoremove -y
+    exit
+fi
 
 # Distro-agnostic package managers
 if [ "$(command -v flatpak)" >/dev/null != "" ]
