@@ -82,6 +82,13 @@ then
     sudo dnf upgrade -y && sudo dnf autoremove -y
 fi
 
+if [ "$(command -v code)" >/dev/null != "" ]
+then
+    print "\e[32m> Upgrading VSCode extensions...\e[39m"
+    code --update-extensions
+fi
+
+
 # MacOS specific
 if [ "$(uname)" = "Darwin" ]
 then
