@@ -41,9 +41,8 @@ then
     if [ "$(uname)" = "Darwin" ]
     then
         brew upgrade --cask -y
-    else 
-        brew upgrade -y
     fi
+    brew upgrade -y
     brew cleanup --prune=all
 fi
 
