@@ -87,6 +87,12 @@ then
     code --update-extensions
 fi
 
+if [ "$(command -v codium)" >/dev/null != "" ]
+then
+    print "\e[32m> Upgrading VSCodium extensions...\e[39m"
+    codium --update-extensions
+fi
+
 
 # MacOS specific
 if [ "$(uname)" = "Darwin" ]
