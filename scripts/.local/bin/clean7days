@@ -16,8 +16,15 @@ dirs="$dirs
 $(find ${HOME}/.var/app -type d -name cache)
 $(find ${HOME}/.var/app -type d -name Cache)"
 
+
+if [ "$(uname)" = "Darwin" ]
+then
+	dirs="${dirs}
+	${XDG_DESKTOP_DIR}"
+fi
+
 # Otherwise, the parameter
-[ -z "$1" ] || dir="$1"
+[ -z "$1" ] || dirs="$1"
 
 # Remove files older than 7 days, or second parameter
 [ -z "$2" ] && days="7" || days="$2"
