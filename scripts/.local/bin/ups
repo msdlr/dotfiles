@@ -96,6 +96,7 @@ fi
 # MacOS specific
 if [ "$(uname)" = "Darwin" ]
 then
+    print "\e[32m> Running Apple software update...\e[39m"
     sudo softwareupdate -ia
 
     if [ "$(command -v mas)" >/dev/null != "" ]
