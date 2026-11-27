@@ -17,8 +17,8 @@ fi
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:="$HOME/.config"}"
 [ -f "${XDG_CONFIG_HOME}/user-dirs.dirs" ] && . "${XDG_CONFIG_HOME}/user-dirs.dirs"
-file=$(realpath $1)
-tmpdir=${XDG_CACHE_HOME:="$HOME/.cache"}/maketex/"$(dirname $file | cksum | awk '{print $1}')"
+file="$(realpath "$1")"
+tmpdir=${XDG_CACHE_HOME:="$HOME/.cache"}/maketex/"$(dirname "$file" | cksum | awk '{print $1}')"
 tex_command="latexmk -pdf -synctex=1 -interaction=nonstopmode -output-directory=$tmpdir -aux-directory=$tmpdir"
 
 if [ ! -f "$1" ]; then
