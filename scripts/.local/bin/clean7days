@@ -12,7 +12,9 @@ ${HOME}/.var/app/org.kde.kasts/data/KDE/kasts/enclosures
 ${XDG_DATA_HOME}/Trash
 ${HOME}/.Trash"
 
-[ -z "$dirs" ] && [ -z "$1" ] && exit
+dirs="$dirs
+$(find ${HOME}/.var/app -type d -name cache)
+$(find ${HOME}/.var/app -type d -name Cache)"
 
 # Otherwise, the parameter
 [ -z "$1" ] || dir="$1"
