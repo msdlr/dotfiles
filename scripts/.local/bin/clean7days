@@ -12,9 +12,12 @@ ${HOME}/.var/app/org.kde.kasts/data/KDE/kasts/enclosures
 ${XDG_DATA_HOME}/Trash
 ${HOME}/.Trash"
 
+if [ -d ${HOME}/.var/app ]
+then
 dirs="$dirs
-$(find ${HOME}/.var/app -type d -name cache)
-$(find ${HOME}/.var/app -type d -name Cache)"
+	$(find ${HOME}/.var/app -type d -name cache)
+	$(find ${HOME}/.var/app -type d -name Cache)"
+fi
 
 
 if [ "$(uname)" = "Darwin" ]
