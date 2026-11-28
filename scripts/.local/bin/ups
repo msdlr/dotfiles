@@ -5,16 +5,21 @@ print () {
     then
         printf "$1\n"
     else
-        echo "$1"
+        printf '%b\n' "$1"
     fi
 }
 
 # Distro-agnostic package managers
 if [ "$(command -v flatpak)" >/dev/null != "" ]
 then
-    print "\e[32m> Upgrading flatpak packages...\e[39m"
-    flatpak update -y 
-    flatpak uninstall --unused -y
+    print "\e[32m> Upgrading flatpak (user) packages...\e[39m"
+    flatpak --user update -y 
+    flatpak --user uninstall --unused -y
+
+
+    print "\e[32m> Upgrading flatpak (system) packages...\e[39m"
+    flatpak --system update -y 
+    flatpak --system uninstall --unused -y
 fi
 
 if [ "$(command -v snap)" >/dev/null != "" ]

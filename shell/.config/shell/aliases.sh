@@ -46,6 +46,7 @@ fi
 [ -f "$(command -v nvim)" 2>/dev/null ] && alias vim='nvim -p'
 [ -n "$COLUMNS" ] && alias diff='diff --color=auto --side-by-side -W $COLUMNS' || diff='diff --color=auto --side-by-side'
 [ -x "$(command -v latexdiff)" 2>/dev/null ] && alias latexdiff="latexdiff --flatten"
+[ -x $(command -v xdg-open) 2>/dev/null ] && alias open=xdg-open
 
 # Verbose commands
 alias mkdir='mkdir -pv'
