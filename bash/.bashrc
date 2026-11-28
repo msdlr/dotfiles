@@ -63,6 +63,10 @@ if command -v docker &> /dev/null; then
     eval "$(docker completion bash)"
 fi
 
+if command -v appman &> /dev/null; then
+    source "$XDG_DATA_HOME/bash-completion/completions/appman"
+fi
+
 alias reload="source $HOME/.bashrc"
 
 bind 'set show-all-if-ambiguous on' 2>/dev/null

@@ -111,6 +111,12 @@ if command -v docker &> /dev/null; then
     eval "$(docker completion zsh)"
 fi
 
+if command -v appman &> /dev/null; then
+    autoload bashcompinit   
+    bashcompinit    
+    source "$XDG_DATA_HOME/bash-completion/completions/appman"
+fi
+
 alias reload="source $HOME/.zshrc"
 
 # Auto execute on cd
