@@ -39,6 +39,18 @@ then
     brew cleanup --prune=all
 fi
 
+if command -v appman >/dev/null 2>&1
+then
+    print "\033[32m> Upgrading AppMan packages...\033[0m"
+    appman update
+fi
+
+if command -v am >/dev/null 2>&1
+then
+    print "\033[32m> Upgrading AM packages...\033[0m"
+    am -u
+fi
+
 # Debian-based
 if [ "$(command -v apt)" >/dev/null != "" ]
 then
